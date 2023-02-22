@@ -10,7 +10,7 @@ const figure9 = document.querySelector('.figure9');
 const figure10 = document.querySelector('.figure10');
 const figure11 = document.querySelector('.figure11');
 
-const figure = document.querySelector('.figure1')
+const figure1 = document.querySelector('.figure1')
 
 fetch('http://localhost:5678/api/works')
 .then ((response) => response.json())
@@ -18,7 +18,7 @@ fetch('http://localhost:5678/api/works')
          
     const img1 = document.createElement("img");
     img1.innerHTML = img1.src = data[0].imageUrl;
-    figure.appendChild(img1);  
+    figure1.appendChild(img1);  
     
     const img2 = document.createElement("img");
     img2.innerHTML = img2.src = data[1].imageUrl;
