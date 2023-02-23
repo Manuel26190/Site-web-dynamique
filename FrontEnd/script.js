@@ -24,4 +24,15 @@ for (let i = 0; i < data.length; i++) {
 } )
 
 
+//Trier et filtrer //
+const filtreTous = document.querySelector('#btnTous');
+const filtreObjets = document.querySelector('#btnObjets');
+const filtreAppartements = document.querySelector('#btnAppartements');
+const filtreHotels = document.querySelector('#btnHotels');
+
+filtreObjets.addEventListener ('click', function(){
+    const article = data[0];
+    console.log(article.title)
+
+});
     
