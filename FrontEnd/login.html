@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@500&family=Work+Sans:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
@@ -18,15 +21,29 @@
             <ul>
                 <li>projets</li>
                 <li>contact</li>
-                <li>login</li>
+                <li id="login">login</li>
                 <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
             </ul>
         </nav>
     </header>
 
     <!--Section comprenant le formulaire du login-->
-    <section>
-
+    <section id="sectionForm">
+        <h3>Log in</h3>
+        <form action="http://localhost:5678/api/users/login" method="post">
+            <div class="formLogin">
+                <label class="textForm" for="E-mail">E-mail</label>
+                <input class="form" type="text" id="E-mail" name="mail_utilisateur">
+            </div>
+            <div class="formLogin">
+                <label class="textForm" for="mot_de_passe">Mot de passe</label>
+                <input class="form" type="text" id="mdp" name="mot_de_passe_utilisateur">
+            </div>
+            <div id="divLogin">
+                <button id="btnConnect" type="submit">Se connecter</button>
+            </div>
+            <a id="mdpOublié" href="#">Mot de passe oublié</a>
+        </form>
 
     </section>
     <footer>

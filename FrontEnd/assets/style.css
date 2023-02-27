@@ -75,7 +75,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+
 }
 
 h2{
@@ -94,6 +94,8 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	margin-left: 40px;
+	
 }
 
 li:hover {
@@ -268,14 +270,82 @@ footer nav ul {
 	height: 1024px;
 	width: 1440px;
 }
+#login{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 19px;
+}
 
-a {	
+#aLogin {	
 	text-decoration: none;
 	color: black;
 }
 
-a:hover {
+#aLogin:hover {
 	color: #B1663C;
+}
+ /*--Formulaire du Login--*/
+#sectionForm{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h3 {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 36px;
+	color: #1D6154;	
+	margin-top: 162px;
+	margin-bottom: 37px;
+}
+
+.formLogin{
+	display: flex;
+	flex-direction: column;
+	width: 379px;	
+	background: #FFFFFF;
+	
+		
+}
+.form{
+	width: 379px;
+	height: 51px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	margin-top: 30px;
+	border: none;
+}
+.textForm{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #3D3D3D;
+	margin-bottom: 3px;
+}
+#btnConnect{
+	width: 179px;
+	height: 36px;
+	margin-top: 37px;
+	background: #1D6154;
+	border-radius: 60px;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	color: #FFFFFF;
+	border: none;
+}
+#divLogin{
+	display: flex;
+	justify-content: center;
+
 }
 
 
