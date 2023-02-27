@@ -35,8 +35,9 @@ for (let i = 0; i < data.length; i++) {
             <img src =${elt.imageUrl} alt=${elt.title}>
             <figcaption> ${elt.title}</figcaption>
         </figure>`
-        )
+        );
     gallery.innerHTML = projetsFiltres;        
+           
     });
 
 //filtre Appartements
