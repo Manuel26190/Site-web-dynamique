@@ -259,6 +259,23 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
+
+/*--Section du Login--*/
+
+#bodyLogin{
+	height: 1024px;
+	width: 1440px;
+}
+
+a {	
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: #B1663C;
+}
+
 
