@@ -369,5 +369,11 @@ h3 {
 	margin-top: 350px;
 }
 
+#modal{
+	display: flex;
+	justify-content: center;
+
+}
+
 
 
