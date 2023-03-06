@@ -76,7 +76,7 @@ boutonObjets2.addEventListener("click", function() {
     filterObjets(values, [2]);
 });
 
-const boutonObjets3 = document.querySelector("#btnHhotels");
+const boutonObjets3 = document.querySelector("#btnHotels");
 boutonObjets3.addEventListener("click", function() {
     filterObjets(values, [3]);
 });
