@@ -30,18 +30,16 @@
     <!--Section comprenant le formulaire du login-->
     <section id="sectionForm">
         <h3>Log in</h3>
-        <form action="http://localhost:5678/api/users/login" method="post">
-            <div class="formLogin">
+        <form id="myForm" action="index.html" method="get">
+            
                 <label class="textForm" for="E-mail">E-mail</label>
-                <input class="form" type="text" id="E-mail" name="mail_utilisateur">
-            </div>
-            <div class="formLogin">
+                <input class="form" type="text" id="eMail" name="mail_utilisateur">            
+            
                 <label class="textForm" for="mot_de_passe">Mot de passe</label>
-                <input class="form" type="text" id="mdp" name="mot_de_passe_utilisateur">
-            </div>
-            <div id="divLogin">
+                <input class="form" type="text" id="mdp" name="mot_de_passe_utilisateur">                       
+            
                 <button id="btnConnect" type="submit">Se connecter</button>
-            </div>
+            
             <div id="mdpOublie">
                 <a id="lienMdp" href="#">Mot de passe oublié</a>
             </div>
@@ -56,6 +54,6 @@
             </ul>
         </nav>
     </footer>
-    
+    <script src="script.js"></script>
 </body>
 </html>

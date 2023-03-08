@@ -1,11 +1,25 @@
 const gallery = document.querySelector('.gallery');
 
-//fetch qui envoi une demande à l'API//
-fetch('http://localhost:5678/api/works')
-.then ((response) => response.json())
+//Récupération des pièces eventuellement stockées dans le localStorage
+//let values = window.localStorage.getItem('values');
 
-//function qui génére les fiches projets//
-.then ((values) => {
+//if (values === null){
+
+    //const valeurValues = JSON.stringify(values);
+
+    //stockage des informations dans le localStorage
+    //window.localStorage.setItem("response", valeurValues);
+
+//}else{
+    //values = JSON.parse(values);
+//};
+    
+//fetch qui envoi une demande à l'API//
+    fetch('http://localhost:5678/api/works')
+    //transformation des values en JSON
+    .then ((response) => response.json())
+    //function qui génére les fiches projets//
+    .then ((values) => {
     //console.log(data[0].title);
     for (let i = 0; i < values.length; i++) {   
         const article = values[i];
@@ -38,7 +52,7 @@ fetch('http://localhost:5678/api/works')
             filteredValues = values.filter(value => categoryId.includes(value.categoryId));
         }
 
-        // On vide les éléments HTML présent dans Gallery
+// On vide les éléments HTML présent dans Gallery
         let gallery = document.querySelector(".gallery");
         gallery.innerHTML = "";
 
@@ -79,14 +93,39 @@ boutonObjets2.addEventListener("click", function() {
 const boutonObjets3 = document.querySelector("#btnHotels");
 boutonObjets3.addEventListener("click", function() {
     filterObjets(values, [3]);
+});     
+    
 });
 
+//Envoi du formulaire Login
+
+
+
+
+const myForm = document.getElementById('myForm');
+
+
+
+myForm.addEventListener('submit', function (e){
+    let myInputEmail = document.getElementById('eMail');
+    let myInputMdp = document.getElementById('mdp');
     
-        
-    
-     
-    
+    let eMailValue = 'sophie.bluel@test.tld';
+    let mdpValue = 'S0phie';
+
+    if (myInputEmail !== 'sophie.bluel@test.tld' && myInputMdp !== 'S0phie') {        
+        alert ('Erreur dans l’identifiant ou le mot de passe');
+    } else 
+    {
+
+    }
+ e.stopPropagation();         
 });
+
+//"email": "sophie.bluel@test.tld",
+//"password": "S0phie"
+
+
 
 
 
