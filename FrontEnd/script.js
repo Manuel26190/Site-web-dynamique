@@ -100,27 +100,42 @@ boutonObjets3.addEventListener("click", function() {
 //Envoi du formulaire Login
 
 
+//je cible mon formulaire login 
+const myForm = document.querySelector('#myForm');
+console.log(myForm);
 
+//Je fais un écouteur d'événement au submit de mon formulaire
+myForm.addEventListener('submit', function (e) {
+   
+    var erreur;
+    const eMail = document.querySelector('#eMail');
+    const motDePasse = document.querySelector('#mdp');
 
-const myForm = document.getElementById('myForm');
-
-
-
-myForm.addEventListener('submit', function (e){
-    let myInputEmail = document.getElementById('eMail');
-    let myInputMdp = document.getElementById('mdp');
-    
-    let eMailValue = 'sophie.bluel@test.tld';
-    let mdpValue = 'S0phie';
-
-    if (myInputEmail !== 'sophie.bluel@test.tld' && myInputMdp !== 'S0phie') {        
-        alert ('Erreur dans l’identifiant ou le mot de passe');
-    } else 
-    {
-
+    if (!eMail.value) {
+        erreur = "Erreur dans l’identifiant ou le mot de passe";
     }
- e.stopPropagation();         
+    if (!motDePasse.value) {
+        erreur = "Erreur dans l’identifiant ou le mot de passe";
+    }
+    if (erreur) {
+        e.preventDefault();
+        document.querySelector('#erreur').innerHTML = erreur;
+        return false;
+    } else {
+        alert('formulaire envoyé !');
+    }    
+    
 });
+
+
+
+
+
+/*if (eMail.value !="sophie.bluel@test.tld") {
+    erreur = "Erreur dans l’identifiant ou le mot de passe";
+} else if (motDePasse.value != "S0phie") {
+    erreur = "Erreur dans l’identifiant ou le mot de passe";
+}*/
 
 //"email": "sophie.bluel@test.tld",
 //"password": "S0phie"
