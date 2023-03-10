@@ -1,18 +1,18 @@
 const gallery = document.querySelector('.gallery');
 
-//Récupération des pièces eventuellement stockées dans le localStorage
-//let values = window.localStorage.getItem('values');
+//Récupération des données eventuellement stockées dans le localStorage
+/*let values = window.localStorage.getItem('values');
 
-//if (values === null){
+if (values === null){
 
-    //const valeurValues = JSON.stringify(values);
+    const valeurValues = JSON.stringify(values);
 
     //stockage des informations dans le localStorage
-    //window.localStorage.setItem("response", valeurValues);
+    window.localStorage.setItem("response", valeurValues);
 
-//}else{
-    //values = JSON.parse(values);
-//};
+}else{
+    values = JSON.parse(values);
+};*/
     
 //fetch qui envoi une demande à l'API//
     fetch('http://localhost:5678/api/works')
@@ -75,67 +75,76 @@ const gallery = document.querySelector('.gallery');
 });
 }
 // Création d'événements "au click" sur différent bouton pour filtrer les éléments selon leur catégorie (bouton) séléctionné
-const noFilter = document.querySelector("#btnTous");
-noFilter.addEventListener("click", function() {
+    const noFilter = document.querySelector("#btnTous");
+    noFilter.addEventListener("click", function() {
     filterObjets(values, []);
 });
 
-const boutonObjets1 = document.querySelector("#btnObjets");
-boutonObjets1.addEventListener("click", function() {
+    const boutonObjets1 = document.querySelector("#btnObjets");
+    boutonObjets1.addEventListener("click", function() {
     filterObjets(values, [1]);
 });
 
-const boutonObjets2 = document.querySelector("#btnAppartements");
-boutonObjets2.addEventListener("click", function() {
+    const boutonObjets2 = document.querySelector("#btnAppartements");
+    boutonObjets2.addEventListener("click", function() {
     filterObjets(values, [2]);
 });
 
-const boutonObjets3 = document.querySelector("#btnHotels");
-boutonObjets3.addEventListener("click", function() {
+    const boutonObjets3 = document.querySelector("#btnHotels");
+    boutonObjets3.addEventListener("click", function() {
     filterObjets(values, [3]);
 });     
     
 });
 
-//Envoi du formulaire Login
 
+//Envoi du formulaire Login
 
 //je cible mon formulaire login 
 const myForm = document.querySelector('#myForm');
-console.log(myForm);
+
 
 //Je fais un écouteur d'événement au submit de mon formulaire
-myForm.addEventListener('submit', function (e) {
-   
-    var erreur;
-    const eMail = document.querySelector('#eMail');
-    const motDePasse = document.querySelector('#mdp');
+myForm.addEventListener('submit', async function (event) {   
+    event.preventDefault();
 
-    if (!eMail.value) {
-        erreur = "Erreur dans l’identifiant ou le mot de passe";
-    }
-    if (!motDePasse.value) {
-        erreur = "Erreur dans l’identifiant ou le mot de passe";
-    }
-    if (erreur) {
-        e.preventDefault();
-        document.querySelector('#erreur').innerHTML = erreur;
-        return false;
-    } else {
-        alert('formulaire envoyé !');
-    }    
+    // Récupération des champs du formulaire nécessaire pour la requête API    
+    let adminInfo = {
+        email: myForm.elements.eMail.value,
+        password: myForm.elements.password.value,
+    };
+        console.log(adminInfo);
+
+    // Requête POST asynchrone à l'API Swagger avec les informations nécessaire pour l'identification
+    const response = await fetch("http://localhost:5678/api/users/login", {
+        method: 'post',
+        headers: {
+            'content-type' : 'application/json'
+        },
+        body: JSON.stringify(adminInfo)
+    });
     
 });
 
+// Ce qu'il se passe si la requête envoyer a l'API est du statut 200 : D'abord récuperer les données reçues par l'API au format JSON
+if (response.ok) {
+    const data = response.JSON();
+    
+    // Enregistrement du Token dans le local storage afin de pouvoir s'en servir pour la suite du Projet
+    sessionStorage.setItem('token', data.token);
+    
+
+    // Rediriger l'utilisateur sur la page d'accueil
+    window.location.href = 'index.html'
+
+} else { 
+    alert ('Erreur dans l’identifiant ou le mot de passe');
+
+};
 
 
 
 
-/*if (eMail.value !="sophie.bluel@test.tld") {
-    erreur = "Erreur dans l’identifiant ou le mot de passe";
-} else if (motDePasse.value != "S0phie") {
-    erreur = "Erreur dans l’identifiant ou le mot de passe";
-}*/
 
 //"email": "sophie.bluel@test.tld",
 //"password": "S0phie"
