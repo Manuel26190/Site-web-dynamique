@@ -136,17 +136,30 @@ form.addEventListener('submit', async (event) => {
         const erreur = document.querySelector('#erreur');        
         erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
         erreur.appendChild('myForm');
-
-    }
+    }    
 })
    
+//Apparition du mode edition
+const bandeau = document.querySelector('#bandeau');
+const seConnecter = document.querySelector('#btnConnect');
+
+console.log(bandeau);
+console.log(seConnecter); 
+ 
+ 
+form.addEventListener('submit', function (){
+    if(getComputedStyle(bandeau).display != "none"){
+        bandeau.style.display = "none";
+      } else {
+        bandeau.style.display = "block";
+      }
+    
+ })
 
 
 
 
 
-//"email": "sophie.bluel@test.tld",
-//"password": "S0phie"
 
 
 
