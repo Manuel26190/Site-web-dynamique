@@ -135,9 +135,7 @@ form.addEventListener('submit', async (event) => {
         alert("Identifiant ou mot de passe incorrect");
     }
 })
-    /*.catch(error => { // Code pour les autres problèmes que l'on pourrait rencontrer 
-        console.error('erreur:', error);
-    });*/
+   
 
 
 
