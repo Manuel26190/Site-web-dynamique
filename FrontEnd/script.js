@@ -132,7 +132,11 @@ form.addEventListener('submit', async (event) => {
         window.location.href = 'index.html'
 
     } else { // Si requête négatif (statut autre que 200), envoyer un message d'alerte sur l'écran
-        alert("Identifiant ou mot de passe incorrect");
+        //alert("Erreur dans l’identifiant ou le mot de passe");
+        const erreur = document.querySelector('#erreur');        
+        erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
+        erreur.appendChild('myForm');
+
     }
 })
    
