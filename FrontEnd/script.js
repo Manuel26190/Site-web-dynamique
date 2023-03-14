@@ -1,18 +1,5 @@
+//Je cible l'élément gallery de ma page HTML
 const gallery = document.querySelector('.gallery');
-
-//Récupération des données eventuellement stockées dans le localStorage
-/*let values = window.localStorage.getItem('values');
-
-if (values === null){
-
-    const valeurValues = JSON.stringify(values);
-
-    //stockage des informations dans le localStorage
-    window.localStorage.setItem("response", valeurValues);
-
-}else{
-    values = JSON.parse(values);
-};*/
     
 //fetch qui envoi une demande à l'API//
     fetch('http://localhost:5678/api/works')
@@ -104,7 +91,7 @@ if (values === null){
 const form = document.querySelector('#myForm');
 
 // Évènement au "submit" du formulaire de connexion
-form.addEventListener('submit', async (event) => {
+form.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     // Récupération des champs du formulaire nécessaire pour la requête API
@@ -141,11 +128,9 @@ form.addEventListener('submit', async (event) => {
    
 //Apparition du mode edition
 const bandeau = document.querySelector('#bandeau');
-const seConnecter = document.querySelector('#btnConnect');
+//const seConnecter = document.querySelector('#btnConnect');
 
 console.log(bandeau);
-console.log(seConnecter); 
- 
  
 form.addEventListener('submit', function (){
     if(getComputedStyle(bandeau).display != "none"){
@@ -155,6 +140,8 @@ form.addEventListener('submit', function (){
       }
     
  })
+
+
 
 
 
