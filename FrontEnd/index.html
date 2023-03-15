@@ -13,7 +13,7 @@
 </head>
 <body>
 	<!--Bandeau noir pour passer en mode édition-->
-	<div id="bandeau" style="display: none">
+	<div id="bandeau" class="js-modal" style="display: none">
 		<a id="modeEdition" href="#"><i id="logoModifier" class="fa-solid fa-pen-to-square"></i>Mode édition</a>
 		<a id="publier" href="#">publier les changements</a>
 	</div>
@@ -33,7 +33,7 @@
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		<!--Modifier en dessous de l'image-->	
-			<a id="modifier2" href="#" style="display: none"><i id="logoModifier2" class="fa-solid fa-pen-to-square"></i>Modifier</a>
+			<a id="modifier2" class="js-modal" href="#modal2" style="display: none"><i id="logoModifier2" class="fa-solid fa-pen-to-square"></i>Modifier</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -47,7 +47,7 @@
 		<div id="modal">
 			<h2>Mes Projets</h2>
 		<!--Modifier de Mes Projets-->			
-			<a href="#modal1" id="modal-link" class="js-modal" style="display: none"><i id="logoModifier3" class="fa-solid fa-pen-to-square"></i>Modifier</a>
+			<a href="#" id="modifier3" class="js-modal" style="display: none"><i id="logoModifier3" class="fa-solid fa-pen-to-square"></i>Modifier</a>
 		</div>
 				
 		<div id="divFiltres">
@@ -81,6 +81,6 @@
 		</ul>
 	</nav>
 </footer>
-<script src="./script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
