@@ -206,13 +206,14 @@ li:hover {
 }
  /*--Modifier + logo --*/
  #logoModifier2{
-	margin: 15px 6px 0 57px ;
+	margin: 0 6px 0 57px ;
 	font-style: normal;
 	color: #000;
 	width: 15px;
 	height: 15px;
  }
  #modifier2{
+	margin: 15px 0 0 0;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 14px;
@@ -220,12 +221,8 @@ li:hover {
 	color: #000;
 	text-decoration: none;
  }
-
-
-
-
 /*--Fiches Mes projets --*/
-#modal{
+#divMesProjets{
 	display: flex;
 	justify-content: center;
 	margin-top: 139px;
@@ -239,7 +236,7 @@ li:hover {
 #modifier3{
 	height: 15px;
 	width: 15px;
-	margin-top: 20px;		
+	margin-top: 10px;		
 	font-style: normal;
 	font-weight: 400;
 	font-size: 14px;
@@ -466,6 +463,26 @@ h3 {
 }
 #erreur{
 	text-align: center;
+}
+
+/*--Fenêtre modale--*/
+/*--Aside--*/
+.modal{	
+	width: 100%;
+	height: 100%;
+	position: fixed;	
+	top: 0px;
+	left: 0px;
+	background: rgba(0, 0, 0, 0.3);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-wrapper{
+	background-color: #FFFFFF;
+	width: 630px;
+	height: 731px;	
 }
 
 

@@ -86,11 +86,11 @@ const gallery = document.querySelector('.gallery');
 
 //Apparition du mode edition
 let token = sessionStorage.getItem("token");
-console.log(token);
+//console.log(token);
 
     if (token) {  
         const modalLinks = document.querySelectorAll(".js-modal");
-        console.log('modal links %o', modalLinks);
+        //console.log('modal links %o', modalLinks);
         
         modalLinks.forEach((link)=> {
             link.style.display ='flex';

@@ -14,7 +14,7 @@
 <body>
 	<!--Bandeau noir pour passer en mode édition-->
 	<div id="bandeau" class="js-modal" style="display: none">
-		<a id="modeEdition" href="#"><i id="logoModifier" class="fa-solid fa-pen-to-square"></i>Mode édition</a>
+		<a href="#modal1" id="modeEdition" ><i id="logoModifier" class="fa-solid fa-pen-to-square"></i>Mode édition</a>
 		<a id="publier" href="#">publier les changements</a>
 	</div>
 <header>
@@ -33,7 +33,7 @@
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 		<!--Modifier en dessous de l'image-->	
-			<a id="modifier2" class="js-modal" href="#modal2" style="display: none"><i id="logoModifier2" class="fa-solid fa-pen-to-square"></i>Modifier</a>
+			<a href="#modal1" class="js-modal" id="modifier2" style="display: none"><i id="logoModifier2" class="fa-solid fa-pen-to-square"></i>Modifier</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -43,11 +43,16 @@
 		</article>
 	</section>
 	<section id="portfolio">
+		<!--Aside contenant la fenêtre modale-->
+		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display: none;">
+			<div class="modal-wrapper">
+			</div>
+		</aside>
 
-		<div id="modal">
+		<div id="divMesProjets">
 			<h2>Mes Projets</h2>
 		<!--Modifier de Mes Projets-->			
-			<a href="#" id="modifier3" class="js-modal" style="display: none"><i id="logoModifier3" class="fa-solid fa-pen-to-square"></i>Modifier</a>
+			<a href="#modal1" class="js-modal" id="modifier3" style="display: none"><i id="logoModifier3" class="fa-solid fa-pen-to-square"></i>Modifier</a>
 		</div>
 				
 		<div id="divFiltres">
