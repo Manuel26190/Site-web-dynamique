@@ -111,7 +111,8 @@ const openModal = function (e) {
     target.setAttribute ('aria-modal', 'true')
     modal = target 
     modal.addEventListener ('click', closeModal)
-    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)  
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)  
     
 };
  //Fonction qui ferme la modale
@@ -121,17 +122,30 @@ const closeModal = function (e) {
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute ('aria-modal')
-    modal = null
-
-    
     modal.removeEventListener ('click', closeModal)
+    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)    
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)    
+    modal = null    
+    
+}
+
+//Function qui empêche de fermer la modale losque l'on click à l'inrérieur du contenu
+const stopPropagation = function (e) {
+    e.stopPropagation()
 }
 
 //Création de l'événement au click sur les lien <a>
 document.querySelectorAll('.js-modal').forEach(a => {
-    a.addEventListener('click', openModal)   
-    
+    a.addEventListener('click', openModal)     
 });
+
+//Fermeture de la modale avec l'utilisation de "échap"
+window.addEventListener('keydown', function (e){
+    console.log(e.key);
+    if (e.key === "Escape" || e.key === "Esc"){
+        closeModal(e)
+    }
+})
 
 
  
