@@ -485,6 +485,69 @@ h3 {
 	height: 731px;	
 }
 
+/*--Icone croix fermeture de la modale--*/
+.js-modal-stop{
+	display: flex;
+	flex-direction: column;	
+	align-items: center;
+}
+.js-modal-close {	
+	border: none;
+	background-color: #ffffff;
+	margin: 30px 0 0 545px;
+}
+#logoFermer{
+	font-size: 20px;
+	
+	
+	
+}
+h3{
+	font-family: 'Work Sans';
+font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 30px;
+	text-align: center;
+	color: #000000;	
+	margin-top: 16px;
+}
+.photosModal{
+	width: 420px;
+	height: 425px;
+	
+	border-bottom: 1px solid #B3B3B3 ;
+}
+.btnAjouter{
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	border: none;
+	background: #1D6154;
+	color: #FFFFFF;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	margin-top: 38px;
+}
+.btnSupprimer{
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	color: #D65353;
+	border: none;
+	background-color: #FFFFFF;
+	margin-top: 23px;
+}
+
+
+
 
 
 

@@ -44,9 +44,17 @@
 	</section>
 	<section id="portfolio">
 		<!--Aside contenant la fenêtre modale-->
-		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+		<aside id="modal1" class="modal" aria-hidden="true" aria-labelledby="titlemodal" role="dialog" aria-modal="false" style="display: none;">
 			<div class="modal-wrapper js-modal-stop">
-				<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
+				<button class="js-modal-close"><i id="logoFermer" class="fa-solid fa-xmark"></i></button>
+				<h3 id="titlemodal">Galerie photo</h3>
+			<!--Div photo appel API-->
+				<div class="photosModal"></div>
+				<button class="btnAjouter">Ajouter une photo</button>
+				<button class="btnSupprimer">Supprimer la galerie</button>
+				
+
+				
 			</div>
 		</aside>
 
