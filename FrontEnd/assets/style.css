@@ -514,9 +514,13 @@ font-style: normal;
 }
 .photosModal{
 	width: 420px;
-	height: 425px;
+	height: 410px;	
+	border-bottom: 1px solid #B3B3B3 ;	
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 6px;
 	
-	border-bottom: 1px solid #B3B3B3 ;
+	
 }
 .btnAjouter{
 	width: 237px;

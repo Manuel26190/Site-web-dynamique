@@ -60,27 +60,27 @@ const gallery = document.querySelector('.gallery');
         gallery.append(figure);
 
 });
-}
+    }
 // Création d'événements "au click" sur différent bouton pour filtrer les éléments selon leur catégorie (bouton) séléctionné
     const noFilter = document.querySelector("#btnTous");
     noFilter.addEventListener("click", function() {
     filterObjets(values, []);
-});
+    });
 
     const boutonObjets1 = document.querySelector("#btnObjets");
     boutonObjets1.addEventListener("click", function() {
     filterObjets(values, [1]);
-});
+    });
 
     const boutonObjets2 = document.querySelector("#btnAppartements");
     boutonObjets2.addEventListener("click", function() {
     filterObjets(values, [2]);
-});
+    });
 
     const boutonObjets3 = document.querySelector("#btnHotels");
     boutonObjets3.addEventListener("click", function() {
     filterObjets(values, [3]);
-});     
+    });     
     
 });
 
@@ -144,7 +144,46 @@ window.addEventListener('keydown', function (e){
     if (e.key === "Escape" || e.key === "Esc"){
         closeModal(e)
     }
-})
+});
+
+//Appel API pour intégrer les photos dans la modale
+
+//je selectionne mon élément Div photos Moadal dans mon HTML
+const photosModal = document.querySelector('.photosModal')
+//console.log(photosModal); 
+
+//fetch qui envoi une demande à l'API//
+fetch('http://localhost:5678/api/works')
+//transformation des values en JSON
+.then ((response) => response.json())
+//function qui génére les fiches projets//
+.then ((values) => {
+//console.log(data[0].title);
+for (let i = 0; i < values.length; i++) {   
+    const article = values[i];
+
+    const fichesModal = document.createElement('fichesModal');    
+
+    const img = document.createElement('img');
+    img.innerHTML = img.src = values[i].imageUrl;
+    img.style.height = '104px';
+    img.style.width = '78px';
+
+    const figcaption = document.createElement('figcaption');
+    figcaption.innerHTML = 'éditer';
+    figcaption.style.fontSize = '12px';
+
+
+    fichesModal.appendChild(img);
+    fichesModal.appendChild(figcaption);
+    photosModal.appendChild(fichesModal);
+
+
+    }
+});
+
+
+
 
 
  
