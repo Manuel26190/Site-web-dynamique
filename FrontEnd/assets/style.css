@@ -551,6 +551,17 @@ font-style: normal;
 	margin-top: 23px;
 }
 
+/*--icone deleteProject--*/
+.fa-trash-can{	
+	position: absolute;
+	top: 7px;
+	right: 5px;	
+}
+
+.figureModal {
+	position: relative;
+}
+
 
 
 

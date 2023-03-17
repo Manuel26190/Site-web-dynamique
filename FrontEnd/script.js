@@ -106,7 +106,7 @@ let modal = null;
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector (e.target.getAttribute('href'));
-    modal.style.display = null;
+    modal.style.display = null
     modal.removeAttribute('aria-hidden')
     modal.setAttribute ('aria-modal', 'true')
     modal.addEventListener ('click', closeModal)
@@ -159,24 +159,29 @@ fetch('http://localhost:5678/api/works')
 //function qui génére les fiches projets//
 .then ((values) => {
 //console.log(data[0].title);
-for (let i = 0; i < values.length; i++) {   
-    const article = values[i];
+for (let i = 0; i < values.length; i++) {       
 
-    const fichesModal = document.createElement('fichesModal');    
+    const figure = document.createElement('figure');    
 
     const img = document.createElement('img');
     img.innerHTML = img.src = values[i].imageUrl;
     img.style.height = '104px';
-    img.style.width = '78px';
+    img.style.width = '78px';    
 
     const figcaption = document.createElement('figcaption');
     figcaption.innerHTML = 'éditer';
-    figcaption.style.fontSize = '12px';
 
+    const deleteLogo = document.createElement('i');
+    deleteLogo.classList.add("fa-solid", "fa-trash-can");
+    
+    
 
-    fichesModal.appendChild(img);
-    fichesModal.appendChild(figcaption);
-    photosModal.appendChild(fichesModal);
+    //console.log("deleteLogo %o", deleteLogo );    
+    
+
+    figure.append(img, figcaption, deleteLogo);
+    
+    photosModal.append(figure);
 
 
     }
