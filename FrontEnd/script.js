@@ -159,6 +159,7 @@ fetch('http://localhost:5678/api/works')
 //function qui génére les fiches projets//
 .then ((values) => {
 //console.log(data[0].title);
+
 for (let i = 0; i < values.length; i++) {       
 
     const figure = document.createElement('figure');    
@@ -168,8 +169,8 @@ for (let i = 0; i < values.length; i++) {
     img.style.height = '104px';
     img.style.width = '78px';    
 
-    const figcaption = document.createElement('figcaption');
-    figcaption.innerHTML = 'éditer';
+    const figcaptionO = document.createElement('figcaption');
+    figcaptionO.innerHTML = 'éditer';
 
     const deleteLogo = document.createElement('i');
     deleteLogo.classList.add("fa-solid", "fa-trash-can");
@@ -177,18 +178,18 @@ for (let i = 0; i < values.length; i++) {
     categoryId = document.createElement("p");
     categoryId.setAttribute("src", values.categoryId);  
     
-    console.log("deleteLogo %o", deleteLogo ); 
-    
-    
+    //console.log("deleteLogo %o", deleteLogo );
+
+    //const figure1 = document.querySelector('figure:nth-child(2)');
+    const moveLogo = document.createElement('i');
+    moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
+
+    figure.appendChild(moveLogo);    
     figure.append(deleteLogo);
     figure.append(img);
-    figure.appendChild(figcaption);
-    
-    
-    
+    figure.appendChild(figcaptionO);    
     photosModal.append(figure);
-
-    }
+    }    
 });
 
 

@@ -555,22 +555,28 @@ font-style: normal;
 .fa-trash-can{	
 	position: absolute;
 	border-radius: 2px;
-	height: 15px;
-	width: 15px;
+	height: 17px;
+	width: 17px;
 	color: #ffffff;
 	background-color: #000;
-	margin: 6px 0 0 56px;
-	text-align: center;
-	
+	margin: 6px 0 0 56px;		
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
-
+	font-size: 9px ;		
+}
+.fa-arrows-up-down-left-right{
+	position: absolute;
+	border-radius: 2px;
+	height: 17px;
+	width: 17px;
+	color: #ffffff;
+	background-color: #000;			
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 9px ;
-	
-
-		
+	margin: 6px 0 0 34px;
 }
 
 .figureModal {
