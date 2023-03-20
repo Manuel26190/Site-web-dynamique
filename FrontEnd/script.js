@@ -163,8 +163,8 @@ for (let i = 0; i < values.length; i++) {
 
     const figure = document.createElement('figure');    
 
-    const img = document.createElement('img');
-    img.innerHTML = img.src = values[i].imageUrl;
+    const img = document.createElement('img');    
+    img.setAttribute("src", values[i].imageUrl );
     img.style.height = '104px';
     img.style.width = '78px';    
 
@@ -173,16 +173,20 @@ for (let i = 0; i < values.length; i++) {
 
     const deleteLogo = document.createElement('i');
     deleteLogo.classList.add("fa-solid", "fa-trash-can");
-    
-    
 
-    //console.log("deleteLogo %o", deleteLogo );    
+    categoryId = document.createElement("p");
+    categoryId.setAttribute("src", values.categoryId);  
     
-
-    figure.append(img, figcaption, deleteLogo);
+    console.log("deleteLogo %o", deleteLogo ); 
+    
+    
+    figure.append(deleteLogo);
+    figure.append(img);
+    figure.appendChild(figcaption);
+    
+    
     
     photosModal.append(figure);
-
 
     }
 });

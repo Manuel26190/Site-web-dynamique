@@ -554,13 +554,29 @@ font-style: normal;
 /*--icone deleteProject--*/
 .fa-trash-can{	
 	position: absolute;
-	top: 7px;
-	right: 5px;	
+	border-radius: 2px;
+	height: 15px;
+	width: 15px;
+	color: #ffffff;
+	background-color: #000;
+	margin: 6px 0 0 56px;
+	text-align: center;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+
+	font-size: 9px ;
+	
+
+		
 }
 
 .figureModal {
 	position: relative;
 }
+
 
 
 

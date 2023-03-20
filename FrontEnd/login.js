@@ -25,10 +25,11 @@ form.addEventListener('submit', async function (event) {
     });
     // Ce qu'il se passe si la requête envoyer a l'API est du statut 200 : D'abord récuperer les données reçues par l'API au format JSON
     if (response.ok) {
-        const data = await response.json();
+        const data = await response.json();        
 
         // Enregistrement du Token dans le local storage afin de pouvoir s'en servir pour la suite du Projet
-        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);        
+        
 
         // Rediriger l'utilisateur sur la page d'accueil
         window.location.href = 'index.html'
