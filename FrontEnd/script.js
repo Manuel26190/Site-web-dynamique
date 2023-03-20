@@ -169,8 +169,8 @@ for (let i = 0; i < values.length; i++) {
     img.style.height = '104px';
     img.style.width = '78px';    
 
-    const figcaptionO = document.createElement('figcaption');
-    figcaptionO.innerHTML = 'éditer';
+    const figcaption = document.createElement('figcaption');
+    figcaption.innerHTML = 'éditer';
 
     const deleteLogo = document.createElement('i');
     deleteLogo.classList.add("fa-solid", "fa-trash-can");
@@ -187,10 +187,38 @@ for (let i = 0; i < values.length; i++) {
     figure.appendChild(moveLogo);    
     figure.append(deleteLogo);
     figure.append(img);
-    figure.appendChild(figcaptionO);    
+    figure.appendChild(figcaption);    
     photosModal.append(figure);
+
     }    
 });
+
+const supButton = document.querySelector('.fa-trash-can');
+console.log (supButton);
+//Suprimer un travail de la modale 
+
+//Je cible le logo delete
+
+
+
+//Évènement au "submit" du formulaire de connexion
+
+//Je récupèrer le token et l'envoi au à l'API
+
+/*--const deleteWork = (id, token = sessionStorage.getItem("token")) => {
+    fetch ('http://localhost:5678/api/works/' + id, {
+        method: "DELETTE",
+        headers: {
+            Autorization: "Bearer" + token,
+        },
+    })
+    .then((response)=> 
+    )
+}--*/
+
+
+
+
 
 
 
