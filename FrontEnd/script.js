@@ -175,16 +175,17 @@ for (let i = 0; i < values.length; i++) {
     const deleteLogo = document.createElement('i');
     deleteLogo.classList.add("fa-solid", "fa-trash-can");
 
-    categoryId = document.createElement("p");
-    categoryId.setAttribute("src", values.categoryId);  
+    /*--categoryId = document.createElement("p");
+    categoryId.setAttribute("src", values.categoryId);--*/  
     
-    //console.log("deleteLogo %o", deleteLogo );
-
-    //const figure1 = document.querySelector('figure:nth-child(2)');
-    const moveLogo = document.createElement('i');
-    moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-
-    figure.appendChild(moveLogo);    
+    //console.log("deleteLogo %o", deleteLogo );       
+    
+    if (i === 0){
+        const moveLogo = document.createElement('i');
+        moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
+        figure.appendChild(moveLogo);
+    }    
+        
     figure.append(deleteLogo);
     figure.append(img);
     figure.appendChild(figcaption);    
@@ -193,21 +194,28 @@ for (let i = 0; i < values.length; i++) {
     }    
 });
 
-const supButton = document.querySelector('.fa-trash-can');
-console.log (supButton);
+
 //Suprimer un travail de la modale 
 
 //Je cible le logo delete
+
+const delButton = document.querySelector('.fa-trash-can');
+console.log ('delButton %o', delButton);
+
+console.log('token %o', token);
+
+
+
 
 
 
 //Évènement au "submit" du formulaire de connexion
 
-//Je récupèrer le token et l'envoi au à l'API
+//Je récupèrer le token en local et je fais une requête delete à l'API
 
 /*--const deleteWork = (id, token = sessionStorage.getItem("token")) => {
     fetch ('http://localhost:5678/api/works/' + id, {
-        method: "DELETTE",
+        method: "DELETE",
         headers: {
             Autorization: "Bearer" + token,
         },
