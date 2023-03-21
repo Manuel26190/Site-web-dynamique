@@ -582,6 +582,10 @@ font-style: normal;
 .figureModal {
 	position: relative;
 }
+.img-modal{
+	height: 104px;
+    width: 78px;
+}
 
 
 

@@ -106,7 +106,7 @@ let modal = null;
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector (e.target.getAttribute('href'));
-    modal.style.display = null
+    modal.style.display = null;
     modal.removeAttribute('aria-hidden')
     modal.setAttribute ('aria-modal', 'true')
     modal.addEventListener ('click', closeModal)
@@ -149,7 +149,7 @@ window.addEventListener('keydown', function (e){
 //Appel API pour intégrer les photos dans la modale
 
 //je selectionne mon élément Div photos Moadal dans mon HTML
-const photosModal = document.querySelector('.photosModal')
+const photosModal = document.querySelector('.photosModal');
 //console.log(photosModal); 
 
 //fetch qui envoi une demande à l'API//
@@ -166,8 +166,8 @@ for (let i = 0; i < values.length; i++) {
 
     const img = document.createElement('img');    
     img.setAttribute("src", values[i].imageUrl );
-    img.style.height = '104px';
-    img.style.width = '78px';    
+    img.classList.add('img-modal');
+        
 
     const figcaption = document.createElement('figcaption');
     figcaption.innerHTML = 'éditer';
@@ -191,7 +191,12 @@ for (let i = 0; i < values.length; i++) {
     figure.appendChild(figcaption);    
     photosModal.append(figure);
 
-    }    
+    }
+
+    const delButton = document.querySelector('.fa-trash-can');
+    console.log ('delButton %o', delButton);
+    
+
 });
 
 
@@ -199,8 +204,7 @@ for (let i = 0; i < values.length; i++) {
 
 //Je cible le logo delete
 
-const delButton = document.querySelector('.fa-trash-can');
-console.log ('delButton %o', delButton);
+
 
 console.log('token %o', token);
 
