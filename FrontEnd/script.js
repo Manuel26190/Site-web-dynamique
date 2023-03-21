@@ -160,53 +160,57 @@ fetch('http://localhost:5678/api/works')
 .then ((values) => {
 //console.log(data[0].title);
 
-for (let i = 0; i < values.length; i++) {       
+    for (let i = 0; i < values.length; i++) {       
 
-    const figure = document.createElement('figure');    
+        const figure = document.createElement('figure');    
 
-    const img = document.createElement('img');    
-    img.setAttribute("src", values[i].imageUrl );
-    img.classList.add('img-modal');
-        
+        const img = document.createElement('img');    
+        img.setAttribute("src", values[i].imageUrl );
+        img.classList.add('img-modal');        
 
-    const figcaption = document.createElement('figcaption');
-    figcaption.innerHTML = 'éditer';
+        const figcaption = document.createElement('figcaption');
+        figcaption.innerHTML = 'éditer';
 
-    const deleteLogo = document.createElement('i');
-    deleteLogo.classList.add("fa-solid", "fa-trash-can");
+        const deleteLogo = document.createElement('i');
+        deleteLogo.classList.add("fa-solid", "fa-trash-can");
 
-    /*--categoryId = document.createElement("p");
-    categoryId.setAttribute("src", values.categoryId);--*/  
+        /*--categoryId = document.createElement("p");
+        categoryId.setAttribute("src", values.categoryId);--*/  
     
-    //console.log("deleteLogo %o", deleteLogo );       
+        //console.log("deleteLogo %o", deleteLogo );       
     
-    if (i === 0){
-        const moveLogo = document.createElement('i');
-        moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-        figure.appendChild(moveLogo);
-    }    
+        if (i === 0){
+            const moveLogo = document.createElement('i');
+            moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
+            figure.appendChild(moveLogo);
+        }    
         
-    figure.append(deleteLogo);
-    figure.append(img);
-    figure.appendChild(figcaption);    
-    photosModal.append(figure);
+        figure.append(deleteLogo);
+        figure.append(img);
+        figure.appendChild(figcaption);    
+        photosModal.append(figure);
 
     }
-
-    const delButton = document.querySelector('.fa-trash-can');
-    console.log ('delButton %o', delButton);
-    
-
-});
-
-
 //Suprimer un travail de la modale 
 
 //Je cible le logo delete
 
+    const delButton = document.querySelector('.fa-trash-can');
+    //console.log ('delButton %o', delButton); 
+
+    const figure = 
+    
+    delButton.addEventListener('click', () => {
 
 
-console.log('token %o', token);
+    });
+
+});
+
+
+
+
+
 
 
 
