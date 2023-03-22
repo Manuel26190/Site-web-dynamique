@@ -140,7 +140,7 @@ document.querySelectorAll('.js-modal').forEach(a => {
 
 //Fermeture de la modale avec l'utilisation de "échap"
 window.addEventListener('keydown', function (e){
-    console.log(e.key);
+    //console.log(e.key);
     if (e.key === "Escape" || e.key === "Esc"){
         closeModal(e)
     }
@@ -157,59 +157,55 @@ fetch('http://localhost:5678/api/works')
 //transformation des values en JSON
 .then ((response) => response.json())
 //function qui génére les fiches projets//
-.then ((values) => {
-//console.log(data[0].title);
-
-    for (let i = 0; i < values.length; i++) {       
-
-        const figure = document.createElement('figure');    
-
-        const img = document.createElement('img');    
-        img.setAttribute("src", values[i].imageUrl );
-        img.classList.add('img-modal');        
-
-        const figcaption = document.createElement('figcaption');
-        figcaption.innerHTML = 'éditer';
-
-        const deleteLogo = document.createElement('i');
-        deleteLogo.classList.add("fa-solid", "fa-trash-can");
-
-        /*--categoryId = document.createElement("p");
-        categoryId.setAttribute("src", values.categoryId);--*/  
+.then ((values) =>  {  
     
-        //console.log("deleteLogo %o", deleteLogo );       
+    const insertPicture = function (){
+        for (let i = 0; i < values.length; i++) {       
+
+            const figure = document.createElement('figure');    
     
-        if (i === 0){
-            const moveLogo = document.createElement('i');
-            moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-            figure.appendChild(moveLogo);
-        }    
+            const img = document.createElement('img');    
+            img.setAttribute("src", values[i].imageUrl );
+            img.classList.add('img-modal');        
+    
+            const figcaption = document.createElement('figcaption');
+            figcaption.innerHTML = 'éditer';
+    
+            const deleteLogo = document.createElement('i');
+            deleteLogo.classList.add("fa-solid", "fa-trash-can");
+    
+            /*--categoryId = document.createElement("p");
+            categoryId.setAttribute("src", values.categoryId);--*/              
         
-        figure.append(deleteLogo);
-        figure.append(img);
-        figure.appendChild(figcaption);    
-        photosModal.append(figure);
+            if (i === 0){
+                const moveLogo = document.createElement('i');
+                moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
+                figure.appendChild(moveLogo);
+            }             
+            
+            figure.append(deleteLogo);
+            figure.append(img);
+            figure.appendChild(figcaption);    
+            photosModal.append(figure);
 
-    }
-//Suprimer un travail de la modale 
-
-//Je cible le logo delete
-
-    const delButton = document.querySelector('.fa-trash-can');
-    //console.log ('delButton %o', delButton); 
-
-    const figure = 
+            deleteLogo.addEventListener('click', function(){
+                img.removeAttribute("src", values[i].imageUrl );
+                figcaption.innerHTML = '';
+                figure.remove();               
+                
+            })
+        } 
+    };
+    insertPicture()
     
-    delButton.addEventListener('click', () => {
 
-
-    });
-
+    
 });
 
 
 
 
+/*console.log('values', values[0].id)*/
 
 
 
@@ -217,6 +213,7 @@ fetch('http://localhost:5678/api/works')
 
 
 
+//Suprimer un travail de la modale
 
 
 //Évènement au "submit" du formulaire de connexion
