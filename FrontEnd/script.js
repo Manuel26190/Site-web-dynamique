@@ -1,6 +1,9 @@
 //Je cible l'élément gallery de ma page HTML
 const gallery = document.querySelector('.gallery');
-    
+ 
+
+
+
 //fetch qui envoi une demande à l'API//
     fetch('http://localhost:5678/api/works')
     //transformation des values en JSON
