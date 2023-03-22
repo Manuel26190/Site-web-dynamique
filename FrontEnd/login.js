@@ -14,6 +14,7 @@ form.addEventListener('submit', async function (event) {
         email: form.elements.email.value,
         password: form.elements.password.value
     };
+    
 
     // Requête POST asynchrone à l'API Swagger avec les informations nécessaire pour l'identification
     const response = await fetch("http://localhost:5678/api/users/login", {
@@ -40,5 +41,7 @@ form.addEventListener('submit', async function (event) {
         erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
         erreur.appendChild('myForm');
     } 
-    event.stopPropagation();      
+    event.stopPropagation();  
+        
 });
+
