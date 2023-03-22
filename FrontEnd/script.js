@@ -157,9 +157,10 @@ fetch('http://localhost:5678/api/works')
 //transformation des values en JSON
 .then ((response) => response.json())
 //function qui génére les fiches projets//
-.then ((values) =>  {  
+.then ((values) =>  {      
     
     const insertPicture = function (){
+        
         for (let i = 0; i < values.length; i++) {       
 
             const figure = document.createElement('figure');    
@@ -188,55 +189,34 @@ fetch('http://localhost:5678/api/works')
             figure.appendChild(figcaption);    
             photosModal.append(figure);
 
-            deleteLogo.addEventListener('click', function(){
-                img.removeAttribute("src", values[i].imageUrl );
-                figcaption.innerHTML = '';
-                figure.remove();               
+            //console.log('token',token);
+
+            const figureRemove = function () {
+                figure.remove()
+            }
+
+            //Suprimer un travail de la modale
+            deleteLogo.addEventListener('click', function (event){
+                console.log('token',token);
+
+                //Je récupèrer le token en local et je fais une requête delete à l'API
+                const deleteWork = (id, token = sessionStorage.getItem("token")) => {
+                    fetch ('http://localhost:5678/api/works/' + id, {
+                        method: "DELETE",
+                        headers: {
+                            Autorization: "Bearer" + token,
+                        },
+                    })
+                    .then((response) => {
+                        if (response.ok){                                
+                        }                         
+                    })                    
+                }         
+                figureRemove()                  
                 
             })
         } 
     };
-    insertPicture()
-    
-
-    
+    insertPicture()     
 });
-
-
-
-
-/*console.log('values', values[0].id)*/
-
-
-
-
-
-
-
-//Suprimer un travail de la modale
-
-
-//Évènement au "submit" du formulaire de connexion
-
-//Je récupèrer le token en local et je fais une requête delete à l'API
-
-/*--const deleteWork = (id, token = sessionStorage.getItem("token")) => {
-    fetch ('http://localhost:5678/api/works/' + id, {
-        method: "DELETE",
-        headers: {
-            Autorization: "Bearer" + token,
-        },
-    })
-    .then((response)=> 
-    )
-}--*/
-
-
-
-
-
-
-
-
-
  
