@@ -398,8 +398,7 @@ h3 {
 	line-height: 36px;
 	color: #1D6154;	
 	margin-top: 162px;
-	margin-bottom: 37px;
-}
+	margin-bottom: 37px;}
 
 .form{
 	width: 379px;
@@ -413,8 +412,6 @@ h3 {
 	width: 379px;	
 	background: #FFFFFF;
 }
-
-
 .textForm{
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -482,7 +479,8 @@ h3 {
 .modal-wrapper{
 	background-color: #FFFFFF;
 	width: 630px;
-	height: 731px;	
+	height: 731px;
+	border-radius: 10px;	
 }
 
 /*--Icone croix fermeture de la modale--*/
@@ -509,12 +507,12 @@ h3 {
 	background: rgba(0, 0, 0, 0.3);
 	display: flex;
 	justify-content: center;
-	align-items: center;	
+	align-items: center;
+		
 }
 #divModal2{
 	display: flex;
-	flex-direction: column;
-	
+	flex-direction: column;	
 	align-items: center;
 	width: 420px;
 	height: 169px;
@@ -539,10 +537,9 @@ h3 {
 	height: 14px;
 	background-color: #FFFFFF;	
 }
-.fa-image{
-	
+.fa-image{	
 	font-size: 58px;
-	background-color: #FFFFFF;
+	background: #E8F1F7;
 	margin-top: 25px;	
 }
 .btnAjout{
@@ -570,8 +567,52 @@ h3 {
 	color: #444444;
 	margin-top: 7px;
 }
+#erreur{
+	text-align: center;	
+	width: 420px;
+	border-bottom: 1px solid #B3B3B3;
+	margin-top: 35px;
+}
 
+/*--Formulaire ajout photo--*/
+#myForm2{
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.modal-wrapper2{
+	background-color: #FFFFFF;
+	width: 630px;
+	height: 670px;
+	border-radius: 10px;
+}
+.form2{
+	width: 420px;
+	height: 51px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);	
+	margin-bottom: 21px;
+	border: none;
+	display: flex;			
+	background: #ffffff;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
 
+color: #444444;
+}
+.textform2{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #3D3D3D;
+	
+}
 
 h3{
 	font-family: 'Work Sans';
@@ -589,8 +630,7 @@ h3{
 	border-bottom: 1px solid #B3B3B3 ;	
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 6px;
-	
+	grid-column-gap: 6px;	
 	
 }
 .btnAjouter{
@@ -619,6 +659,20 @@ h3{
 	border: none;
 	background-color: #FFFFFF;
 	margin-top: 23px;
+}
+#btnValider{
+	width: 237px;
+	height: 36px;
+	background: #A7A7A7;
+	color: #FFFFFF;
+	border-radius: 60px;
+	border: none;
+	margin-top: 32px;
+	font-family:'syne';	
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
 }
 
 /*--icone deleteProject--*/

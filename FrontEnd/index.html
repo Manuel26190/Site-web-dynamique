@@ -5,9 +5,8 @@
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@500&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/8ad4ebeb56.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
@@ -57,8 +56,8 @@
 		</aside>
 
 		<!--Aside contenant la modale2 ajout photo-->
-		<aside id="modale2" class="modal2" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal">
-			<div class="modal-wrapper">
+		<aside id="modale2" class="modal2" style="display: none;" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal">
+			<div class="modal-wrapper2">
 				<button id="logoReturn"><i class="fa-sharp fa-solid fa-arrow-right fa-rotate-180"></i></button>
 				<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
 				<h3 id="titlemodal">Ajout photo</h3>
@@ -67,21 +66,20 @@
 					<button class="btnAjout">+ ajouter une photo</button>
 					<p id="imgSize">jpg. png: 4mo max</p>
 				</div>
-				<form id="myForm2" action="" method="">
-            
-					<label  for="title" class="textForm">Titre</label>
-					<input type="text" name="title" class="form" id="photoTitle">            
+				<form id="myForm2" action="" method="">            
+					<label  for="title" class="textForm2">Titre</label>
+					<input type="text" name="title" class="form2" id="photoTitle">            
 				
-					<label  for="type" class="textForm">Catégorie</label>
-					<select name="category list" id="categoryList" class="form">
+					<label  for="type" class="textForm2">Catégorie</label>
+					<select name="category list" id="categoryList" class="form2">
 						<option value=""></option>
-						<option value="Objets">Objets</option>
-						<option value="Appartements">Appartements</option>
-						<option value="Hôtel & restaurants">Hôtel & restaurants</option>
+						<option class="listClass" value="Objets">Objets</option>
+						<option class="listClass" value="Appartements">Appartements</option>
+						<option class="listClass" value="Hôtel & restaurants">Hôtel & restaurants</option>
 						<!--<input type="text"  name="category" class="form" id="categoryId">-->						
 					</select>
-					<p style="color: red;" id="erreur"></p>
-					<button type="submit" value="Validation" id="btnValider">Se connecter</button>				           
+					<p style="color: red;" id="erreur"></p>					
+					<button type="submit" value="Validation" id="btnValider">Valider</button>				           
 			</form>			
 			</div>
 		</aside>
