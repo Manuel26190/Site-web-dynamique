@@ -514,7 +514,7 @@ h3 {
 #divModal2{
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	
 	align-items: center;
 	width: 420px;
 	height: 169px;
@@ -539,13 +539,43 @@ h3 {
 	height: 14px;
 	background-color: #FFFFFF;	
 }
-
+.fa-image{
+	
+	font-size: 58px;
+	background-color: #FFFFFF;
+	margin-top: 25px;	
+}
+.btnAjout{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	color: #306685;
+	width: 173px;
+	height: 36px;
+	background: #CBD6DC;
+	border-radius: 50px;
+	border: none;
+	margin-top: 21px;
+}
+#imgSize{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	text-align: center;
+	color: #444444;
+	margin-top: 7px;
+}
 
 
 
 h3{
 	font-family: 'Work Sans';
-font-style: normal;
+	font-style: normal;
 	font-weight: 400;
 	font-size: 26px;
 	line-height: 30px;

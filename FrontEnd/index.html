@@ -63,10 +63,27 @@
 				<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
 				<h3 id="titlemodal">Ajout photo</h3>
 				<div id="divModal2">
-					<span><i class="fa-solid fa-image"></i></span>
-					<a href="#">+ ajouter une photo</a>
-					<p>jpg. png: 4mo max</p>
-				</div>			</div>
+					<span><i class="fa-sharp fa-regular fa-image"></i></span>
+					<button class="btnAjout">+ ajouter une photo</button>
+					<p id="imgSize">jpg. png: 4mo max</p>
+				</div>
+				<form id="myForm2" action="" method="">
+            
+					<label  for="title" class="textForm">Titre</label>
+					<input type="text" name="title" class="form" id="photoTitle">            
+				
+					<label  for="type" class="textForm">Catégorie</label>
+					<select name="category list" id="categoryList" class="form">
+						<option value=""></option>
+						<option value="Objets">Objets</option>
+						<option value="Appartements">Appartements</option>
+						<option value="Hôtel & restaurants">Hôtel & restaurants</option>
+						<!--<input type="text"  name="category" class="form" id="categoryId">-->						
+					</select>
+					<p style="color: red;" id="erreur"></p>
+					<button type="submit" value="Validation" id="btnValider">Se connecter</button>				           
+			</form>			
+			</div>
 		</aside>
 		<div id="divMesProjets">
 			<h2>Mes Projets</h2>
