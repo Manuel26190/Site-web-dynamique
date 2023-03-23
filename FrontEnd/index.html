@@ -55,15 +55,24 @@
 				<button class="btnSupprimer">Supprimer la galerie</button>				
 			</div>
 		</aside>
-		
 
-
+		<!--Aside contenant la modale2 ajout photo-->
+		<aside id="modale2" class="modal2" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal">
+			<div class="modal-wrapper">
+				<button id="logoReturn"><i class="fa-sharp fa-solid fa-arrow-right fa-rotate-180"></i></button>
+				<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
+				<h3 id="titlemodal">Ajout photo</h3>
+				<div id="divModal2">
+					<span><i class="fa-solid fa-image"></i></span>
+					<a href="#">+ ajouter une photo</a>
+					<p>jpg. png: 4mo max</p>
+				</div>			</div>
+		</aside>
 		<div id="divMesProjets">
 			<h2>Mes Projets</h2>
 		<!--Modifier de Mes Projets-->			
 			<a href="#modal1" class="js-modal" id="modifier3" style="display: none"><i id="logoModifier3" class="fa-solid fa-pen-to-square"></i>Modifier</a>
-		</div>
-				
+		</div>				
 		<div id="divFiltres">
 			<button id="btnTous">Tous</button>
 			<button id="btnObjets">Objets</button>
