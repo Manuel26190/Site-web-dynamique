@@ -120,7 +120,7 @@ const openModal = function (e) {
  //Fonction qui ferme la modale
 const closeModal = function (e) {
     if (modal === null) return
-    e.preventDefault()    
+        
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute ('aria-modal')
@@ -223,3 +223,28 @@ fetch('http://localhost:5678/api/works')
     insertPicture()     
 });
  
+
+//Modale 2 ajout photo
+
+const openModal2 = function (e) {
+    
+    const target2 = document.querySelector('.modal2');
+    //console.log('target2', target2);
+    target2.style.display = null;
+    target2.removeAttribute('aria-hidden')
+    target2.setAttribute('aria-modal','true')
+}; 
+
+const btnAjouter = document.querySelector('.btnAjouter');
+//console.log(btnAjouter)
+
+btnAjouter.addEventListener('click', function (e){
+    console.log(e)
+    openModal2();
+    closeModal();
+});
+
+
+
+
+

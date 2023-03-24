@@ -480,7 +480,39 @@ h3 {
 	background-color: #FFFFFF;
 	width: 630px;
 	height: 731px;
-	border-radius: 10px;	
+	border-radius: 10px;
+	opacity: 0.6;	
+}
+.btnAjouter{
+	width: 237px;
+	height: 36px;
+	border-radius: 60px;
+	border: none;
+	background: #1D6154;
+	color: #FFFFFF;
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	margin-top: 38px;
+	text-decoration: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.btnSupprimer{
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	color: #D65353;
+	border: none;
+	background-color: #FFFFFF;
+	margin-top: 23px;
 }
 
 /*--Icone croix fermeture de la modale--*/
@@ -504,7 +536,7 @@ h3 {
 	position: fixed;	
 	top: 0px;
 	left: 0px;
-	background: rgba(0, 0, 0, 0.3);
+	background: rgba(177, 63, 63, 0.3);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -586,7 +618,7 @@ h3 {
 	background-color: #FFFFFF;
 	width: 630px;
 	height: 670px;
-	border-radius: 10px;
+	border-radius: 10px;	
 }
 .form2{
 	width: 420px;
@@ -633,33 +665,7 @@ h3{
 	grid-column-gap: 6px;	
 	
 }
-.btnAjouter{
-	width: 237px;
-	height: 36px;
-	border-radius: 60px;
-	border: none;
-	background: #1D6154;
-	color: #FFFFFF;
-	font-family: 'Syne';
-	font-style: normal;
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 17px;
-	text-align: center;
-	margin-top: 38px;
-}
-.btnSupprimer{
-	font-family: 'Syne';
-	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 17px;
-	text-align: center;
-	color: #D65353;
-	border: none;
-	background-color: #FFFFFF;
-	margin-top: 23px;
-}
+
 #btnValider{
 	width: 237px;
 	height: 36px;
