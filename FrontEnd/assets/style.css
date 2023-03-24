@@ -481,7 +481,7 @@ h3 {
 	width: 630px;
 	height: 731px;
 	border-radius: 10px;
-	opacity: 0.6;	
+		
 }
 .btnAjouter{
 	width: 237px;
@@ -536,7 +536,7 @@ h3 {
 	position: fixed;	
 	top: 0px;
 	left: 0px;
-	background: rgba(177, 63, 63, 0.3);
+	background: rgba(0, 0, 0, 0.3);
 	display: flex;
 	justify-content: center;
 	align-items: center;
