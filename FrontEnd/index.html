@@ -58,16 +58,19 @@
 
 		<!--Aside contenant la modale2 ajout photo-->
 		<aside id="modale2" class="modal2" style="display: none;" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal">
-			<div class="modal-wrapper2">
+			<div class="modal-wrapper2 js-modal-stop2">
 				<button id="logoReturn"><i class="fa-sharp fa-solid fa-arrow-right fa-rotate-180"></i></button>
 				<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
-				<h3 id="titlemodal">Ajout photo</h3>
-				<div id="divModal2">
-					<span><i class="fa-sharp fa-regular fa-image"></i></span>
-					<button class="btnAjout">+ ajouter une photo</button>
-					<p id="imgSize">jpg. png: 4mo max</p>
-				</div>
-				<form id="myForm2" action="" method="">            
+				<h3 id="titlemodal">Ajout photo</h3>				
+				<div class="divModal2">
+					<form id="pictureForm">
+						<span><i class="fa-sharp fa-regular fa-image"></i></span>
+						<label for="file">+ ajouter une photo</label>
+						<input type="file" class="btnAjout" accept="image/*">
+						<p id="imgSize">jpg. png: 4mo max</p>
+					</form>
+				</div>				
+				<form id="myForm2">            
 					<label  for="title" class="textForm2">Titre</label>
 					<input type="text" name="title" class="form2" id="photoTitle">            
 				

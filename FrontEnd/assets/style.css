@@ -542,7 +542,7 @@ h3 {
 	align-items: center;
 		
 }
-#divModal2{
+.divModal2{
 	display: flex;
 	flex-direction: column;	
 	align-items: center;
@@ -573,21 +573,6 @@ h3 {
 	font-size: 58px;
 	background: #E8F1F7;
 	margin-top: 25px;	
-}
-.btnAjout{
-	font-family: 'Work Sans';
-	font-style: normal;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	text-align: center;
-	color: #306685;
-	width: 173px;
-	height: 36px;
-	background: #CBD6DC;
-	border-radius: 50px;
-	border: none;
-	margin-top: 21px;
 }
 #imgSize{
 	font-family: 'Work Sans';
@@ -717,7 +702,36 @@ h3{
     width: 78px;
 }
 
-
+/*--Formulaire ajout photo vers API--*/
+#pictureForm{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.divModal2 form label {
+	cursor: pointer;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	color: #306685;
+	width: 173px;
+	height: 36px;
+	background: #CBD6DC;
+	border-radius: 50px;
+	border: none;
+	margin-top: 21px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+.divModal2 form input {
+	
+}
 
 
 

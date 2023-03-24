@@ -85,6 +85,9 @@ const gallery = document.querySelector('.gallery');
     filterObjets(values, [3]);
     });     
     
+})
+.catch(error => {
+    console.log('error', error);
 });
 
 //Apparition du mode edition
@@ -175,8 +178,8 @@ fetch('http://localhost:5678/api/works')
             const figcaption = document.createElement('figcaption');
             figcaption.innerHTML = 'éditer';
     
-            const deleteLogo = document.createElement('i');
-            deleteLogo.classList.add("fa-solid", "fa-trash-can");
+            const deleteWork = document.createElement('i');
+            deleteWork.classList.add("fa-solid", "fa-trash-can");
     
             /*--categoryId = document.createElement("p");
             categoryId.setAttribute("src", values.categoryId);--*/              
@@ -187,7 +190,7 @@ fetch('http://localhost:5678/api/works')
                 figure.appendChild(moveLogo);
             }             
             
-            figure.append(deleteLogo);
+            figure.append(deleteWork);
             figure.append(img);
             figure.appendChild(figcaption);    
             photosModal.append(figure);
@@ -195,28 +198,30 @@ fetch('http://localhost:5678/api/works')
             //console.log('token',token);
 
             const figureRemove = function () {
+                /*forEach(figure =>  {
+                    figure.setAttribute('id', values.id);
+                })*/
                 figure.remove()
-            }
+            }   
+                      
+            
 
             //Suprimer un travail de la modale
-            deleteLogo.addEventListener('click', function (event){
-                console.log('token',token);
-
-                //Je récupèrer le token en local et je fais une requête delete à l'API
-                const deleteWork = (id, token = sessionStorage.getItem("token")) => {
-                    fetch ('http://localhost:5678/api/works/' + id, {
-                        method: "DELETE",
-                        headers: {
-                            Autorization: "Bearer" + token,
-                        },
-                    })
-                    .then((response) => {
-                        if (response.ok){                                
-                        }                         
-                    })                    
-                }         
-                figureRemove()                  
-                
+            deleteWork.addEventListener('click', function (){
+                //console.log('token',token);
+                fetch('http://localhost:5678/api/works/' /*+ id*/ , {
+                    method: "DELETE",
+                    headers: {
+                        "Autorization": "Bearer" + token
+                    }
+                })
+                .then(data => {
+                    figureRemove()
+                })
+                .catch(error => {
+                    console.log('error', error);
+                });                 
+                //figureRemove()                
             })
         } 
     };
@@ -226,23 +231,79 @@ fetch('http://localhost:5678/api/works')
 
 //Modale 2 ajout photo
 
-const openModal2 = function (e) {
-    
+let modal2 = null;
+
+const openModal2 = function () {    
     const target2 = document.querySelector('.modal2');
-    //console.log('target2', target2);
     target2.style.display = null;
     target2.removeAttribute('aria-hidden')
     target2.setAttribute('aria-modal','true')
+    modal2 = target2
+    modal2.addEventListener('click', closeModal2)
+    modal2.querySelector('.js-modal-close2').addEventListener('click', closeModal2)
+    modal2.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation2)
 }; 
+
+const closeModal2 = function (e) {
+    if (modal2 === null) return
+    e.preventDefault()
+    modal2.style.display = 'none';
+    modal2.setAttribute('aria-hidden', 'true')
+    modal2.removeAttribute('aria-modal')    
+    modal2.removeEventListener('click', closeModal2)
+    modal2.querySelector('.js-modal-close2').removeEventListener('click', closeModal2)
+    modal2.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation2)
+    modal2 = null
+
+}
+
+//Function qui empêche de fermer la modale losque l'on click à l'inrérieur du contenu
+const stopPropagation2 = function (e){
+    e.stopPropagation()
+}
 
 const btnAjouter = document.querySelector('.btnAjouter');
 //console.log(btnAjouter)
 
-btnAjouter.addEventListener('click', function (e){
-    console.log(e)
+btnAjouter.addEventListener('click', function (){
+    //console.log(e)
     openModal2();
     closeModal();
 });
+
+//Fermeture de la modale avec l'utilisation de "échap"
+window.addEventListener('keydown', function (e){
+    //console.log(e.key);
+    if (e.key === "Escape" || e.key === "Esc"){
+        closeModal2(e)
+    }
+});
+
+//ajout photo vers l'API
+const divModal2 = document.querySelector('.divModal2');
+
+const btnAjout = document.querySelector('.btnAjout');
+
+btnAjout.addEventListener('change', event => {
+    console.log('click', btnAjout);
+    const files = event.target.files;
+    const formData = new FormData();
+    formData.append('image', files[0]);
+
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        body:formData,
+    })
+    .then(response => response.json())
+    .then(data =>{
+        document.divModal2.style.background = "url('"+ data.image +"')";
+        document.divModal2.style.backgroundSize ='cover';
+    })
+    .catch(error => {
+        console.log('error', error);
+    });
+});
+
 
 
 
