@@ -584,7 +584,7 @@ h3 {
 	color: #444444;
 	margin-top: 7px;
 }
-#erreur{
+#erreur2{
 	text-align: center;	
 	width: 420px;
 	border-bottom: 1px solid #B3B3B3;
@@ -595,9 +595,9 @@ h3 {
 #myForm2{
 	margin-top: 30px;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;	
+	margin-left: 105px;
+	width: 420px;
 }
 .modal-wrapper2{
 	background-color: #FFFFFF;
@@ -628,6 +628,9 @@ color: #444444;
 	font-size: 14px;
 	line-height: 16px;
 	color: #3D3D3D;
+	display: block;
+	;
+	
 	
 }
 
@@ -658,7 +661,7 @@ h3{
 	color: #FFFFFF;
 	border-radius: 60px;
 	border: none;
-	margin-top: 32px;
+	margin: 32px 0 0 90px;
 	font-family:'syne';	
 	font-weight: 700;
 	font-size: 14px;
@@ -708,8 +711,9 @@ h3{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	
 }
-.divModal2 form label {
+#labelFile {
 	cursor: pointer;
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -727,10 +731,17 @@ h3{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
 	
 }
-.divModal2 form input {
-	
+#input-file{
+	display: none;
+}
+#profilePicture{
+	width: 58px;
+	height: 46px;
+	margin-top: 28px;
+
 }
 
 

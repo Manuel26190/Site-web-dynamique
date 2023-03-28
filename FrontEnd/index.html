@@ -63,10 +63,11 @@
 				<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
 				<h3 id="titlemodal">Ajout photo</h3>				
 				<div class="divModal2">
-					<form id="pictureForm">
-						<span><i class="fa-sharp fa-regular fa-image"></i></span>
-						<label for="file">+ ajouter une photo</label>
-						<input type="file" class="btnAjout" accept="image/*">
+					<!--Formulaire modale 2 pour upload l'image-->
+					<form id="pictureForm">						
+						<img src="assets/images/picture_logo.svg" alt="" id="profilePicture">
+						<label for="input-file" id="labelFile">+ ajouter une photo</label>
+						<input type="file" name="saisie" id="input-file" accept="image/jpeg, image/png, image/jpg">
 						<p id="imgSize">jpg. png: 4mo max</p>
 					</form>
 				</div>				
@@ -82,7 +83,7 @@
 						<option class="listClass" value="Hôtel & restaurants">Hôtel & restaurants</option>
 						<!--<input type="text"  name="category" class="form" id="categoryId">-->						
 					</select>
-					<p style="color: red;" id="erreur"></p>					
+					<p style="color: red;" id="erreur2"></p>					
 					<button type="submit" value="Validation" id="btnValider">Valider</button>				           
 			</form>			
 			</div>

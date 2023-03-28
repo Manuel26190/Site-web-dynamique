@@ -1,16 +1,34 @@
 //Je cible l'élément gallery de ma page HTML
 const gallery = document.querySelector('.gallery');
  
+const url = 'http://localhost:5678/api/works';
 
+
+/*async function values(url) {
+    let res = await fetch (url)
+    .then(async (response) => {
+        if (!response.ok) {
+            throw new Error ('Erreur de chargement de la base de données');
+        }
+        return response.text ().then((data) =>{
+            return data;
+        });
+    })
+    .catch ((error) => {
+        console.log(error);
+    });
+    return res
+}*/
 
 
 //fetch qui envoi une demande à l'API//
-    fetch('http://localhost:5678/api/works')
+    fetch(url)
     //transformation des values en JSON
     .then ((response) => response.json())
+   
     //function qui génére les fiches projets//
     .then ((values) => {
-    //console.log(data[0].title);
+    //console.log(values[0].title);
     for (let i = 0; i < values.length; i++) {   
         const article = values[i];
         //console.log(article.categoryId == 2); 
@@ -62,7 +80,7 @@ const gallery = document.querySelector('.gallery');
         figure.append(img, figcaption);
         gallery.append(figure);
 
-});
+        });
     }
 // Création d'événements "au click" sur différent bouton pour filtrer les éléments selon leur catégorie (bouton) séléctionné
     const noFilter = document.querySelector("#btnTous");
@@ -159,7 +177,7 @@ const photosModal = document.querySelector('.photosModal');
 //console.log(photosModal); 
 
 //fetch qui envoi une demande à l'API//
-fetch('http://localhost:5678/api/works')
+fetch(url)
 //transformation des values en JSON
 .then ((response) => response.json())
 //function qui génére les fiches projets//
@@ -208,8 +226,8 @@ fetch('http://localhost:5678/api/works')
 
             //Suprimer un travail de la modale
             deleteWork.addEventListener('click', function (){
-                //console.log('token',token);
-                fetch('http://localhost:5678/api/works/' /*+ id*/ , {
+                console.log('token',token);
+                fetch(url + '/' + {id} , {
                     method: "DELETE",
                     headers: {
                         "Autorization": "Bearer" + token
@@ -227,6 +245,13 @@ fetch('http://localhost:5678/api/works')
     };
     insertPicture()     
 });
+
+
+
+
+
+
+
  
 
 //Modale 2 ajout photo
@@ -280,7 +305,60 @@ window.addEventListener('keydown', function (e){
 });
 
 //ajout photo vers l'API
-const divModal2 = document.querySelector('.divModal2');
+
+let profilePicture = document.getElementById('profilePicture');
+
+let inputFile = document.getElementById('input-file');
+let labelFile = document.getElementById('labelFile');
+let imgSize = document.getElementById('imgSize');
+
+inputFile.onchange = function (){
+    profilePicture.src = URL.createObjectURL(inputFile.files[0])
+    profilePicture.style.width = '129px'; 
+    profilePicture.style.height = '169px';
+    profilePicture.style.marginTop ='0';
+    labelFile.style.background = 'white';  
+    inputFile.innerHTML = ''; 
+    labelFile.innerHTML = '';
+    imgSize.innerHTML = '';    
+}
+
+// le formulaire est rempli je veux que le bouton valider soit de couleur bleu
+let pictureForm = document.getElementById('pictureForm');
+let btnValider = document.getElementById ('btnValider');
+let titreAjoutPhoto = document.getElementById('photoTitle');
+let categoryList = document.getElementById('categoryList');
+
+//console.log('categoryList', categoryList);
+//console.log('titreajoutphoto', titreAjoutPhoto);
+//console.log('pictureForm', pictureForm);
+//console.log('btnValider', btnValider);
+
+
+btnValider.addEventListener ('click', function () {
+    if (pictureForm.value === "" ){
+        alert('Fromulaire non rempli');
+    } 
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const divModal2 = document.querySelector('.divModal2');
 
 const btnAjout = document.querySelector('.btnAjout');
 
@@ -290,19 +368,19 @@ btnAjout.addEventListener('change', event => {
     const formData = new FormData();
     formData.append('image', files[0]);
 
-    fetch('http://localhost:5678/api/works', {
+    fetch(url, {
         method: 'POST',
         body:formData,
     })
     .then(response => response.json())
     .then(data =>{
-        document.divModal2.style.background = "url('"+ data.image +"')";
+        document.divModal2.style.background = "url,('"+ data.image +"')";
         document.divModal2.style.backgroundSize ='cover';
     })
     .catch(error => {
         console.log('error', error);
     });
-});
+});*/
 
 
 
