@@ -31,7 +31,7 @@ fetch(url)
         if (debug === true){
             console.log('entrée dans la fonction fetch');
         }
-
+//
 
 
     //console.log(values[0].title);
