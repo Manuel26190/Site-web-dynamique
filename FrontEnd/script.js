@@ -22,12 +22,18 @@ const url = 'http://localhost:5678/api/works';
 
 
 //fetch qui envoi une demande à l'API//
-    fetch(url)
+fetch(url)
     //transformation des values en JSON
-    .then ((response) => response.json())
-   
+    .then ((response) => response.json())   
     //function qui génére les fiches projets//
     .then ((values) => {
+        let debug = false;
+        if (debug === true){
+            console.log('entrée dans la fonction fetch');
+        }
+
+
+
     //console.log(values[0].title);
     for (let i = 0; i < values.length; i++) {   
         const article = values[i];
@@ -220,39 +226,62 @@ fetch(url)
                     figure.setAttribute('id', values.id);
                 })*/
                 figure.remove()
-            }   
+            };   
                       
-            
+            //console.log('url', url);            
 
-            //Suprimer un travail de la modale
+            //Suprimer un travail de la modale 
             deleteWork.addEventListener('click', function (){
-                console.log('token',token);
-                fetch(url + '/' + {id} , {
-                    method: "DELETE",
-                    headers: {
-                        "Autorization": "Bearer" + token
-                    }
-                })
-                .then(data => {
-                    figureRemove()
-                })
-                .catch(error => {
-                    console.log('error', error);
-                });                 
-                //figureRemove()                
-            })
-        } 
-    };
-    insertPicture()     
+                //console.log("token", token);
+                    fetch(url + "/" + id,  {
+                        method: "DELETE",
+                        headers: {
+                            "Autorization": "Bearer" + token
+                        },
+                    })
+                    .then ((response) => {
+                        if (response.ok){
+                            alert("la suppression de l'élémenet a fonctionner")
+                            figureRemove();
+                        } else {
+                            console.error("La suppression de l'élément pose un problème");
+                            //figureRemove();
+                        }
+                    })
+                    .catch(error => {
+                        console.log('error', error);
+                    });                
+            })//Fermeture du Fetch Delete
+        }//Fermeture de la boucle for  
+    };//Fermeture de la function insertPicture
+    insertPicture();
+       
 });
 
+//console.log('token', token)
 
 
-
-
-
-
- 
+/*deleteWork.addEventListener('click', function (){
+    const deleteProject = (id, token = sessionStorage.getItem('token')) => {
+        fetch(url + '/' + {id} , {
+            method: "DELETE",
+            headers: {
+                "Autorization": "Bearer" + token
+            }
+        })
+        .then ((response) => {
+            if (response.ok){
+                alert("la suppression de l'élémenet a fonctionner")
+                figureRemove(id);
+            } else {
+                console.error("La suppression de l'élément pose un problème");
+            }
+        })
+        .catch(error => {
+            console.log('error', error);
+        });        
+    }
+})*/ 
 
 //Modale 2 ajout photo
 
@@ -341,22 +370,6 @@ btnValider.addEventListener ('click', function () {
     } 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*const divModal2 = document.querySelector('.divModal2');
 
