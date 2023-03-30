@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@500&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/8ad4ebeb56.js" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -70,21 +71,26 @@
 						<input type="file" name="saisie" id="input-file" accept="image/jpeg, image/png, image/jpg">
 						<p id="imgSize">jpg. png: 4mo max</p>
 					</form>
+					<p style="color: red;" id="erreur1"></p>
 				</div>				
-				<form id="myForm2">            
+				<form id="myForm2" method="" name="formulaire" onsubmit="verif_form()">
+					<!--Bouton Titre-->            
 					<label  for="title" class="textForm2">Titre</label>
-					<input type="text" name="title" class="form2" id="photoTitle">            
-				
-					<label  for="type" class="textForm2">Catégorie</label>
-					<select name="category list" id="categoryList" class="form2">
+					<input type="text" name="title" class="form2" id="photoTitle">
+					<p style="color: red;" id="erreur2"></p>            
+					
+					<!--Liste de categorie Objets, appartements, Hôtels-->
+					<label  for="type" class="textForm2">Catégorie</label>					
+					<select name="categorylist" id="categoryList" class="form2">
 						<option value=""></option>
 						<option class="listClass" value="Objets">Objets</option>
 						<option class="listClass" value="Appartements">Appartements</option>
 						<option class="listClass" value="Hôtel & restaurants">Hôtel & restaurants</option>
-						<!--<input type="text"  name="category" class="form" id="categoryId">-->						
+						<!--<input type="text"  name="category" class="form" id="categoryId">-->  						
 					</select>
-					<p style="color: red;" id="erreur2"></p>					
-					<button type="submit" value="Validation" id="btnValider">Valider</button>				           
+					<!--Bouton Valider-->
+					<p style="color: red;" id="erreur3"></p>					
+					<button type="button" value="Validation" id="btnValider">Valider</button>				           
 			</form>			
 			</div>
 		</aside>

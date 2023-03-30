@@ -4,23 +4,6 @@ const gallery = document.querySelector('.gallery');
 const url = 'http://localhost:5678/api/works';
 
 
-/*async function values(url) {
-    let res = await fetch (url)
-    .then(async (response) => {
-        if (!response.ok) {
-            throw new Error ('Erreur de chargement de la base de données');
-        }
-        return response.text ().then((data) =>{
-            return data;
-        });
-    })
-    .catch ((error) => {
-        console.log(error);
-    });
-    return res
-}*/
-
-
 //fetch qui envoi une demande à l'API//
 fetch(url)
     //transformation des values en JSON
@@ -36,7 +19,7 @@ fetch(url)
 
     //console.log(values[0].title);
     for (let i = 0; i < values.length; i++) {   
-        const article = values[i];
+        
         //console.log(article.categoryId == 2); 
 
         const fiches = document.createElement("fiches");
@@ -45,7 +28,7 @@ fetch(url)
         img.innerHTML = img.src = values[i].imageUrl;
 
         const figcaption = document.createElement("figcaption");
-        figcaption.innerHTML = article.title;    
+        figcaption.innerHTML = values[i].title;    
     
         fiches.appendChild(img);
         fiches.appendChild(figcaption);
@@ -64,10 +47,10 @@ fetch(url)
 
         }else{ //Sinon, on filtrera les objets pour afficher seulement ceux dont la catégorie est mentionner au click boutton
             filteredValues = values.filter(value => categoryId.includes(value.categoryId));
+            console.log ('filter value', filteredValues);
         }
 
 // On vide les éléments HTML présent dans Gallery
-        let gallery = document.querySelector(".gallery");
         gallery.innerHTML = "";
 
 // Itération sur les objets filtrés pour créer les éléments HTML ci-joints
@@ -336,7 +319,6 @@ window.addEventListener('keydown', function (e){
 //ajout photo vers l'API
 
 let profilePicture = document.getElementById('profilePicture');
-
 let inputFile = document.getElementById('input-file');
 let labelFile = document.getElementById('labelFile');
 let imgSize = document.getElementById('imgSize');
@@ -353,22 +335,38 @@ inputFile.onchange = function (){
 }
 
 // le formulaire est rempli je veux que le bouton valider soit de couleur bleu
-let pictureForm = document.getElementById('pictureForm');
 let btnValider = document.getElementById ('btnValider');
-let titreAjoutPhoto = document.getElementById('photoTitle');
-let categoryList = document.getElementById('categoryList');
-
-//console.log('categoryList', categoryList);
-//console.log('titreajoutphoto', titreAjoutPhoto);
-//console.log('pictureForm', pictureForm);
-//console.log('btnValider', btnValider);
+let uploadPhotoError = document.getElementById('erreur1');
+let titleError = document.getElementById('erreur2');
+let categoryListError = document.getElementById('erreur3');
+//console.log('caterror %o', categoryListError)
 
 
-btnValider.addEventListener ('click', function () {
-    if (pictureForm.value === "" ){
-        alert('Fromulaire non rempli');
+function verif_form(){        
+    if (document.getElementById('input-file').value ==""){
+        uploadPhotoError.innerText ="Veuillez charger une photo";
+        return false;
+    } else if (document.getElementById('input-File').value != ""){
+        uploadPhotoError.innerHTML="";
+        labelFile.innerHTML = "";
+        inputFile.innerHTML = "";
+    }
+    if (document.getElementById('photoTitle').value ==""){
+        titleError.innerText = "Veuillez entrer un titre";        
+        return false;
+    } else if (document.getElementById('photoTitle').value != ""){
+        titleError.innerText = "";
     } 
+    if (document.getElementById('categoryList').value == ""){
+        categoryListError.innerText = "Veuillez indiquer une catégorie";
+    } else if (document.getElementById('categoryList').value != ""){
+        categoryListError.innerText = "";
+    }  
+}
 
+
+btnValider.addEventListener ('click', function () {    
+    verif_form()
 });
 
 /*const divModal2 = document.querySelector('.divModal2');
@@ -394,9 +392,3 @@ btnAjout.addEventListener('change', event => {
         console.log('error', error);
     });
 });*/
-
-
-
-
-
-

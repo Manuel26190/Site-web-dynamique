@@ -584,11 +584,24 @@ h3 {
 	color: #444444;
 	margin-top: 7px;
 }
+#erreur1{
+	text-align: center;	
+	width: 420px;
+		
+	
+}
 #erreur2{
 	text-align: center;	
 	width: 420px;
+	margin: -5px 0 10px 0;	
+	
+}
+#erreur3{
+	text-align: center;	
+	width: 420px;
 	border-bottom: 1px solid #B3B3B3;
-	margin-top: 35px;
+	margin: 5px 0 10px 0;
+	
 }
 
 /*--Formulaire ajout photo--*/
