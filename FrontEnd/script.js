@@ -171,8 +171,7 @@ fetch(url)
 .then ((response) => response.json())
 //function qui génére les fiches projets//
 .then ((values) =>  {    
-    //const insertPicture = function (){
-        
+            
         for (let i = 0; i < values.length; i++) {       
 
             const figure = document.createElement('figure');    
@@ -199,45 +198,57 @@ fetch(url)
             figure.append(deleteWork);
             figure.append(img);
             figure.appendChild(figcaption);    
-            photosModal.append(figure);           
+            photosModal.append(figure); 
+            
+            //console.log('values %o', values[i].id)            
 
             const figureRemove = function () {
-                /*forEach(figure =>  {
-                    figure.setAttribute('id', values.id);
-                })*/
+                //forEach(figure  =>  {
+                    //figure.setAttribute('id', values[i].id);
+                //})
                 figure.remove()
-            };                       
+            };
+            
+            const id = figure.setAttribute('id', values[i].id);
 
             //Suprimer un travail de la modale 
-            deleteWork.addEventListener('click', function (){
+            
                 //console.log("token", token);
-                    fetch(url + "/" + id,  {
-                        method: "DELETE",
+                async function deleteWorkById () {
+
+                    const token = localStorage.getItem('token');
+                
+                    const response = await fetch(url + "/" + {id}, {
+                        method: 'DELETE',
                         headers: {
-                            "Autorization": "Bearer" + token
-                        },
-                    })
-                    .then ((response) => {
-                        if (response.ok){
-                            alert("la suppression de l'élémenet a fonctionner")
-                            figureRemove();
-                        } else {
-                            console.error("La suppression de l'élément pose un problème");
-                            figureRemove();
+                            'Autorization': `Bearer ${token}`
                         }
-                    })
-                    .catch(error => {
-                        console.log('error', error);
-                    });                
-            })//Fermeture du Fetch Delete
-        }//Fermeture de la boucle for  
-    //};//Fermeture de la function insertPicture
-   // insertPicture();       
-});
-//console.log('token', token)
+                    });
+                    if (!response.ok) {
+                        throw new Error (`Failled to delete work: ${response.statusText}`);
+                    }
+                    const result = await response.text();
+                    if (result){
+                        return JSON.parse(result);    
+                    } else {
+                        return {};
+                    }
+                }
+
+                deleteWork.addEventListener('click', function (){
+                    deleteWorkById();
+                    figureRemove();
+                })     
+                    
+                               
+            
+        }//Fermeture de la boucle for    
+});//Fermeture de du Fetch Get
 
 
-/*deleteWork.addEventListener('click', function (){
+
+/*
+deleteWork.addEventListener('click', function (){
     const deleteProject = (id, token = sessionStorage.getItem('token')) => {
         fetch(url + '/' + {id} , {
             method: "DELETE",
@@ -257,7 +268,37 @@ fetch(url)
             console.log('error', error);
         });        
     }
-})*/ 
+})
+*/ 
+
+//console.log('token', token)
+
+/*
+fetch(url + "/" + {id} ,  {
+    method: "DELETE",
+    headers: {
+        "Autorization": "Bearer" + token
+    },
+})
+.then ((response) => {
+    if (response.ok){                            
+        figureRemove();
+        alert("la suppression de l'élémenet a fonctionner")
+    } else {
+        console.error("La suppression de l'élément ne fonctionne pas");                            
+    }
+})
+.catch(error => {
+    console.log('error', error);
+}); 
+*/
+
+
+
+
+
+
+
 
 //Création de la Modale 2 ajout de photo
 
