@@ -170,9 +170,8 @@ fetch(url)
 //transformation des values en JSON
 .then ((response) => response.json())
 //function qui génére les fiches projets//
-.then ((values) =>  {      
-    
-    const insertPicture = function (){
+.then ((values) =>  {    
+    //const insertPicture = function (){
         
         for (let i = 0; i < values.length; i++) {       
 
@@ -200,18 +199,14 @@ fetch(url)
             figure.append(deleteWork);
             figure.append(img);
             figure.appendChild(figcaption);    
-            photosModal.append(figure);
-
-            //console.log('token',token);
+            photosModal.append(figure);           
 
             const figureRemove = function () {
                 /*forEach(figure =>  {
                     figure.setAttribute('id', values.id);
                 })*/
                 figure.remove()
-            };   
-                      
-            //console.log('url', url);            
+            };                       
 
             //Suprimer un travail de la modale 
             deleteWork.addEventListener('click', function (){
@@ -228,7 +223,7 @@ fetch(url)
                             figureRemove();
                         } else {
                             console.error("La suppression de l'élément pose un problème");
-                            //figureRemove();
+                            figureRemove();
                         }
                     })
                     .catch(error => {
@@ -236,11 +231,9 @@ fetch(url)
                     });                
             })//Fermeture du Fetch Delete
         }//Fermeture de la boucle for  
-    };//Fermeture de la function insertPicture
-    insertPicture();
-       
+    //};//Fermeture de la function insertPicture
+   // insertPicture();       
 });
-
 //console.log('token', token)
 
 
@@ -266,7 +259,7 @@ fetch(url)
     }
 })*/ 
 
-//Modale 2 ajout photo
+//Création de la Modale 2 ajout de photo
 
 let modal2 = null;
 
@@ -291,7 +284,6 @@ const closeModal2 = function (e) {
     modal2.querySelector('.js-modal-close2').removeEventListener('click', closeModal2)
     modal2.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation2)
     modal2 = null
-
 }
 
 //Function qui empêche de fermer la modale losque l'on click à l'inrérieur du contenu
@@ -300,7 +292,6 @@ const stopPropagation2 = function (e){
 }
 
 const btnAjouter = document.querySelector('.btnAjouter');
-//console.log(btnAjouter)
 
 btnAjouter.addEventListener('click', function (){
     //console.log(e)
@@ -318,12 +309,16 @@ window.addEventListener('keydown', function (e){
 
 //ajout photo vers l'API
 
-let profilePicture = document.getElementById('profilePicture');
-let inputFile = document.getElementById('input-file');
-let labelFile = document.getElementById('labelFile');
-let imgSize = document.getElementById('imgSize');
-//let pictureForm = document.getElementById('pictureForm');
+//Je cible les différents champs du fomulaire ajout d'image 
+const pictureForm = document.getElementById('pictureForm');
+const myForm2 = document.getElementById('myForm2');
 
+const profilePicture = document.getElementById('profilePicture');
+const inputFile = document.getElementById('input-file');
+const labelFile = document.getElementById('labelFile');
+const imgSize = document.getElementById('imgSize');
+
+//function qui upload l'image et la fait apparaître dans la modale
 inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
@@ -331,16 +326,16 @@ inputFile.onchange = function (){
     profilePicture.style.marginTop ='0';
     labelFile.style.background = 'white';       
     labelFile.innerHTML = '';
-    imgSize.innerHTML = '';
-        
+    imgSize.innerHTML = '';        
 }
 
-
-let btnValider = document.getElementById ('btnValider');
-let uploadPhotoError = document.getElementById('erreur1');
-let titleError = document.getElementById('erreur2');
-let categoryListError = document.getElementById('erreur3');
-//console.log('caterror %o', categoryListError)
+//Je cible les éléménts du formulaire ajout d'image, messages d'erreur et bouton submit
+const btnValider = document.getElementById ('btnValider');
+const photoTitle = document.getElementById('photoTitle');
+const categoryList = document.getElementById('categoryList');
+const uploadPhotoError = document.getElementById('erreur1');
+const titleError = document.getElementById('erreur2');
+const categoryListError = document.getElementById('erreur3');
 
 //Vérification que les champs du formulaire soient bien rempli
 function verif_form(){        
@@ -348,21 +343,29 @@ function verif_form(){
         uploadPhotoError.innerText ="Veuillez ajouter une photo";
         return false;
     }     
-    if (document.getElementById('photoTitle').value ==""){
+    if (photoTitle.value ==""){
         titleError.innerText = "Veuillez entrer un titre";        
         return false;
-    } else if (document.getElementById('photoTitle').value != ""){
+    } else if (photoTitle.value != ""){
         titleError.innerText = "";
     } 
-    if (document.getElementById('categoryList').value == ""){
+    if (categoryList.value == ""){
         categoryListError.innerText = "Veuillez indiquer une catégorie";
-    } else if (document.getElementById('categoryList').value != ""){
+    } else if (categoryList.value != ""){
         categoryListError.innerText = "";
     }  
 }
 
 // le formulaire est rempli je veux que le bouton valider soit de couleur bleu
+//console.log('pictureForm %o', pictureForm)
+//console.log('pictureForm %o', btnValider)
+//console.log('myForm2 %o', myForm2)
 
+
+    
+     if ((inputFile.value != "") && (photoTitle.value != "") && (categoryList.value != "")){
+        btnValider.style.background = 'blue';
+    };
 
 btnValider.addEventListener ('click', function () {    
     verif_form()
