@@ -322,35 +322,32 @@ let profilePicture = document.getElementById('profilePicture');
 let inputFile = document.getElementById('input-file');
 let labelFile = document.getElementById('labelFile');
 let imgSize = document.getElementById('imgSize');
+//let pictureForm = document.getElementById('pictureForm');
 
 inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
     profilePicture.style.height = '169px';
     profilePicture.style.marginTop ='0';
-    labelFile.style.background = 'white';  
-    inputFile.innerHTML = ''; 
+    labelFile.style.background = 'white';       
     labelFile.innerHTML = '';
-    imgSize.innerHTML = '';    
+    imgSize.innerHTML = '';
+        
 }
 
-// le formulaire est rempli je veux que le bouton valider soit de couleur bleu
+
 let btnValider = document.getElementById ('btnValider');
 let uploadPhotoError = document.getElementById('erreur1');
 let titleError = document.getElementById('erreur2');
 let categoryListError = document.getElementById('erreur3');
 //console.log('caterror %o', categoryListError)
 
-
+//Vérification que les champs du formulaire soient bien rempli
 function verif_form(){        
-    if (document.getElementById('input-file').value ==""){
-        uploadPhotoError.innerText ="Veuillez charger une photo";
+    if (inputFile.value ==""){
+        uploadPhotoError.innerText ="Veuillez ajouter une photo";
         return false;
-    } else if (document.getElementById('input-File').value != ""){
-        uploadPhotoError.innerHTML="";
-        labelFile.innerHTML = "";
-        inputFile.innerHTML = "";
-    }
+    }     
     if (document.getElementById('photoTitle').value ==""){
         titleError.innerText = "Veuillez entrer un titre";        
         return false;
@@ -363,6 +360,8 @@ function verif_form(){
         categoryListError.innerText = "";
     }  
 }
+
+// le formulaire est rempli je veux que le bouton valider soit de couleur bleu
 
 
 btnValider.addEventListener ('click', function () {    

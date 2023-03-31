@@ -737,14 +737,14 @@ h3{
 	color: #306685;
 	width: 173px;
 	height: 36px;
-	background: #CBD6DC;
+	background: #dcd0cb;
 	border-radius: 50px;
 	border: none;
 	margin-top: 21px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: relative;
+	
 	
 }
 #input-file{
