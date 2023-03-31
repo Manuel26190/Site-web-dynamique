@@ -187,8 +187,9 @@ fetch(url)
             deleteWork.classList.add("fa-solid", "fa-trash-can");
     
             /*--categoryId = document.createElement("p");
-            categoryId.setAttribute("src", values.categoryId);--*/              
-        
+            categoryId.setAttribute("src", values.categoryId);--*/ 
+
+            //J'intègre à ma première photo le logo déplaçer 
             if (i === 0){
                 const moveLogo = document.createElement('i');
                 moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
@@ -198,52 +199,53 @@ fetch(url)
             figure.append(deleteWork);
             figure.append(img);
             figure.appendChild(figcaption);    
-            photosModal.append(figure); 
-            
-            //console.log('values %o', values[i].id)            
-
-            const figureRemove = function () {
-                //forEach(figure  =>  {
-                    //figure.setAttribute('id', values[i].id);
-                //})
+            photosModal.append(figure);    
+             
+            //Function qui supprime l'élément figure
+            const figureRemove = function () {                
                 figure.remove()
             };
             
-            const id = figure.setAttribute('id', values[i].id);
+            const id = values[i].id;
+            //console.log('values %o', values[i].id)
 
-            //Suprimer un travail de la modale 
-            
-                //console.log("token", token);
+            //Suprimer un travail de la modale             
+                
                 async function deleteWorkById () {
 
-                    const token = localStorage.getItem('token');
+                    //console.log("token", token);            
                 
-                    const response = await fetch(url + "/" + {id}, {
+                    const response = await fetch(url + "/" + id, {
                         method: 'DELETE',
                         headers: {
-                            'Autorization': `Bearer ${token}`
+                            "Autorization": "Bearer" + token
                         }
                     });
                     if (!response.ok) {
-                        throw new Error (`Failled to delete work: ${response.statusText}`);
+                        console.log("L'api ne répond pas");
                     }
-                    const result = await response.text();
-                    if (result){
-                        return JSON.parse(result);    
+                    if (response.ok){
+                        alert("la suppression de l'élémenet a fonctionner")
+                        figureRemove(id);
                     } else {
-                        return {};
+                        console.error("La suppression de l'élément pose un problème");
                     }
                 }
-
                 deleteWork.addEventListener('click', function (){
+                    alert('ok')
                     deleteWorkById();
                     figureRemove();
-                })     
-                    
-                               
-            
+                })        
         }//Fermeture de la boucle for    
 });//Fermeture de du Fetch Get
+
+
+
+
+
+
+
+
 
 
 
