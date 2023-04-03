@@ -4,7 +4,7 @@ const urlApi = 'http://localhost:5678/api/works';
 const gallery = document.querySelector('.gallery');
 
 //function pour itérer et afficher les travaux stockés dans l'API
-const displayWorks = function () {
+let displayWorks = function () {
     dataTable.forEach( value => {
 
         let figure = document.createElement("figure");
@@ -24,6 +24,9 @@ const displayWorks = function () {
 
 let dataTable = [];//Je crée une constante qui contient un tableau vide
 
+console.log('dataTable %o', dataTable);
+//console.log('ligne 1 dataTable', dataTable.title);
+
 //Appel fetch qui copie les données de l'APÏ dans mon tableau dataTable
 fetch(urlApi)
     .then(function (response) {
@@ -36,7 +39,7 @@ fetch(urlApi)
             dataTable.push(element);
         });
         displayWorks(dataTable);
-
+console.log('values %o', values[0].title)
 // Création d'une fonction pour filtrer les objets en fonction du bouton de catégorie cliquer sur le site
     function filterObjets(values, categoryId) {
 
@@ -49,7 +52,7 @@ fetch(urlApi)
 
         }else{ //Sinon, on filtrera les objets pour afficher seulement ceux dont la catégorie est mentionner au click boutton
             filteredValues = values.filter(value => categoryId.includes(value.categoryId));
-            //console.log ('filter value', filteredValues);
+            console.log ('filter value', filteredValues);
         }
 
 // On vide les éléments HTML présent dans Gallery
@@ -77,6 +80,7 @@ fetch(urlApi)
     const noFilter = document.querySelector("#btnTous");
     noFilter.addEventListener("click", function() {
     filterObjets(values, []);
+    
     });
 
     const boutonObjets1 = document.querySelector("#btnObjets");
@@ -163,34 +167,40 @@ window.addEventListener('keydown', function (e){
 
 //Appel API pour intégrer les photos dans la modale
 
-//je selectionne mon élément Div photos Moadal dans mon HTML
-const photosModal = document.querySelector('.photosModal');
+
 //console.log(photosModal); 
 
+//console.log('data table', dataTable[0])
+
+/*
 //fetch qui envoi une demande à l'API//
 fetch(urlApi)
 //transformation des values en JSON
 .then ((response) => response.json())
 //function qui génére les fiches projets//
-.then ((values) =>  {    
-            
+.then ((values) =>  {  
+  */
+     
+  
+//je selectionne mon élément Div photos Modal dans mon HTML
+let photosModal = document.querySelector('.photosModal');
+//console.log('photo modal %o', photosModal)
+
+    const afficherTravaux = function (values) {
         for (let i = 0; i < values.length; i++) {       
 
-            const figure = document.createElement('figure');    
-    
-            const img = document.createElement('img');    
+            let figure = document.createElement('figure');
+
+            let img = document.createElement('img');    
             img.setAttribute("src", values[i].imageUrl );
             img.classList.add('img-modal');        
     
-            const figcaption = document.createElement('figcaption');
+            let figcaption = document.createElement('figcaption2');
             figcaption.innerHTML = 'éditer';
     
             const deleteWork = document.createElement('i');
             deleteWork.classList.add("fa-solid", "fa-trash-can");
-    
-            /*--categoryId = document.createElement("p");
-            categoryId.setAttribute("src", values.categoryId);--*/ 
-
+                
             //J'intègre à ma première photo le logo déplaçer 
             if (i === 0){
                 const moveLogo = document.createElement('i');
@@ -199,27 +209,62 @@ fetch(urlApi)
             }             
             
             figure.append(deleteWork, img, figcaption);               
-            photosModal.append(figure);    
-             
-            //Function qui supprime l'élément figure
-            const figureRemove = function () {                
-                figure.remove()
-            };
+            photosModal.append(figure);
+        }  
+    }
+
+    afficherTravaux(dataTable);
+
+
+
+//}); 
+
+
+
+
+
+
+
+//Function qui retire l'élémént id
+function retirerElement(id) {
+    for (let i = 0; i < dataTable.length; i++){
+        console.log (dataTable[i].id)
+        if (dataTable[i].id === id){
+            dataTable.splice(i, 1);
+        }
+    }
+}
+
+/*
+//Function pour supprimer le travail de l'API 
+const deleteWork = (id, token = sessionStorage.getItem('token')) => {
+    fetch(urlApi + '/' + id, {
+        method: "DELETE",
+        headers: {
+            "Autorization": "Bearer" + token
+        },
+    })
+    .then ((response) => {
+        if (response.ok){
+            alert("la suppression de l'élémenet a fonctionner")
+            retirerElement(id);
+
+        } else {
+            console.error("La suppression de l'élément ne fonctionne pas");
+        }
+    })
+    .catch(error => {
+        console.log('error', error);
+    });        
+}
+
+*/
+
             
 
 
 
-
-
-
-
-
-
-
-
-            const id = values[i].id;
-            //console.log('values %o', values[i].id)
-
+/*
             //Suprimer un travail de la modale             
                 
                 async function deleteWorkById () {
@@ -242,49 +287,9 @@ fetch(urlApi)
                         console.error("La suppression de l'élément pose un problème");
                     }
                 }
-                deleteWork.addEventListener('click', function (){
-                    alert('ok')
-                    deleteWorkById();
-                    figureRemove();
-                })        
-        }//Fermeture de la boucle for    
-});//Fermeture de du Fetch Get
+ */                  
 
 
-
-
-
-
-
-
-
-
-
-/*
-deleteWork.addEventListener('click', function (){
-    const deleteProject = (id, token = sessionStorage.getItem('token')) => {
-        fetch(url + '/' + {id} , {
-            method: "DELETE",
-            headers: {
-                "Autorization": "Bearer" + token
-            }
-        })
-        .then ((response) => {
-            if (response.ok){
-                alert("la suppression de l'élémenet a fonctionner")
-                figureRemove(id);
-            } else {
-                console.error("La suppression de l'élément pose un problème");
-            }
-        })
-        .catch(error => {
-            console.log('error', error);
-        });        
-    }
-})
-*/ 
-
-//console.log('token', token)
 
 /*
 fetch(url + "/" + {id} ,  {
