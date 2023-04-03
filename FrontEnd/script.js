@@ -1,41 +1,43 @@
-//Je cible l'élément gallery de ma page HTML
+// je stock dans une variable l'url de l'API
+const urlApi = 'http://localhost:5678/api/works';
+
 const gallery = document.querySelector('.gallery');
- 
-const url = 'http://localhost:5678/api/works';
 
+//function pour itérer et afficher les travaux stockés dans l'API
+const displayWorks = function () {
+    dataTable.forEach( value => {
 
-//fetch qui envoi une demande à l'API//
-fetch(url)
-    //transformation des values en JSON
-    .then ((response) => response.json())   
-    //function qui génére les fiches projets//
-    .then ((values) => {
-        let debug = false;
-        if (debug === true){
-            console.log('entrée dans la fonction fetch');
-        }
-//
-
-
-    //console.log(values[0].title);
-    for (let i = 0; i < values.length; i++) {   
-        
-        //console.log(article.categoryId == 2); 
-
-        const fiches = document.createElement("fiches");
-
-        const img = document.createElement("img");
-        img.innerHTML = img.src = values[i].imageUrl;
-
-        const figcaption = document.createElement("figcaption");
-        figcaption.innerHTML = values[i].title;    
+        let figure = document.createElement("figure");
+        let img = document.createElement("img");
+        let figcaption = document.createElement("figcaption");
     
-        fiches.appendChild(img);
-        fiches.appendChild(figcaption);
-        gallery.appendChild(fiches);
-    }
+        img.setAttribute("src", value.imageUrl);
+        figcaption.setAttribute("alt", value.title);
+        img.setAttribute("crossorigin", "anonymous");
+    
+        figcaption.innerHTML = value.title;
+    
+        figure.append(img, figcaption);
+        gallery.append(figure);    
+    });    
+}; 
 
-    // Création d'une fonction pour filtrer les objets en fonction du bouton de catégorie cliquer sur le site
+let dataTable = [];//Je crée une constante qui contient un tableau vide
+
+//Appel fetch qui copie les données de l'APÏ dans mon tableau dataTable
+fetch(urlApi)
+    .then(function (response) {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+    .then(function (values) {
+        values.forEach(function (element) {
+            dataTable.push(element);
+        });
+        displayWorks(dataTable);
+
+// Création d'une fonction pour filtrer les objets en fonction du bouton de catégorie cliquer sur le site
     function filterObjets(values, categoryId) {
 
         let filteredValues;
@@ -47,7 +49,7 @@ fetch(url)
 
         }else{ //Sinon, on filtrera les objets pour afficher seulement ceux dont la catégorie est mentionner au click boutton
             filteredValues = values.filter(value => categoryId.includes(value.categoryId));
-            console.log ('filter value', filteredValues);
+            //console.log ('filter value', filteredValues);
         }
 
 // On vide les éléments HTML présent dans Gallery
@@ -90,12 +92,11 @@ fetch(url)
     const boutonObjets3 = document.querySelector("#btnHotels");
     boutonObjets3.addEventListener("click", function() {
     filterObjets(values, [3]);
-    });     
-    
+    });
 })
-.catch(error => {
-    console.log('error', error);
-});
+    .catch(error => {
+        console.log('error', error);
+    });
 
 //Apparition du mode edition
 let token = sessionStorage.getItem("token");
@@ -159,6 +160,7 @@ window.addEventListener('keydown', function (e){
     }
 });
 
+
 //Appel API pour intégrer les photos dans la modale
 
 //je selectionne mon élément Div photos Moadal dans mon HTML
@@ -166,7 +168,7 @@ const photosModal = document.querySelector('.photosModal');
 //console.log(photosModal); 
 
 //fetch qui envoi une demande à l'API//
-fetch(url)
+fetch(urlApi)
 //transformation des values en JSON
 .then ((response) => response.json())
 //function qui génére les fiches projets//
@@ -196,9 +198,7 @@ fetch(url)
                 figure.appendChild(moveLogo);
             }             
             
-            figure.append(deleteWork);
-            figure.append(img);
-            figure.appendChild(figcaption);    
+            figure.append(deleteWork, img, figcaption);               
             photosModal.append(figure);    
              
             //Function qui supprime l'élément figure
@@ -206,6 +206,17 @@ fetch(url)
                 figure.remove()
             };
             
+
+
+
+
+
+
+
+
+
+
+
             const id = values[i].id;
             //console.log('values %o', values[i].id)
 
@@ -215,7 +226,7 @@ fetch(url)
 
                     //console.log("token", token);            
                 
-                    const response = await fetch(url + "/" + id, {
+                    const response = await fetch(urlApi + "/" + id, {
                         method: 'DELETE',
                         headers: {
                             "Autorization": "Bearer" + token
