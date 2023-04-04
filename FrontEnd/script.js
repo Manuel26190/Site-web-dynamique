@@ -4,10 +4,10 @@ const urlApi = 'http://localhost:5678/api/works';
 const gallery = document.querySelector('.gallery');
 
 //function pour itérer et afficher les travaux stockés dans l'API
-let displayWorks = function () {
-    dataTable.forEach( value => {
+let displayWorks = function (toto) {
+    toto.forEach( value => {
 
-        let figure = document.createElement("figure");
+        /*let figure = document.createElement("figure");
         let img = document.createElement("img");
         let figcaption = document.createElement("figcaption");
     
@@ -17,15 +17,31 @@ let displayWorks = function () {
     
         figcaption.innerHTML = value.title;
     
-        figure.append(img, figcaption);
+        figure.append(img, figcaption);*/
+        let figure = cElement(value)
         gallery.append(figure);    
-    });    
+    }
+    );    
 }; 
 
 let dataTable = [];//Je crée une constante qui contient un tableau vide
 
-console.log('dataTable %o', dataTable);
-//console.log('ligne 1 dataTable', dataTable.title);
+   // console.log('dataTable %o', dataTable);
+   // console.log('ligne 1 dataTable %o', dataTable[0]);
+
+const cElement = function (el){
+    let figure = document.createElement("figure");
+    let img = document.createElement("img");
+    let figcaption = document.createElement("figcaption");
+
+    img.setAttribute("src", el.imageUrl);
+    figcaption.setAttribute("alt", el.title);
+    img.setAttribute("crossorigin", "anonymous");
+
+    figcaption.innerHTML = el.title;    
+    figure.append(img, figcaption);
+    return figure;
+}
 
 //Appel fetch qui copie les données de l'APÏ dans mon tableau dataTable
 fetch(urlApi)
@@ -36,10 +52,13 @@ fetch(urlApi)
     })
     .then(function (values) {
         values.forEach(function (element) {
-            dataTable.push(element);
+            dataTable.push(element); //je veux stocker dans un tableau la data retournée 
+            console.log('dataTable', dataTable)
+            cElement(element)//j'appelle une fonction qui crée des éléments dans le DOM 
         });
         displayWorks(dataTable);
-console.log('values %o', values[0].title)
+//console.log('values %o', values[0].title)
+
 // Création d'une fonction pour filtrer les objets en fonction du bouton de catégorie cliquer sur le site
     function filterObjets(values, categoryId) {
 
@@ -52,7 +71,7 @@ console.log('values %o', values[0].title)
 
         }else{ //Sinon, on filtrera les objets pour afficher seulement ceux dont la catégorie est mentionner au click boutton
             filteredValues = values.filter(value => categoryId.includes(value.categoryId));
-            console.log ('filter value', filteredValues);
+            //console.log ('filter value', filteredValues);
         }
 
 // On vide les éléments HTML présent dans Gallery
@@ -79,8 +98,7 @@ console.log('values %o', values[0].title)
 // Création d'événements "au click" sur différent bouton pour filtrer les éléments selon leur catégorie (bouton) séléctionné
     const noFilter = document.querySelector("#btnTous");
     noFilter.addEventListener("click", function() {
-    filterObjets(values, []);
-    
+    filterObjets(values, []);    
     });
 
     const boutonObjets1 = document.querySelector("#btnObjets");
@@ -97,10 +115,12 @@ console.log('values %o', values[0].title)
     boutonObjets3.addEventListener("click", function() {
     filterObjets(values, [3]);
     });
-})
+})//fermeture du Fetch
     .catch(error => {
         console.log('error', error);
-    });
+    })
+
+    
 
 //Apparition du mode edition
 let token = sessionStorage.getItem("token");
@@ -171,53 +191,93 @@ window.addEventListener('keydown', function (e){
 //console.log(photosModal); 
 
 //console.log('data table', dataTable[0])
-
 /*
+
 //fetch qui envoi une demande à l'API//
 fetch(urlApi)
 //transformation des values en JSON
 .then ((response) => response.json())
 //function qui génére les fiches projets//
-.then ((values) =>  {  
-  */
-     
+.then ((values) =>  { 
+    */    
   
 //je selectionne mon élément Div photos Modal dans mon HTML
 let photosModal = document.querySelector('.photosModal');
-//console.log('photo modal %o', photosModal)
 
-    const afficherTravaux = function (values) {
-        for (let i = 0; i < values.length; i++) {       
-
+//Fonction qui affiche tous les travaux dans la fenêtre modale
+    const afficherTravaux = function (totoo) {
+        totoo.forEach (values => {
             let figure = document.createElement('figure');
 
             let img = document.createElement('img');    
             img.setAttribute("src", values[i].imageUrl );
             img.classList.add('img-modal');        
     
-            let figcaption = document.createElement('figcaption2');
+            let figcaption = document.createElement('figcaption');
             figcaption.innerHTML = 'éditer';
     
             const deleteWork = document.createElement('i');
             deleteWork.classList.add("fa-solid", "fa-trash-can");
                 
-            //J'intègre à ma première photo le logo déplaçer 
+//J'intègre à ma première photo le logo déplaçer 
             if (i === 0){
                 const moveLogo = document.createElement('i');
                 moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-                figure.appendChild(moveLogo);
-            }             
+                figure.appendChild(moveLogo);            }             
             
             figure.append(deleteWork, img, figcaption);               
             photosModal.append(figure);
-        }  
+
+//Fonction qui supprime le travail en cliquant sur le logo delete
+            deleteWork.addEventListener('click', function (){
+                figure.remove()                
+            })
+
+        })           
+          
     }
-
-    afficherTravaux(dataTable);
-
+    afficherTravaux(dataTable);   
 
 
-//}); 
+/*
+});
+/* 
+
+
+//Je veux supprimer le travail au click pour qu'il ne soit plus visible, par le même biais je veux effacer ce même travail sur mon API 
+//puis regénérer les travaux présents sur ma modale sans le travail effacé et regénérer mon index.html sans le travail effacé également
+
+
+
+
+
+//Function pour supprimer le travail de l'API 
+const deleteProject = (id, token = sessionStorage.getItem('token')) => {
+    fetch(urlApi + '/' + id, {
+        method: "DELETE",
+        headers: {
+            "Autorization": "Bearer" + token
+        },
+    })
+    .then ((response) => {
+        if (response.ok){
+            alert("la suppression de l'élémenet a fonctionner")
+            
+
+        } else {
+            console.error("La suppression de l'élément ne fonctionne pas");
+        }
+    })
+    .catch(error => {
+        console.log('error', error);
+    });        
+}
+
+
+
+
+
+
 
 
 
@@ -235,32 +295,10 @@ function retirerElement(id) {
     }
 }
 
-/*
-//Function pour supprimer le travail de l'API 
-const deleteWork = (id, token = sessionStorage.getItem('token')) => {
-    fetch(urlApi + '/' + id, {
-        method: "DELETE",
-        headers: {
-            "Autorization": "Bearer" + token
-        },
-    })
-    .then ((response) => {
-        if (response.ok){
-            alert("la suppression de l'élémenet a fonctionner")
-            retirerElement(id);
 
-        } else {
-            console.error("La suppression de l'élément ne fonctionne pas");
-        }
-    })
-    .catch(error => {
-        console.log('error', error);
-    });        
-}
 
-*/
 
-            
+       
 
 
 
@@ -287,7 +325,7 @@ const deleteWork = (id, token = sessionStorage.getItem('token')) => {
                         console.error("La suppression de l'élément pose un problème");
                     }
                 }
- */                  
+ */                 
 
 
 
@@ -310,10 +348,6 @@ fetch(url + "/" + {id} ,  {
     console.log('error', error);
 }); 
 */
-
-
-
-
 
 
 
