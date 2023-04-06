@@ -1,7 +1,7 @@
 let dataTable2 = [];
 
 
-fetch('http://localhost:5678/api/works')
+fetch('http://localhost:5678/api/works/id')
     .then(res => res.json ())
     .then(function (values) {
         //console.log ('values', values)
