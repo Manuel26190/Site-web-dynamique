@@ -208,7 +208,7 @@ function modalWorks (values) {
         img.setAttribute("src", values[i].imageUrl );
         img.classList.add('img-modal');
         
-        categoryId = document.createElement('p');
+        let categoryId = document.createElement('p');
         categoryId.setAttribute('src', values.categoryId);
 
         let figcaption = document.createElement('figcaption');
@@ -229,7 +229,7 @@ function modalWorks (values) {
 //Fonction qui supprime le travail en cliquant sur le logo delete
         deleteWork.addEventListener('click', function () {
             deleteProject(values.id);
-            figure.remove()
+            //figure.remove()
         })
         
     }    
@@ -241,7 +241,7 @@ function modalWorks (values) {
 
 //Function pour supprimer le travail de l'API 
 const deleteProject = (id, token = sessionStorage.getItem('token')) => {
-    fetch(urlApi + '/' + {id}, {
+    fetch(urlApi + '/' + id, {
         method: "DELETE",
         headers: {
             "Autorization": "Bearer" + token
