@@ -244,34 +244,28 @@ function modalWorks (values) {
 
 
 //Function pour supprimer le travail de l'API 
+const deleteWork =  (id, token = sessionStorage.getItem("token")) => {
 
 
+    fetch("http://localhost:5678/api/works" + "/" + id, {
+        method: "DELETE",
+        headers: {
+            Authorization : "Bearer " + token,
+        },
+    })
+    .then((response) => {
+        if (response.ok){
+            alert("la suppression de l'élémenet a fonctionner")
+            deleteElement(id);
+            modalWorks(dataTable); //itération des travaux de la fénêtre modale
+            displayWorks(dataTable); //itération des travaux de la page d'accueil            
 
-    const deleteWork = (id, token = sessionStorage.getItem("token")) => {
-
-        fetch(urlApi + "/" + id, {
-          method: "DELETE",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-          .then((response) => {
-            if (response.ok) {
-             alert("La suppression de l'élément a fonctionner");
-              // document.getElementById(id).innerHTML ="";
-              retirerElement(id);
-              displayAll(dataTable);
-              displayAllModal(dataTable);
-              // closeModal();
-            } else {
-              console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
-            }
-          })
-        };
-      
-
-
-
+        } else {
+            console.error("La suppression de l'élément ne fonctionne pas", response);
+        }
+    })    
+           
+};
    
 
 //Function qui retire l'élémént id
@@ -424,7 +418,7 @@ btnValider.addEventListener ('click', function () {
     verif_form()
 });
 
-/*const divModal2 = document.querySelector('.divModal2');
+const divModal2 = document.querySelector('.divModal2');
 
 const btnAjout = document.querySelector('.btnAjout');
 
@@ -434,11 +428,13 @@ btnAjout.addEventListener('change', event => {
     const formData = new FormData();
     formData.append('image', files[0]);
 
-    fetch(url, {
+    fetch(urlApi, {
+        //headers: 
         method: 'POST',
         body:formData,
     })
     .then(response => response.json())
+
     .then(data =>{
         document.divModal2.style.background = "url,('"+ data.image +"')";
         document.divModal2.style.backgroundSize ='cover';
@@ -446,4 +442,4 @@ btnAjout.addEventListener('change', event => {
     .catch(error => {
         console.log('error', error);
     });
-});*/
+});
