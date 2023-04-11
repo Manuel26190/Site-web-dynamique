@@ -134,6 +134,13 @@ let token = sessionStorage.getItem("token");
             link.style.display ='flex';
         });    
     };
+
+    modalWorks(dataTable);
+
+})//fermeture du Fetch
+.catch(error => {
+    console.log('error', error);
+})
  
 //Ouverture de la fenêtre modale
 
@@ -154,8 +161,8 @@ const openModal = function (e) {
 };
  //Fonction qui ferme la modale
 const closeModal = function (e) {
-    if (modal === null) return
-        
+    
+    if (modal === null) return        
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true')
     modal.removeAttribute ('aria-modal')
@@ -163,8 +170,9 @@ const closeModal = function (e) {
     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)    
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)    
     modal = null    
-    
-}
+};
+
+
 
 //Function qui empêche de fermer la modale losque l'on click à l'inrérieur du contenu
     const stopPropagation = function (e) {
@@ -185,12 +193,7 @@ const closeModal = function (e) {
     }); 
 
     
-    modalWorks(dataTable);
 
-})//fermeture du Fetch
-.catch(error => {
-    console.log('error', error);
-})
 
 //Fonction qui affiche tous les travaux dans la fenêtre modale
 function modalWorks (values) {
@@ -302,12 +305,13 @@ const stopPropagation2 = function (e){
     e.stopPropagation()
 }
 
-const btnAjouter = document.querySelector('.btnAjouter');
 
+const btnAjouter = document.querySelector('.btnAjouter');
+//function qui ouvre la modale 2 et ferme la modale 1 au click sur le bouton ajouter une photo
 btnAjouter.addEventListener('click', function (){
     //console.log(e)
-    openModal2();
     closeModal();
+    openModal2();    
 });
 
 //Fermeture de la modale avec l'utilisation de "échap"
@@ -334,7 +338,7 @@ inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
     profilePicture.style.height = '169px';
-    profilePicture.style.marginTop ='29px';
+    profilePicture.style.marginTop ='28px';
            
     labelFile.innerHTML = '';
     imgSize.innerHTML = '';        
