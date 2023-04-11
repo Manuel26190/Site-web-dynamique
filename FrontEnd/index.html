@@ -63,35 +63,36 @@
 				<button id="logoReturn"><i class="fa-sharp fa-solid fa-arrow-right fa-rotate-180"></i></button>
 				<button class="js-modal-close2"><i class="fa-solid fa-xmark"></i></button>
 				<h3 id="titlemodal">Ajout photo</h3>				
-				<div class="divModal2">
+				
+				
 					<!--Formulaire modale 2 pour upload l'image-->
-					<form id="pictureForm">						
-						<img src="assets/images/picture_logo.svg" alt="" id="profilePicture">
-						<label for="input-file" id="labelFile">+ ajouter une photo</label>
-						<input type="file" name="saisie" id="input-file" accept="image/jpeg, image/png, image/jpg">
-						<p id="imgSize">jpg. png: 4mo max</p>
-					</form>
-					<p style="color: red;" id="erreur1"></p>
-				</div>				
-				<form id="myForm2" method="" name="formulaire" onsubmit="verif_form()">
-					<!--Bouton Titre-->            
-					<label  for="title" class="textForm2">Titre</label>
-					<input type="text" name="title" class="form2" id="photoTitle">
-					<p style="color: red;" id="erreur2"></p>            
+					<form id="pictureForm" name="formulaire">
+						<div id="divModal2">
+							<img src="assets/images/picture_logo.svg" alt="photo du bar Malt and Juniper à New York" id="profilePicture">
+							<label for="input-file" id="labelFile">+ ajouter une photo</label>
+							<input type="file" name="saisie" id="input-file" accept="image/jpeg, image/png, image/jpg">
+							<p id="imgSize">jpg. png: 4mo max</p>
+							<p style="color: red;" id="erreur1"></p>
+						</div>
+											
+						<!--Bouton Titre-->            
+						<label for="title" id="titreForm2">Titre</label>
+						<input type="text" name="title" class="form2" id="photoTitle">
+						<p style="color: red;" id="erreur2"></p>           
 					
-					<!--Liste de categorie Objets, appartements, Hôtels-->
-					<label  for="type" class="textForm2">Catégorie</label>					
-					<select name="categorylist" id="categoryList" class="form2">
-						<option value=""></option>
-						<option class="listClass" value="Objets">Objets</option>
-						<option class="listClass" value="Appartements">Appartements</option>
-						<option class="listClass" value="Hôtel & restaurants">Hôtel & restaurants</option>
-						<!--<input type="text"  name="category" class="form" id="categoryId">-->  						
-					</select>
-					<!--Bouton Valider-->
-					<p style="color: red;" id="erreur3"></p>					
-					<button type="button" value="Validation" id="btnValider">Valider</button>				           
-			</form>			
+						<!--Liste de categorie Objets, appartements, Hôtels-->
+						<label  for="type" id="categoryForm2">Catégorie</label>					
+						<select name="categorylist" id="categoryList" class="form2">
+							<option value=""></option>
+							<option class="listClass" value="Objets">Objets</option>
+							<option class="listClass" value="Appartements">Appartements</option>
+							<option class="listClass" value="Hôtel & restaurants">Hôtel & restaurants</option>
+							<!--<input type="text"  name="category" class="form" id="categoryId">-->  						
+						</select>
+						<!--Bouton Valider-->
+						<p style="color: red;" id="erreur3"></p>					
+						<button type="button" value="Validation" id="btnValider">Valider</button>				           
+					</form>			
 			</div>
 		</aside>
 		<div id="divMesProjets">

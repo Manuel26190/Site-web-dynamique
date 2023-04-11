@@ -3,8 +3,6 @@ const urlApi = 'http://localhost:5678/api/works';
 
 const gallery = document.querySelector('.gallery');
 
-
-
 //function pour itérer et afficher les travaux stockés dans l'API
 function displayWorks (toto) {
     toto.forEach( value => {
@@ -122,10 +120,7 @@ fetch(urlApi)
     const boutonObjets3 = document.querySelector("#btnHotels");
     boutonObjets3.addEventListener("click", function() {
     filterObjets(values, [3]);
-    });
-
-
-    
+    });    
 
 //Apparition du mode edition
 let token = sessionStorage.getItem("token");
@@ -242,10 +237,8 @@ function modalWorks (values) {
 }
 
 
-
 //Function pour supprimer le travail de l'API 
 const deleteWork =  (id, token = sessionStorage.getItem("token")) => {
-
 
     fetch("http://localhost:5678/api/works" + "/" + id, {
         method: "DELETE",
@@ -265,8 +258,7 @@ const deleteWork =  (id, token = sessionStorage.getItem("token")) => {
         }
     })    
            
-};
-   
+};   
 
 //Function qui retire l'élémént id
 function deleteElement(id) {
@@ -277,34 +269,6 @@ function deleteElement(id) {
         }
     }
 }       
-/*
-            //Suprimer un travail de la modale             
-                
-                async function deleteWorkById () {
-
-                    //console.log("token", token);            
-                
-                    const response = await fetch(urlApi + "/" + id, {
-                        method: 'DELETE',
-                        headers: {
-                            "Autorization": "Bearer" + token
-                        }
-                    });
-                    if (!response.ok) {
-                        console.log("L'api ne répond pas");
-                    }
-                    if (response.ok){
-                        alert("la suppression de l'élémenet a fonctionner")
-                        figureRemove(id);
-                    } else {
-                        console.error("La suppression de l'élément pose un problème");
-                    }
-                }
-                  
-*/
-
-
-
 
 //Création de la Modale 2 ajout de photo
 
@@ -370,8 +334,8 @@ inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
     profilePicture.style.height = '169px';
-    profilePicture.style.marginTop ='0';
-    labelFile.style.background = 'white';       
+    profilePicture.style.marginTop ='29px';
+           
     labelFile.innerHTML = '';
     imgSize.innerHTML = '';        
 }
@@ -387,12 +351,10 @@ const categoryListError = document.getElementById('erreur3');
 //Vérification que les champs du formulaire soient bien rempli
 function verif_form(){        
     if (inputFile.value ==""){
-        uploadPhotoError.innerText ="Veuillez ajouter une photo";
-        return false;
+        uploadPhotoError.innerText ="Veuillez ajouter une photo";        
     }     
     if (photoTitle.value ==""){
         titleError.innerText = "Veuillez entrer un titre";        
-        return false;
     } else if (photoTitle.value != ""){
         titleError.innerText = "";
     } 
@@ -402,44 +364,35 @@ function verif_form(){
         categoryListError.innerText = "";
     }  
 }
+btnValider.addEventListener('click', function (){
+    verif_form();
+});
 
-// le formulaire est rempli je veux que le bouton valider soit de couleur bleu
+// le formulaire est rempli je veux que le bouton valider soit de couleur verte
 //console.log('pictureForm %o', pictureForm)
 //console.log('pictureForm %o', btnValider)
 //console.log('myForm2 %o', myForm2)
-
-
     
-     if ((inputFile.value != "") && (photoTitle.value != "") && (categoryList.value != "")){
-        btnValider.style.background = 'blue';
+     /*if ((inputFile.value != "") && (photoTitle.value != "") && (categoryList.value != "")){
+        btnValider.style.background = '#1D6154';
     };
+    */
+
+    if ((myForm2.value == "")){
+        btnValider.style.background = "#A7A7A7";
+    } else {
+        btnValider.style.background = "#1D6154";
+    }
 
 btnValider.addEventListener ('click', function () {    
     verif_form()
 });
 
-const divModal2 = document.querySelector('.divModal2');
+const divModal2 = document.querySelector('.divModal2'); //je cible ma fenêtre modale 
 
-const btnAjout = document.querySelector('.btnAjout');
+const btnAjout = document.querySelector('.btnAjout');//je cible mon bouton valider le formulaire
 
-btnAjout.addEventListener('change', event => {
-    console.log('click', btnAjout);
-    const files = event.target.files;
-    const formData = new FormData();
-    formData.append('image', files[0]);
+const formData = new FormData(); //j'utilise le formData pour envoyer les données de mon formulaire
 
-    fetch(urlApi, {
-        //headers: 
-        method: 'POST',
-        body:formData,
-    })
-    .then(response => response.json())
 
-    .then(data =>{
-        document.divModal2.style.background = "url,('"+ data.image +"')";
-        document.divModal2.style.backgroundSize ='cover';
-    })
-    .catch(error => {
-        console.log('error', error);
-    });
-});
+

@@ -390,7 +390,6 @@ footer nav ul {
 	flex-direction: column;
 	align-items: center;
 }
-
 h3 {
 	font-family: 'Syne';
 	font-weight: 700;
@@ -418,8 +417,7 @@ h3 {
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
-	color: #3D3D3D;
-	
+	color: #3D3D3D;	
 }
 #btnConnect{
 	width: 179px;
@@ -446,7 +444,6 @@ h3 {
 	text-align: center;
 	margin-top: 28px;
 	}
-
 #lienMdp{
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -542,15 +539,18 @@ h3 {
 	align-items: center;
 		
 }
-.divModal2{
-	display: flex;
-	flex-direction: column;	
-	align-items: center;
+#divModal2{	
 	width: 420px;
 	height: 169px;
 	background: #E8F1F7;
 	border-radius: 3px;
-	margin: 36px 0 0 105px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+	
+	border: 1px solid black;
 }
 .js-modal-close2 {	
 	border: none;	
@@ -602,13 +602,6 @@ h3 {
 }
 
 /*--Formulaire ajout photo--*/
-#myForm2{
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;	
-	margin-left: 105px;
-	width: 420px;
-}
 .modal-wrapper2{
 	background-color: #FFFFFF;
 	width: 630px;
@@ -620,6 +613,7 @@ h3 {
 	height: 51px;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);	
 	margin-bottom: 21px;
+	margin-top: 10px;	
 	border: none;
 	display: flex;			
 	background: #ffffff;
@@ -631,19 +625,24 @@ h3 {
 
 color: #444444;
 }
-.textform2{
+#titreForm2{
 	font-family: 'Work Sans';
 	font-style: normal;
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
 	color: #3D3D3D;
-	display: block;
-	;
-	
-	
+	margin-left: -395px;	
 }
-
+#categoryForm2{
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #3D3D3D;
+	margin-left: -355px;	
+}
 h3{
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -663,7 +662,6 @@ h3{
 	grid-column-gap: 6px;	
 	
 }
-
 #btnValider{
 	width: 237px;
 	height: 36px;
@@ -671,15 +669,50 @@ h3{
 	color: #FFFFFF;
 	border-radius: 60px;
 	border: none;
-	margin: 32px 0 0 90px;
+	margin-top: 32px;
 	font-family:'syne';	
 	font-weight: 700;
 	font-size: 14px;
 	line-height: 17px;
 	text-align: center;
 }
+/*--Formulaire ajout photo vers API--*/
+#pictureForm{
+	display: flex;
+	flex-direction: column;	
+	align-items: center;		
+}
+#labelFile {
+	cursor: pointer;
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	color: #306685;
+	width: 173px;
+	height: 36px;
+	background: #dcd0cb;
+	border-radius: 50px;
+	border: none;
+	margin-top: 21px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	
+}
+#input-file{
+	display: none;
+}
+#profilePicture{
+	width: 58px;
+	height: 46px;
+	margin-top: 28px;
 
-/*--icone deleteProject--*/
+}
+/*--icone deleteProject modale--*/
 .fa-trash-can{	
 	position: absolute;
 	border-radius: 2px;
@@ -713,45 +746,6 @@ h3{
 .img-modal{
 	height: 104px;
     width: 78px;
-}
-
-/*--Formulaire ajout photo vers API--*/
-#pictureForm{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	
-}
-#labelFile {
-	cursor: pointer;
-	font-family: 'Work Sans';
-	font-style: normal;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	text-align: center;
-	color: #306685;
-	width: 173px;
-	height: 36px;
-	background: #dcd0cb;
-	border-radius: 50px;
-	border: none;
-	margin-top: 21px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	
-	
-}
-#input-file{
-	display: none;
-}
-#profilePicture{
-	width: 58px;
-	height: 46px;
-	margin-top: 28px;
-
 }
 
 
