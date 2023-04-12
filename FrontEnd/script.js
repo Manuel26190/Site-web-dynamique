@@ -236,27 +236,26 @@ function modalWorks (values) {
 
 
 //Function pour supprimer le travail de l'API 
-const deleteWork =  (id, token = sessionStorage.getItem("token")) => {
+const deleteWork = (id, token = sessionStorage.getItem("token")) => {
 
     fetch("http://localhost:5678/api/works" + "/" + id, {
-        method: "DELETE",
-        headers: {
-            Authorization : "Bearer " + token,
-        },
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     })
-    .then((response) => {
-        if (response.ok){
-            alert("la suppression de l'élémenet a fonctionner")
-            deleteElement(id);
-            modalWorks(dataTable); //itération des travaux de la fénêtre modale
-            displayWorks(dataTable); //itération des travaux de la page d'accueil            
-
+      .then((response) => {
+        if (response.ok) {
+          alert("La suppression de l'élément a fonctionner");
+          deleteElement(id);          
+          modalWorks(dataTable) //itération des travaux de la fénêtre modale
+          displayWorks(dataTable) //itération des travaux de la page d'accueil
         } else {
-            console.error("La suppression de l'élément ne fonctionne pas", response);
+          console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
         }
-    })    
-           
-};   
+      })
+    };
+
 
 //Function qui retire l'élémént id
 function deleteElement(id) {
@@ -364,24 +363,14 @@ function verif_form(){
         categoryListError.innerText = "";
     }  
 }
-btnValider.addEventListener('click', function (){
-    verif_form();
-});
+//btnValider.addEventListener('click', function (){
+//    verif_form();
+//});
 
-// le formulaire est rempli je veux que le bouton valider soit de couleur verte
-//console.log('pictureForm', pictureForm)
-//console.log('btn valider', btnValider)
-
-if (pictureForm.value == ""){
-    alert('vide');
-}    
+ 
     //#A7A7A7 couleur grise
     // couleur verte "#1D6154"
 
-    /*
-btnValider.addEventListener ('click', function () {    
-    verif_form()
-});  */
 
 //function au click du submit qui appelle la function addPicture
 //pictureForm.addEventListener('submit', addPicture );
@@ -399,40 +388,46 @@ function addPicture (e) {
 }
 */
 
+
+//fonction qui envoi les données du formulaire à l'API au click et qui ajoute le nouveau travail à la page d'accueil
 btnValider.addEventListener('click', function (e) {
     e.preventDefault();
     verif_form();
-    const formData = new FormData(pictureForm); //j'utilise le formData pour envoyer les données de mon formulaire
+    addWork();
+    displayWorks(dataTable);   
+});
+
+   //Function pour ajouter le travail vers l'API 
+   const addWork = ( token = sessionStorage.getItem("token")) => {
+
+        const formData = new FormData(pictureForm); //j'utilise le formData pour envoyer les données de mon formulaire
     
-    const fileUpload = formData.get('upload');
-    const title = formData.get('title');    
-    const category = formData.get('categorylist');
+        const fileUpload = formData.get('upload');
+        const title = formData.get('title');    
+        const category = formData.get('categorylist');
     
-    let newWork = {        
-            id : 3,
+        let newWork = {        
+            //id : 3,
             title : title,
             imageUrl : fileUpload,
             categoryId : category,
-            userId : 1          
-    };
-    //console.log('données formulaire', {fileUpload, title, category} );
-   // console.log('formData', formData);
+            //userId : 1          
+        };
+        console.log ('data', newWork)
+
     fetch("http://localhost:5678/api/works", {
         method: "POST",
-        body: JSON.stringify(newWork),
+        body: newWork,
         headers: {
-            "Content-Type": "application/json",
-        },
+        Authorization: "Bearer" + token,
+      },
     })
-    .then((response) => {
-        if (response.ok){
-            alert("la suppression de l'élémenet a fonctionner")     
-
+      .then((response) => {
+        if (response.ok) {
+          alert("L'ajout de l'élément a fonctionner");
+          
         } else {
-            console.error("La suppression de l'élément ne fonctionne pas", response);
+          console.error("L'ajout de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
         }
-    })    
-           
-   
-   
-});
+      });    
+    };
