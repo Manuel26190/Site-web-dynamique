@@ -151,7 +151,7 @@ let modal = null;
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector (e.target.getAttribute('href'));
-    modal.style.display = null;
+    modal.style.display = 'flex';
     modal.removeAttribute('aria-hidden')
     modal.setAttribute ('aria-modal', 'true')
     modal.addEventListener ('click', closeModal)
@@ -172,8 +172,6 @@ const closeModal = function (e) {
     modal = null    
 };
 
-
-
 //Function qui empêche de fermer la modale losque l'on click à l'inrérieur du contenu
     const stopPropagation = function (e) {
         e.stopPropagation()
@@ -191,9 +189,6 @@ const closeModal = function (e) {
             closeModal(e)
         }
     }); 
-
-    
-
 
 //Fonction qui affiche tous les travaux dans la fenêtre modale
 function modalWorks (values) {
@@ -305,8 +300,8 @@ const stopPropagation2 = function (e){
     e.stopPropagation()
 }
 
-
 const btnAjouter = document.querySelector('.btnAjouter');
+
 //function qui ouvre la modale 2 et ferme la modale 1 au click sur le bouton ajouter une photo
 btnAjouter.addEventListener('click', function (){
     //console.log(e)
@@ -326,8 +321,6 @@ window.addEventListener('keydown', function (e){
 
 //Je cible les différents champs du fomulaire ajout d'image 
 const pictureForm = document.getElementById('pictureForm');
-const myForm2 = document.getElementById('myForm2');
-
 const profilePicture = document.getElementById('profilePicture');
 const inputFile = document.getElementById('input-file');
 const labelFile = document.getElementById('labelFile');
@@ -338,10 +331,11 @@ inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
     profilePicture.style.height = '169px';
-    profilePicture.style.marginTop ='28px';
-           
-    labelFile.innerHTML = '';
-    imgSize.innerHTML = '';        
+    //profilePicture.style.marginTop ='28px'; 
+    inputFile.innerHTML = "";          
+    labelFile.innerHTML = "";    
+    imgSize.innerHTML = "";
+
 }
 
 //Je cible les éléménts du formulaire ajout d'image, messages d'erreur et bouton submit
@@ -356,6 +350,8 @@ const categoryListError = document.getElementById('erreur3');
 function verif_form(){        
     if (inputFile.value ==""){
         uploadPhotoError.innerText ="Veuillez ajouter une photo";        
+    } else if (inputFile.value != ""){
+        uploadPhotoError.innerText = "";
     }     
     if (photoTitle.value ==""){
         titleError.innerText = "Veuillez entrer un titre";        
@@ -373,30 +369,70 @@ btnValider.addEventListener('click', function (){
 });
 
 // le formulaire est rempli je veux que le bouton valider soit de couleur verte
-//console.log('pictureForm %o', pictureForm)
-//console.log('pictureForm %o', btnValider)
-//console.log('myForm2 %o', myForm2)
-    
-     /*if ((inputFile.value != "") && (photoTitle.value != "") && (categoryList.value != "")){
-        btnValider.style.background = '#1D6154';
-    };
-    */
+//console.log('pictureForm', pictureForm)
+//console.log('btn valider', btnValider)
 
-    if ((myForm2.value == "")){
-        btnValider.style.background = "#A7A7A7";
-    } else {
-        btnValider.style.background = "#1D6154";
-    }
+if (pictureForm.value == ""){
+    alert('vide');
+}    
+    //#A7A7A7 couleur grise
+    // couleur verte "#1D6154"
 
+    /*
 btnValider.addEventListener ('click', function () {    
     verif_form()
+});  */
+
+//function au click du submit qui appelle la function addPicture
+//pictureForm.addEventListener('submit', addPicture );
+/*
+function addPicture (e) {
+    e.preventDefault();
+    //console.log('form submit' );
+    const formData = new FormData(pictureForm); //j'utilise le formData pour envoyer les données de mon formulaire
+    
+    const fileUpload = formData.get('upload');
+    const title = formData.get('title');    
+    const category = formData.get('categorylist');    
+
+    console.log('données formulaire', {fileUpload, title, category} );
+}
+*/
+
+btnValider.addEventListener('click', function (e) {
+    e.preventDefault();
+    verif_form();
+    const formData = new FormData(pictureForm); //j'utilise le formData pour envoyer les données de mon formulaire
+    
+    const fileUpload = formData.get('upload');
+    const title = formData.get('title');    
+    const category = formData.get('categorylist');
+    
+    let newWork = {        
+            id : 3,
+            title : title,
+            imageUrl : fileUpload,
+            categoryId : category,
+            userId : 1          
+    };
+    //console.log('données formulaire', {fileUpload, title, category} );
+   // console.log('formData', formData);
+    fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: JSON.stringify(newWork),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then((response) => {
+        if (response.ok){
+            alert("la suppression de l'élémenet a fonctionner")     
+
+        } else {
+            console.error("La suppression de l'élément ne fonctionne pas", response);
+        }
+    })    
+           
+   
+   
 });
-
-const divModal2 = document.querySelector('.divModal2'); //je cible ma fenêtre modale 
-
-const btnAjout = document.querySelector('.btnAjout');//je cible mon bouton valider le formulaire
-
-const formData = new FormData(); //j'utilise le formData pour envoyer les données de mon formulaire
-
-
-

@@ -548,9 +548,7 @@ h3 {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 30px;
-	
-	border: 1px solid black;
+	margin-bottom: 30px;	
 }
 .js-modal-close2 {	
 	border: none;	
@@ -622,8 +620,7 @@ h3 {
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 16px;
-
-color: #444444;
+	color: #444444;
 }
 #titreForm2{
 	font-family: 'Work Sans';
@@ -699,9 +696,7 @@ h3{
 	margin-top: 21px;
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	
-	
+	align-items: center;	
 }
 #input-file{
 	display: none;
@@ -710,8 +705,8 @@ h3{
 	width: 58px;
 	height: 46px;
 	margin-top: 28px;
-
 }
+
 /*--icone deleteProject modale--*/
 .fa-trash-can{	
 	position: absolute;
