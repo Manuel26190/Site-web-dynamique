@@ -367,53 +367,49 @@ function verif_form(){
 //    verif_form();
 //});
 
+if (pictureForm.value != ""){
+    btnValider.style.background = "#1D6154"
+}
  
     //#A7A7A7 couleur grise
     // couleur verte "#1D6154"
 
 
-//function au click du submit qui appelle la function addPicture
-
-
-
+//function au click du submit du formulaire qui appelle la function sendWork
 pictureForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    
+    SendWork();           
+});  
+
+const SendWork = (token = sessionStorage.getItem("token")) => {
     const formData = new FormData(pictureForm);
 
     formData.append('image', inputFile.files[0], inputFile.name);
     formData.append('title', photoTitle.value);
     formData.append('category', categoryList.value);
-    //formData.append('id', '123');
     
-    const res = Object.fromEntries(formData);
+    
+    const res = Object.fromEntries(formData);//permet de transformer une liste de paires de clés/valeurs en un objet.
     const payload = JSON.stringify(res);
-    console.log('payload %o',payload);
+    //console.log('payload %o',payload);
+
+    console.log(token);
 
     for (item of formData) {
-        console.log( item[0], item[1]);
+        //console.log( item[0], item[1]);
     }
-
-    let token = sessionStorage.getItem("token");
-    console.log(token);
-    
 
     fetch('http://localhost:5678/api/works', {
         method: "POST",
-        body: payload,
+        body: payload,        
         headers: {
             Authorization: "Bearer " + token,
-            //'Content-Type': 'multipart/form-data', 
-        }
+        }, 
     })
+    //{ 'Content-Type': 'multipart/form-data' }
         .then(res => res.json())
         .then(res => console.log(res));
-
-
-
-})
-
-
+};
 
     
 
