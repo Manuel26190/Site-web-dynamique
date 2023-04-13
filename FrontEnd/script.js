@@ -373,61 +373,48 @@ function verif_form(){
 
 
 //function au click du submit qui appelle la function addPicture
-//pictureForm.addEventListener('submit', addPicture );
-/*
-function addPicture (e) {
+
+
+
+pictureForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    //console.log('form submit' );
-    const formData = new FormData(pictureForm); //j'utilise le formData pour envoyer les données de mon formulaire
     
-    const fileUpload = formData.get('upload');
-    const title = formData.get('title');    
-    const category = formData.get('categorylist');    
+    const formData = new FormData(pictureForm);
 
-    console.log('données formulaire', {fileUpload, title, category} );
-}
-*/
-
-
-//fonction qui envoi les données du formulaire à l'API au click et qui ajoute le nouveau travail à la page d'accueil
-btnValider.addEventListener('click', function (e) {
-    e.preventDefault();
-    verif_form();
-    addWork();
-    displayWorks(dataTable);   
-});
-
-   //Function pour ajouter le travail vers l'API 
-   const addWork = ( token = sessionStorage.getItem("token")) => {
-
-        const formData = new FormData(pictureForm); //j'utilise le formData pour envoyer les données de mon formulaire
+    formData.append('image', inputFile.files[0], inputFile.name);
+    formData.append('title', photoTitle.value);
+    formData.append('category', categoryList.value);
+    //formData.append('id', '123');
     
-        const fileUpload = formData.get('upload');
-        const title = formData.get('title');    
-        const category = formData.get('categorylist');
-    
-        let newWork = {        
-            //id : 3,
-            title : title,
-            imageUrl : fileUpload,
-            categoryId : category,
-            //userId : 1          
-        };
-        console.log ('data', newWork)
+    const res = Object.fromEntries(formData);
+    const payload = JSON.stringify(res);
+    console.log('payload %o',payload);
 
-    fetch("http://localhost:5678/api/works", {
+    for (item of formData) {
+        console.log( item[0], item[1]);
+    }
+
+    let token = sessionStorage.getItem("token");
+    console.log(token);
+    
+
+    fetch('http://localhost:5678/api/works', {
         method: "POST",
-        body: newWork,
+        body: payload,
         headers: {
-        Authorization: "Bearer" + token,
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert("L'ajout de l'élément a fonctionner");
-          
-        } else {
-          console.error("L'ajout de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
+            Authorization: "Bearer " + token,
+            //'Content-Type': 'multipart/form-data', 
         }
-      });    
-    };
+    })
+        .then(res => res.json())
+        .then(res => console.log(res));
+
+
+
+})
+
+
+
+    
+
+    //console.log('formdata', formData);

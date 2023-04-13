@@ -1,17 +1,36 @@
-/*  fetch("http://localhost:5678/api/works", {
+
+/*
+
+const pictureForm2 = document.getElementById('pictureForm');
+
+pictureForm2.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let formData = new FormData(pictureForm2);
+
+    const fileUpload = formData.get('upload');
+    const title = formData.get('title');    
+    const category = formData.get('categorylist');
+
+
+//console.log('formdata', formData);
+});
+
+*/
+
+
+    
+
+
+let token = sessionStorage.getItem("token");
+
+
+fetch('http://localhost:5678/api/works', {
         method: "POST",
-        body: JSON.stringify(newWork),
-        headers: {
-            "Content-Type": "application/json",
-        },
+        body: formData,
+               
     })
-    .then((response) => {
-        if (response.ok){
-            alert("la suppression de l'élémenet a fonctionner")     
+    .then(res => res.json())
+    .then(res => console.log(res));
 
-        } else {
-            console.error("La suppression de l'élément ne fonctionne pas", response);
-        }
-    })    
-       */ 
-
+ 

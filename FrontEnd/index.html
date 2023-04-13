@@ -66,11 +66,11 @@
 				
 				
 					<!--Formulaire modale 2 pour upload l'image-->
-					<form id="pictureForm" name="formulaire">
+					<form id="pictureForm" name="formulaire" enctype="multipart/form-data">
 						<div id="divModal2">
 							<img src="assets/images/picture_logo.svg" alt="photo du bar Malt and Juniper à New York" id="profilePicture">
-							<label for="input-file" id="labelFile">+ ajouter une photo</label>
-							<input type="file" name="upload" id="input-file" accept="image/jpeg, image/png, image/jpg">
+							<label for="input-file" id="labelFile" name="upload" >+ ajouter une photo</label>
+							<input type="file" name="image" id="input-file" accept="image/jpeg, image/png, image/jpg">
 							<p id="imgSize">jpg. png: 4mo max</p>
 							<p style="color: red;" id="erreur1"></p>
 						</div>
@@ -82,7 +82,7 @@
 					
 						<!--Liste de categorie Objets, appartements, Hôtels-->
 						<label  for="type" id="categoryForm2">Catégorie</label>					
-						<select name="categorylist" id="categoryList" class="form2">
+						<select name="category" id="categoryList" class="form2">
 							<option value=""></option>
 							<option class="listClass" value="Objets">Objets</option>
 							<option class="listClass" value="Appartements">Appartements</option>
@@ -131,6 +131,7 @@
 	</nav>
 </footer>
 <script src="script.js"></script>
+
 
 </body>
 </html>
