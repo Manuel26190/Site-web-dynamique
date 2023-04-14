@@ -673,6 +673,16 @@ h3{
 	line-height: 17px;
 	text-align: center;
 }
+#btnValider[disabled]{
+	background-color: #a7a7a7;
+}
+#btnValider[disabled]:hover{
+	background-color: #a7a7a7;
+}
+
+
+
+
 /*--Formulaire ajout photo vers API--*/
 #pictureForm{
 	display: flex;

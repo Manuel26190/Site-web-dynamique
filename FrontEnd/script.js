@@ -225,7 +225,8 @@ function modalWorks (values) {
             deleteWork(value.id);
             //figure.remove();
             //retirerElement(dataTable);
-            e.preventDefault();            
+            e.preventDefault();
+            return false;            
         });
         
     });   
@@ -254,13 +255,13 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
     };
 
 //Function qui retire l'élémént id
-function deleteElement(id) {
+function deleteElement(id, event) {
     for (let i = 0; i < dataTable.length; i++){
         console.log ('dataTableId',dataTable[i].id)
         if (dataTable[i].id === id){
             dataTable.splice(i, 1);
         }
-    }
+    }event.preventDefault();
 }       
 
 //Création de la Modale 2 ajout de photo
@@ -363,14 +364,14 @@ function verif_form(){
 //    verif_form();
 //});
 
-if (pictureForm.value != ""){
-    btnValider.style.background = "#1D6154"
+if (!inputFile && !photoTitle) {
+    btnValider.disabled = false;
+} else {
+    btnValider.disabled = true;
 }
- 
-    //#A7A7A7 couleur grise
-    // couleur verte "#1D6154"
-    ;
 
+
+ 
 //function au click du submit du formulaire qui appelle la function sendWork
 pictureForm.addEventListener('submit', function (e) {
     e.preventDefault();    
@@ -379,38 +380,45 @@ pictureForm.addEventListener('submit', function (e) {
     displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil           
 });  
 
-const SendWork = (token = sessionStorage.getItem("token")) => {
+const SendWork = () => {
     const formData = new FormData(pictureForm);
 
     formData.append('image', inputFile.files[0], inputFile.name);
     formData.append('title', photoTitle.value);
     formData.append('category', categoryList.value);
-    
-    
-    const res = Object.fromEntries(formData);//permet de transformer une liste de paires de clés/valeurs en un objet.
-    const payload = JSON.stringify(res);
-    //console.log('payload %o',payload);
+       
+    //const res = Object.fromEntries(formData);//permet de transformer une liste de paires de clés/valeurs en un objet.
+    //const payload = JSON.stringify(res);
+    //console.log('payload %o',payload);    
 
-    console.log(token);
-
-    for (item of formData) {
-        //console.log( item[0], item[1]);
-    }
-
-    fetch(urlApi, {
-        method: "POST",
-        body: payload,        
+    fetch('http://localhost:5678/api/works', {
+        method: "POST",                
         headers: {
-            Authorization: "Bearer " + token,
-            "Accept": "apllication/json",
-            "Content-Type": "multipart/form-data", 
-        }, 
-    })
-    //{ 'Content-Type': 'multipart/form-data' }
-        .then(res => res.json())
-        .then(res => console.log(res));
-};
-
-    
+            "Authorization": "Bearer " + sessionStorage.getItem("token")            
+        },
+            body: formData 
+    })    
+        .then(function (response){
+            if (response.ok){
+                closeModal2();
+                alert('ça fonctionne');
+                return response.json();
+            } else {
+                throw new Error ('Réponse négative du serveur');
+            }
+        })
+        .then(function (data) {
+            dataTable.push(data);
+            displayWorks(dataTable);
+            modalWorks(dataTable);
+        })
+        .catch(function (error){
+            console.error('error', error);
+            alert("Erreur lors de l'ajout de l'élémnent");
+        })
+};    
 
     //console.log('formdata', formData);
+
+
+    

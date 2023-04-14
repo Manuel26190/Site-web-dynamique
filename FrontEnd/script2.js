@@ -1,4 +1,30 @@
 
+const formElem = document.getElementById('pictureForm');
+
+
+formElem.onsubmit = async (e) => {
+    e.preventDefault();
+    
+    let token = sessionStorage.getItem('token', token);
+    console.log(token);
+
+    let response = await fetch(urlApi, {
+      method: 'POST',
+      body: new FormData(formElem),
+      headers: { 
+        Authorization: "Bearer " + token,        
+      }
+      
+    });
+
+    let result = await response.json();
+
+    alert(result.message);
+  };
+
+
+
+
 /*
 
 const pictureForm2 = document.getElementById('pictureForm');
@@ -17,6 +43,7 @@ pictureForm2.addEventListener('submit', function (e) {
 });
 
 */
+/*
 async function fetchUsers (token = sessionStorage.getItem("token")) {
 
     const formData = new FormData(pictureForm);
@@ -35,9 +62,9 @@ async function fetchUsers (token = sessionStorage.getItem("token")) {
     for (item of formData) {
         //console.log( item[0], item[1]);
     }
+*/
 
-
-
+/*
 
     const r = await fetch('https://jsonplaceholder.typicode.com/users', {
         method: "POST",
@@ -86,7 +113,7 @@ const SendWork = (token = sessionStorage.getItem("token")) => {
     
 };
 
-
+*/
 
     
 
