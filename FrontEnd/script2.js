@@ -17,20 +17,80 @@ pictureForm2.addEventListener('submit', function (e) {
 });
 
 */
+async function fetchUsers (token = sessionStorage.getItem("token")) {
+
+    const formData = new FormData(pictureForm);
+
+    //formData.append('image', inputFile.files[0], inputFile.name);
+    formData.append('title', photoTitle.value);
+    formData.append('category', categoryList.value);
+    
+    
+    const res = Object.fromEntries(formData);//permet de transformer une liste de paires de clés/valeurs en un objet.
+    const payload = JSON.stringify(res);
+    //console.log('payload %o',payload);
+
+    console.log(token);
+
+    for (item of formData) {
+        //console.log( item[0], item[1]);
+    }
+
+
+
+
+    const r = await fetch('https://jsonplaceholder.typicode.com/users', {
+        method: "POST",
+        headers: {
+            Authorization: "Bearer " + token,
+            "Accept": "apllication/json",
+            "Content-Type": "multipart/form-data"
+        },
+    })
+    
+    if (r.ok === true) {
+        return r.json();         
+    }
+    throw new Error('impossible de contacter le serveur')
+}
+
+fetchUsers().then(users => console.log(users))
+
+
+
+pictureForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    SendWork();
+    verif_form();           
+});  
+
+const SendWork = (token = sessionStorage.getItem("token")) => {
+    const formData = new FormData(pictureForm);
+
+    formData.append('image', inputFile.files[0], inputFile.name);
+    formData.append('title', photoTitle.value);
+    formData.append('category', categoryList.value);
+    
+    
+    const res = Object.fromEntries(formData);//permet de transformer une liste de paires de clés/valeurs en un objet.
+    const payload = JSON.stringify(res);
+    //console.log('payload %o',payload);
+
+    console.log(token);
+
+    for (item of formData) {
+        //console.log( item[0], item[1]);
+    }
+
+    
+};
+
 
 
     
 
 
-let token = sessionStorage.getItem("token");
 
-
-fetch('http://localhost:5678/api/works', {
-        method: "POST",
-        body: formData,
-               
-    })
-    .then(res => res.json())
-    .then(res => console.log(res));
 
  

@@ -6,7 +6,7 @@ const gallery = document.querySelector('.gallery');
 //function pour itérer et afficher les travaux stockés dans l'API
 function displayWorks (toto) {
     toto.forEach( value => {
-
+        
         let figure = document.createElement("figure");
         let img = document.createElement("img");
         let figcaption = document.createElement("figcaption");
@@ -40,9 +40,6 @@ const cElement = function (el){
 }
 */
 
-let elId =[];
-//console.log('elId', elId);
-
 let dataTable = [];//Je crée une constante qui contient un tableau vide
 
 //Appel fetch qui copie les données de l'APÏ dans mon tableau dataTable
@@ -56,9 +53,7 @@ fetch(urlApi)
         values.forEach(function (element) {
             dataTable.push(element); //je veux stocker dans un tableau la data retournée             
             //cElement(element)//j'appelle une fonction qui crée des éléments dans le DOM 
-            //console.log ('element %o',element.id)
-            elId.push(element.id);
-            //console.log('elId', elId);
+            //console.log ('element %o',element.id)            
         });
 
         displayWorks(dataTable);
@@ -160,7 +155,7 @@ const openModal = function (e) {
     
 };
  //Fonction qui ferme la modale
-const closeModal = function (e) {
+const closeModal = function () {
     
     if (modal === null) return        
     modal.style.display = 'none';
@@ -192,7 +187,7 @@ const closeModal = function (e) {
 
 //Fonction qui affiche tous les travaux dans la fenêtre modale
 function modalWorks (values) {
-
+    
     let photosModal = document.querySelector('.photosModal');
     photosModal.innerHTML ='';
 
@@ -225,10 +220,11 @@ function modalWorks (values) {
         //console.log('dataId %o', dataTable)
 
 //Fonction qui supprime le travail en cliquant sur le logo delete
-        deleteProject.addEventListener("click", function () {
+        deleteProject.addEventListener("click", function (e) {
             deleteWork(value.id);
             //figure.remove();
-            //retirerElement(dataTable);            
+            //retirerElement(dataTable);
+            e.preventDefault();            
         });
         
     });   
@@ -238,7 +234,7 @@ function modalWorks (values) {
 //Function pour supprimer le travail de l'API 
 const deleteWork = (id, token = sessionStorage.getItem("token")) => {
 
-    fetch("http://localhost:5678/api/works" + "/" + id, {
+    fetch(urlApi + "/" + id, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + token,
@@ -248,14 +244,13 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
         if (response.ok) {
           alert("La suppression de l'élément a fonctionner");
           deleteElement(id);          
-          modalWorks(dataTable) //itération des travaux de la fénêtre modale
-          displayWorks(dataTable) //itération des travaux de la page d'accueil
+          //modalWorks(dataTable); //itération des travaux de la fénêtre modale
+          //displayWorks(dataTable); //itération des travaux de la page d'accueil
         } else {
           console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
         }
       })
     };
-
 
 //Function qui retire l'élémént id
 function deleteElement(id) {
@@ -373,12 +368,14 @@ if (pictureForm.value != ""){
  
     //#A7A7A7 couleur grise
     // couleur verte "#1D6154"
-
+    ;
 
 //function au click du submit du formulaire qui appelle la function sendWork
 pictureForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    SendWork();           
+    e.preventDefault();    
+    SendWork();//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API 
+    verif_form();//fonction qui vérifie si le formulaire d'ajout d'image est bien rempli
+    displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil           
 });  
 
 const SendWork = (token = sessionStorage.getItem("token")) => {
@@ -399,11 +396,13 @@ const SendWork = (token = sessionStorage.getItem("token")) => {
         //console.log( item[0], item[1]);
     }
 
-    fetch('http://localhost:5678/api/works', {
+    fetch(urlApi, {
         method: "POST",
         body: payload,        
         headers: {
             Authorization: "Bearer " + token,
+            "Accept": "apllication/json",
+            "Content-Type": "multipart/form-data", 
         }, 
     })
     //{ 'Content-Type': 'multipart/form-data' }
