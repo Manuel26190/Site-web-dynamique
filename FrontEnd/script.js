@@ -189,8 +189,8 @@ const closeModal = function () {
 function modalWorks (values) {
     
     let photosModal = document.querySelector('.photosModal');
-    photosModal.innerHTML ='';
-
+    //photosModal.innerHTML ='';
+    
     values.forEach ((value) =>  {
         
         let figure = document.createElement('figure');
@@ -209,10 +209,11 @@ function modalWorks (values) {
         deleteProject.classList.add("fa-solid", "fa-trash-can");
             
 //J'intègre à ma première photo le logo déplaçer 
-        if (value.id === 0){
+        if (value.id === 1){
             const moveLogo = document.createElement('i');
             moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-            figure.appendChild(moveLogo);            }             
+            figure.appendChild(moveLogo);            
+        }             
         
         figure.append(deleteProject, img, figcaption);               
         photosModal.append(figure);
