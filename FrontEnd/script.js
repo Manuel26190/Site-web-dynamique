@@ -314,6 +314,9 @@ window.addEventListener('keydown', function (e){
     }
 });
 
+/*
+
+
 //ajout photo vers l'API
 
 //Je cible les différents champs du fomulaire ajout d'image 
@@ -388,6 +391,8 @@ pictureForm.addEventListener('submit', function (e) {
 /*
 el : c'est un élément du DOM, sendWork prend en paramêtre el un élément du DOM
 */
+
+/*
 const SendWork = (el) => {
     const formData = new FormData(el);
     console.log('formdata %o', formData );
@@ -426,8 +431,10 @@ const SendWork = (el) => {
         /*.catch(function (error){
             console.error('error', error);
             alert("Erreur lors de l'ajout de l'élémnent");
-        })*/
+        })
 };    
+
+*/
 
     //console.log('formdata', formData);
 
