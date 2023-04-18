@@ -225,6 +225,7 @@ function modalWorks (values) {
             deleteWork(value.id);
             //figure.remove();
             //retirerElement(dataTable);
+            
             e.preventDefault();
             return false;            
         });
@@ -343,82 +344,92 @@ const titleError = document.getElementById('erreur2');
 const categoryListError = document.getElementById('erreur3');
 
 //Vérification que les champs du formulaire soient bien rempli
-function verif_form(){        
-    if (inputFile.value ==""){
+function verif_form(file, title, cat){        
+    if (file.value ==""){
         uploadPhotoError.innerText ="Veuillez ajouter une photo";        
-    } else if (inputFile.value != ""){
+    } else if (file.value != ""){
         uploadPhotoError.innerText = "";
     }     
-    if (photoTitle.value ==""){
+    if (title.value ==""){
         titleError.innerText = "Veuillez entrer un titre";        
-    } else if (photoTitle.value != ""){
+    } else if (title.values != ""){
         titleError.innerText = "";
     } 
-    if (categoryList.value == ""){
+    if (cat.value ==""){
         categoryListError.innerText = "Veuillez indiquer une catégorie";
-    } else if (categoryList.value != ""){
+    } else if (cat.value != ""){
         categoryListError.innerText = "";
     }  
 }
-//btnValider.addEventListener('click', function (){
-//    verif_form();
-//});
 
-if (!inputFile && !photoTitle) {
-    btnValider.disabled = false;
-} else {
-    btnValider.disabled = true;
+
+//background: #A7A7A7; gris
+//background: #1D6154; vert
+
+//check if picture has been selected and enable the submit button
+function checkInputs(el, btn){
+    if (el.value != ""){
+        btn.disabled = false;
+    }else{
+        btn.disabled = true;
+    }
 }
-
+checkInputs(photoTitle, btnValider);
 
  
 //function au click du submit du formulaire qui appelle la function sendWork
 pictureForm.addEventListener('submit', function (e) {
-    e.preventDefault();    
-    SendWork();//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API 
-    verif_form();//fonction qui vérifie si le formulaire d'ajout d'image est bien rempli
-    displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil           
+    e.preventDefault();
+    //console.log('e.target', e.target);    
+    //SendWork(e.target);//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API 
+    verif_form(inputFile, photoTitle, categoryList);//fonction qui vérifie si le formulaire d'ajout d'image est bien rempli
+    //displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil              
 });  
+/*
+el : c'est un élément du DOM, sendWork prend en paramêtre el un élément du DOM
+*/
+const SendWork = (el) => {
+    const formData = new FormData(el);
+    console.log('formdata %o', formData );
+    for (var pair of formData.entries()) {
+        console.log("clés %o valeur %o", pair[0], pair[1] )    }
 
-const SendWork = () => {
-    const formData = new FormData(pictureForm);
-
-    formData.append('image', inputFile.files[0], inputFile.name);
+    formData.append('image', inputFile.files[0] );
     formData.append('title', photoTitle.value);
-    formData.append('category', categoryList.value);
-       
-    //const res = Object.fromEntries(formData);//permet de transformer une liste de paires de clés/valeurs en un objet.
-    //const payload = JSON.stringify(res);
-    //console.log('payload %o',payload);    
+    formData.append('category', categoryList.value);   
+   
+    
+    token = sessionStorage.getItem("token");
+    //console.log('token', token);
 
     fetch('http://localhost:5678/api/works', {
         method: "POST",                
         headers: {
-            "Authorization": "Bearer " + sessionStorage.getItem("token")            
+            Authorization: "Bearer " + token          
         },
-            body: formData 
+            body: JSON.stringify(formData)            
     })    
         .then(function (response){
             if (response.ok){
-                closeModal2();
+                //closeModal2();
                 alert('ça fonctionne');
                 return response.json();
             } else {
                 throw new Error ('Réponse négative du serveur');
             }
         })
-        .then(function (data) {
-            dataTable.push(data);
-            displayWorks(dataTable);
-            modalWorks(dataTable);
+        .then(function () {
+            //dataTable.push(data);
+            //displayWorks(dataTable);
+            //modalWorks(dataTable);
         })
-        .catch(function (error){
+        /*.catch(function (error){
             console.error('error', error);
             alert("Erreur lors de l'ajout de l'élémnent");
-        })
+        })*/
 };    
 
     //console.log('formdata', formData);
 
-
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
     

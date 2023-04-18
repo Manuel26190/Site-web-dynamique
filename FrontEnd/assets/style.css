@@ -115,7 +115,6 @@ header {
 	font-size: 16px;
 	line-height: 19px;
 }
-
 #aLogin {	
 	text-decoration: none;
 	color: black;
@@ -261,8 +260,6 @@ li:hover {
 	grid-row-gap: 20px;
 	margin-top: 51px;	
 }
-
-
 #ulFiltres{
 	display: flex;
 	justify-content:center;
@@ -382,8 +379,6 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em;
 }
-
-
  /*--Formulaire du Login--*/
 #sectionForm{
 	display: flex;
@@ -656,7 +651,9 @@ h3{
 	border-bottom: 1px solid #B3B3B3 ;	
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 6px;	
+	grid-column-gap: 6px;
+	
+		
 	
 }
 #btnValider{
@@ -673,9 +670,23 @@ h3{
 	line-height: 17px;
 	text-align: center;
 }
+
+/*--bouton vert clair--*/
+#btnValider{
+    background-color: #1D6154;
+}
+
+/*--bouton gris si disabled--*/
 #btnValider[disabled]{
 	background-color: #a7a7a7;
 }
+
+/*--bouton vert foncé lorsque hover--*/
+#btnValider:hover{
+	background-color: #0e2f28;
+}
+
+/*--bouton toujours gris si disabled et hover--*/
 #btnValider[disabled]:hover{
 	background-color: #a7a7a7;
 }
