@@ -145,8 +145,8 @@ let modal = null;
 //Foinction qui cible mes lien href et annule le display block pour faire apparaître la fenêtre modale
 const openModal = function (e) {
     e.preventDefault()
-    modal = document.querySelector (e.target.getAttribute('href'));
-    modal.style.display = 'flex';
+    modal = document.querySelector(e.target.getAttribute('href'));
+    modal.style.display = null;
     modal.removeAttribute('aria-hidden')
     modal.setAttribute ('aria-modal', 'true')
     modal.addEventListener ('click', closeModal)
@@ -160,7 +160,7 @@ const closeModal = function () {
     if (modal === null) return        
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute ('aria-modal')
+    modal.removeAttribute('aria-modal')
     modal.removeEventListener ('click', closeModal)
     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)    
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)    
@@ -395,6 +395,7 @@ el : c'est un élément du DOM, sendWork prend en paramêtre el un élément du 
 /*
 const SendWork = (el) => {
     const formData = new FormData(el);
+
     console.log('formdata %o', formData );
     for (var pair of formData.entries()) {
         console.log("clés %o valeur %o", pair[0], pair[1] )    }

@@ -1,41 +1,58 @@
+
+
+
 function addData() {
-    const title = document.getElementById('photoTitle').value;
+
     const imageUrl = document.getElementById('input-file').files[0];
-    const select = document.getElementById('categoryList');
-    //const options = select.options;
+    const title = document.getElementById('photoTitle').value;    
+    const select = document.getElementById('categoryList').value;
+    
+    /*const options = select.options;
     const categoryIds = {
         "1": 1,
         "2": 2,
         "3": 3
-    }
+    }*/
 
     //const categoryId = categoryIds[options[select.selectedIndex].value];
 
     if (!title || !imageUrl || !select) {
      alert('Veuillez remplir tout les champs du formulaire');
-     }
+     return;
+     } 
 
-    const formData = new FormData();
 
-    formData.append('title', title);
-    formData.append('image', imageUrl);
-    formData.append('category', select.value);
+    let pictureForm = document.getElementById('pictureForm');
 
-    for (var pair of formData.entries()) {
+    let formData = new FormData(pictureForm);
+
+    //formData.append('image', imageUrl);
+    //formData.append('title', title);    
+    //formData.append('category', select);
+
+    //let objData = Object.fromEntries(formData);
+    //let finalObj = JSON.stringify(objData);
+
+    /*for (var pair of formData.entries()) {
         console.log("clés %o valeur %o", pair[0], pair[1] )    
+    }*/
+
+    for (let entry of formData) {
+        console.log(entry);
     }
 
     let token = sessionStorage.getItem("token");
+    //console.log(token)
 
 
     fetch("http://localhost:5678/api/works", {
         method: "POST",
-        headers: {
-            "Authorization": "Bearer" + token
+        headers: {            
+            "Authorization": "Bearer" + token            
         },
         body: formData
-})
-    .then(function (response){
+    })
+    .then(function (response) {
         if (response.ok) {
             //closeModal2();
             alert("L'ajout du nouveau projet a fonctionné");
@@ -55,13 +72,11 @@ function addData() {
     });
 };
 
-const btnValidModal2 = document.getElementById('btnValider');
-    
+const btnValidModal2 = document.getElementById('btnValider');    
 
-    btnValidModal2.addEventListener('click', function (event) {
-        event.preventDefault();
+    btnValidModal2.addEventListener('click', function (e) {                
         addData();
-        
+        e.preventDefault();                
     });
 
 
@@ -81,4 +96,6 @@ inputFile.onchange = function (){
     inputFile.innerHTML = "";          
     labelFile.innerHTML = "";    
     imgSize.innerHTML = "";
-}
+};
+
+
