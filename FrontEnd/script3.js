@@ -1,24 +1,29 @@
 
 
-const imageUrl = document.getElementById('input-file')
-const title = document.getElementById('photoTitle')    
-const select = document.getElementById('categoryList')
+const imageUrl = document.getElementById('input-file');
+const title = document.getElementById('photoTitle') ;   
+const select = document.getElementById('categoryList');
 
 const btnValidModal2 = document.getElementById('btnValider');
 
 
-title.addEventListener("input", () => {
-    CheckForm()
-})
-
-function CheckForm (){
-    if ( title.value !== "") {
-        btnValidModal2.disabled = false;
+function CheckForm (valid){
+    if ( title.value !== "" || imageUrl.files.length === 0) {
+        valid.disabled = false;
     } else {
-        btnValidModal2.disabled = true;
+        valid.disabled = true;
     }
 };
-CheckForm(); 
+
+
+title.addEventListener("input", () => {
+    CheckForm(btnValidModal2)
+});
+imageUrl.addEventListener("input", () => {
+    CheckForm(btnValidModal2)
+});
+
+
 
 
 
@@ -28,7 +33,7 @@ const formEl = document.getElementById('pictureForm');
 formEl.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    if (!title || !imageUrl || !select) {
+    if (!title.value || !imageUrl.files || !select.value) {
         alert("Veuillez remplir toutles les champs du fomrulaire.");
         return;
     }
