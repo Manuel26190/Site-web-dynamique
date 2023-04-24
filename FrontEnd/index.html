@@ -66,18 +66,17 @@
 				
 				<!--Formulaire modale 2 pour upload l'image-->
 				<form id="pictureForm" name="formulaire" enctype="multipart/form-data">
+					<!--Upload du document image-->
 					<div id="divModal2">
 						<img src="assets/images/picture_logo.svg" id="profilePicture" >
 						<label for="input-file" id="labelFile" name="upload" >+ ajouter une photo</label>
 						<input type="file" name="image" id="input-file" accept="image/jpeg, image/png, image/jpg">
-						<p id="imgSize">jpg. png: 4mo max</p>
-						<p style="color: red;" id="erreur1"></p>
+						<p id="imgSize">jpg. png: 4mo max</p>						
 					</div>
-											
+
 					<!--Bouton Titre-->            
 					<label for="title" id="titreForm2">Titre</label>
-					<input type="text" name="title" class="form2" id="photoTitle">
-					<p style="color: red;" id="erreur2"></p>           
+					<input type="text" name="title" class="form2" id="photoTitle">					           
 					
 					<!--Liste de categorie Objets, appartements, Hôtels-->
 					<label  for="type" id="categoryForm2">Catégorie</label>					
@@ -87,8 +86,7 @@
 						<option class="listClass" value="Appartements">Appartements</option>
 						<option class="listClass" value="Hôtel & restaurants">Hôtel & restaurants</option>							
 					</select>
-					<!--Bouton Valider-->
-					<p style="color: red;" id="erreur3"></p>					
+					<!--Bouton Valider du formulaire-->										
 					<button type="submit" id="btnValider" disabled >Valider</button>				           
 				</form>			
 			</div>
