@@ -1,7 +1,7 @@
 
+const pictureForm = document.getElementById('pictureForm');
 
-
-function addData() {
+function addData(el) {
 
     const imageUrl = document.getElementById('input-file').files[0];
     const title = document.getElementById('photoTitle').value;    
@@ -19,12 +19,13 @@ function addData() {
     if (!title || !imageUrl || !select) {
      alert('Veuillez remplir tout les champs du formulaire');
      return;
-     } 
+     } else {
+        alert('rempli');
+     }
 
+    
 
-    let pictureForm = document.getElementById('pictureForm');
-
-    let formData = new FormData(pictureForm);
+    let formData = new FormData(el);
 
     //formData.append('image', imageUrl);
     //formData.append('title', title);    
@@ -42,8 +43,6 @@ function addData() {
     }
 
     let token = sessionStorage.getItem("token");
-    //console.log(token)
-
 
     fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -72,16 +71,25 @@ function addData() {
     });
 };
 
-const btnValidModal2 = document.getElementById('btnValider');    
+const btnValidModal2 = document.getElementById('btnValider');
+
+function verifForm (){
+    if (document.getElementById("input-file").files.length === 0 || document.getElementById("photoTitle").value === "") {
+        btnValidModal2.disabled = true;
+    } else {
+        btnValidModal2.disabled = false;
+    }
+}
+verifForm();
 
     btnValidModal2.addEventListener('click', function (e) {                
-        addData();
+        addData(pictureForm);
         e.preventDefault();                
     });
 
 
 //Je cible les différents champs du fomulaire ajout d'image 
-const pictureForm = document.getElementById('pictureForm');
+
 const profilePicture = document.getElementById('profilePicture');
 const inputFile = document.getElementById('input-file');
 const labelFile = document.getElementById('labelFile');
