@@ -25,7 +25,7 @@ imageUrl.addEventListener("input", () => {
 const formEl = document.getElementById('pictureForm');
 
 //Fonction qui vérifie que les tout champs du fomulaire soient bien rempli 
-//et qui envoie les donnéées du formulaire vers l'API au click du bouton valider
+//et qui envoie les données du formulaire vers l'API au click du bouton valider
 formEl.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -37,20 +37,12 @@ formEl.addEventListener('submit', function (e) {
     }    
 
     const formData = new FormData();
-    formData.append('image-file', imageUrl.files[0]);
+    formData.append('image', imageUrl.files[0]);
     formData.append('title', title.value);
     formData.append('category', category.value);
 
     //const data = new URLSearchParams(formData);
-    //let dataObj = Object.fromEntries(formData);
-
-    let apiObj = {
-        "id": 0,
-        "title": "Bar New-York",
-        "imageUrl": "string",
-        "categoryId": "Objets",
-        "userId": 0
-      };
+    //let dataObj = Object.fromEntries(formData);   
 
     for (let entry of formData) {
         console.log(entry);
@@ -81,3 +73,14 @@ imageUrl.onchange = function (){
     labelFile.remove();    
     imgSize.remove();
 };
+
+
+/*
+let apiObj = {
+        "id": 0,
+        "title": "Bar New-York",
+        "imageUrl": "string",
+        "categoryId": "Objets",
+        "userId": 0
+      };
+*/
