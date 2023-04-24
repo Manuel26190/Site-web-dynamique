@@ -47,16 +47,19 @@ formEl.addEventListener('submit', function (e) {
     for (let entry of formData) {
         console.log(entry);
     }
+    const token = sessionStorage.getItem("token");
+    console.log("token", token)    
 
     fetch('http://localhost:5678/api/works', {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Authorization': 'bearer' + sessionStorage.getItem("token"),
+            "Authorization": "Bearer " + token
         },
         body: formData
-    }).then(res => res.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error));      
+    })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.log(error));      
 });
 
 //function qui upload l'image et la fait apparaître dans la modale
