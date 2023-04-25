@@ -146,7 +146,7 @@ let modal = null;
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'));
-    modal.style.display = null;
+    modal.style.display = 'flex';
     modal.removeAttribute('aria-hidden')
     modal.setAttribute ('aria-modal', 'true')
     modal.addEventListener ('click', closeModal)
@@ -155,8 +155,7 @@ const openModal = function (e) {
     
 };
  //Fonction qui ferme la modale
-const closeModal = function () {
-    
+const closeModal = function () {    
     if (modal === null) return        
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true')
@@ -314,13 +313,9 @@ window.addEventListener('keydown', function (e){
     }
 });
 
-/*
-
-
 //ajout photo vers l'API
-
 //Je cible les différents champs du fomulaire ajout d'image 
-const pictureForm = document.getElementById('pictureForm');
+
 const profilePicture = document.getElementById('profilePicture');
 const inputFile = document.getElementById('input-file');
 const labelFile = document.getElementById('labelFile');
@@ -330,15 +325,66 @@ const imgSize = document.getElementById('imgSize');
 inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
-    profilePicture.style.height = '169px';
-    //profilePicture.style.marginTop ='28px'; 
-    inputFile.innerHTML = "";          
+    profilePicture.style.height = '169px';             
     labelFile.innerHTML = "";    
     imgSize.innerHTML = "";
-
 }
 
+const pictureForm = document.getElementById('pictureForm');
+ 
+//function au click du submit du formulaire qui appelle la function sendWork
+pictureForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    //console.log('e.target', e.target);    
+    SendWork(e.target);//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API 
+    //fonction qui vérifie si le formulaire d'ajout d'image est bien rempli
+    //displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil              
+});  
+/*
+el : c'est un élément du DOM, sendWork prend en paramêtre el un élément du DOM
+*/
+
+
+const SendWork = (el) => {
+    const formData = new FormData(el);
+    //const dataObj = Object.fromEntries(formData);
+
+    console.log('formdata %o', formData );   
+    
+    token = sessionStorage.getItem("token");
+    //console.log('token', token);
+
+    fetch('http://localhost:5678/api/works', {
+        method: "POST",
+        headers: {
+            'Authorization': 'Bearer' + token
+        },           
+        body: formData            
+    })    
+        .then(function (response){
+            if (response.ok){
+                //closeModal2();
+                alert('ça fonctionne');
+                return response.json();
+            } else {
+                throw new Error ('Réponse négative du serveur');
+            }
+        })
+        .then(function () {
+            //dataTable.push(data);
+            //displayWorks(dataTable);
+            //modalWorks(dataTable);
+        })
+        .catch(function (error){
+            console.error('error', error);
+            alert("Erreur lors de l'ajout de l'élément");
+        })
+}; 
+
+//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
+    
 //Je cible les éléménts du formulaire ajout d'image, messages d'erreur et bouton submit
+/*
 const btnValider = document.getElementById ('btnValider');
 const photoTitle = document.getElementById('photoTitle');
 const categoryList = document.getElementById('categoryList');
@@ -364,80 +410,11 @@ function verif_form(file, title, cat){
         categoryListError.innerText = "";
     }  
 }
-
-
-//background: #A7A7A7; gris
-//background: #1D6154; vert
-
-//check if picture has been selected and enable the submit button
-function checkInputs(el, btn){
-    if (el.value != ""){
-        btn.disabled = false;
-    }else{
-        btn.disabled = true;
-    }
-}
-checkInputs(photoTitle, btnValider);
-
- 
-//function au click du submit du formulaire qui appelle la function sendWork
-pictureForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    //console.log('e.target', e.target);    
-    //SendWork(e.target);//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API 
-    verif_form(inputFile, photoTitle, categoryList);//fonction qui vérifie si le formulaire d'ajout d'image est bien rempli
-    //displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil              
-});  
-/*
-el : c'est un élément du DOM, sendWork prend en paramêtre el un élément du DOM
 */
 
-/*
-const SendWork = (el) => {
-    const formData = new FormData(el);
-
-    console.log('formdata %o', formData );
-    for (var pair of formData.entries()) {
+/*    for (var pair of formData.entries()) {
         console.log("clés %o valeur %o", pair[0], pair[1] )    }
 
     formData.append('image', inputFile.files[0] );
     formData.append('title', photoTitle.value);
-    formData.append('category', categoryList.value);   
-   
-    
-    token = sessionStorage.getItem("token");
-    //console.log('token', token);
-
-    fetch('http://localhost:5678/api/works', {
-        method: "POST",                
-        headers: {
-            Authorization: "Bearer " + token          
-        },
-            body: JSON.stringify(formData)            
-    })    
-        .then(function (response){
-            if (response.ok){
-                //closeModal2();
-                alert('ça fonctionne');
-                return response.json();
-            } else {
-                throw new Error ('Réponse négative du serveur');
-            }
-        })
-        .then(function () {
-            //dataTable.push(data);
-            //displayWorks(dataTable);
-            //modalWorks(dataTable);
-        })
-        /*.catch(function (error){
-            console.error('error', error);
-            alert("Erreur lors de l'ajout de l'élémnent");
-        })
-};    
-
-*/
-
-    //console.log('formdata', formData);
-
-//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
-    
+    formData.append('category', categoryList.value); */ 
