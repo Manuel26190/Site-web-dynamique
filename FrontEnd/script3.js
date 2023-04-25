@@ -23,12 +23,19 @@ imageUrl.addEventListener("input", () => {
 }); 
 
 const formEl = document.getElementById('pictureForm');
+/*
+formEl.addEventListener('submit', function (e) {
+    e.preventDefault();
+    debugger;
+})
+*/
 
 //Fonction qui vérifie que les tout champs du fomulaire soient bien rempli 
 //et qui envoie les données du formulaire vers l'API au click du bouton valider
 formEl.addEventListener('submit', function (e) {
     e.preventDefault();
 
+    
     const category = document.getElementById('categoryList');
 
     if (!title.value || !imageUrl.files || !category.value) {
@@ -36,33 +43,48 @@ formEl.addEventListener('submit', function (e) {
         return;
     }    
 
-    const formData = new FormData();
-    formData.append('image', imageUrl.files[0]);
-    formData.append('title', title.value);
-    formData.append('category', category.value);
+    const formData = new FormData(formEl);
 
-    //const data = new URLSearchParams(formData);
-    //let dataObj = Object.fromEntries(formData);   
+    //formData.append('image', imageUrl.files[0]);
+    //formData.append('title', title.value);
+    //formData.append('category', category.value);
 
-    for (let entry of formData) {
-        console.log(entry);
-    }
+    //let dataObj = Object.fromEntries(formData);
+   
+    for (var pair of formData.entries()) {
+        console.log("clés %o valeur %o", pair[0], pair[1] )}
+    
     const token = sessionStorage.getItem("token");
-    console.log("token", token)    
-
-    fetch('http://localhost:5678/api/works', {
+    //console.log("token", token)    
+    //debugger; 
+    fetch(urlApi, {
         method: "POST",
         headers: {
-            "Authorization": "Bearer " + token
+            Authorization: "Bearer" + token            
         },
-        body: formData
-    })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        body: formData,
+        })        
+        .then(function (response){
+            if (response.ok){
+                //closeModal2();
+                alert('Données envoyées');
+                
+                return response.json();
+            } else {
+                throw new Error ('Réponse négative du serveur');
+            }
+        })
+        .then(function () {
+            //dataTable.push(data);
+            //displayWorks(dataTable);
+            //modalWorks(dataTable);
+        })
         .catch(error => console.log(error));      
 });
 
 //function qui upload l'image et la fait apparaître dans la modale
+
+
 imageUrl.onchange = function (){
 
     const profilePicture = document.getElementById('profilePicture');    
@@ -71,19 +93,28 @@ imageUrl.onchange = function (){
 
     profilePicture.src = URL.createObjectURL(imageUrl.files[0])
     profilePicture.style.width = '129px'; 
-    profilePicture.style.height = '169px';    
-    imageUrl.remove();          
+    profilePicture.style.height = '169px';          
     labelFile.remove();    
     imgSize.remove();
 };
 
+//Fonction qui affiche le fichier image du formulaire dans la modale
+
+
+
+
 
 /*
-let apiObj = {
-        "id": 0,
-        "title": "Bar New-York",
-        "imageUrl": "string",
-        "categoryId": "Objets",
-        "userId": 0
-      };
-*/
+    formData.append('image', imageUrl.files[0]);
+    formData.append('title', title.value);
+    formData.append('category', category.value);
+    */
+    //const data = new URLSearchParams(formData);
+    //let dataObj = Object.fromEntries(formData); 
+
+    /*
+    for (var pair of formData.entries()) {
+        console.log("clés %o valeur %o", pair[0], pair[1] )}
+        */
+
+    
