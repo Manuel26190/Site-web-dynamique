@@ -171,7 +171,7 @@ const closeModal = function () {
         e.stopPropagation()
     }
 
-//Création de l'événement au click sur les lien <a>
+//Création de l'événement au click sur les liens <a> mode édition
     document.querySelectorAll('.js-modal').forEach(a => {
         a.addEventListener('click', openModal)     
     });
@@ -188,7 +188,7 @@ const closeModal = function () {
 function modalWorks (values) {
     
     let photosModal = document.querySelector('.photosModal');
-    photosModal.innerHTML ="";
+    photosModal.innerHTML = "";
     
     values.forEach ((value) =>  {
         
@@ -218,14 +218,9 @@ function modalWorks (values) {
         photosModal.append(figure);        
 
 //Fonction qui supprime le travail en cliquant sur le logo delete
-        deleteProject.addEventListener("click", function (e) {
-            deleteWork(value.id);
-            //figure.remove();
-            //retirerElement(dataTable);            
-            e.preventDefault();
-            return false;            
-        });
-        
+        deleteProject.addEventListener("click", function () {
+            deleteWork(value.id);                        
+        });        
     });   
 }
 
@@ -252,16 +247,14 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
     };
 
 //Function qui retire l'élémént id
-function deleteElement(e, id) {    
+function deleteElement(id) {    
     for (let i = 0; i < dataTable.length; i++){
         //console.log ('dataTableId',dataTable[i].id)
         if (dataTable[i].id === id){
             dataTable.splice(i, 1);
         }
-    }
-    e.preventDefault();
-        
-};       
+    }        
+}       
 
 //Création de la Modale 2 ajout de photo
 
@@ -358,7 +351,7 @@ const pictureForm = document.getElementById('pictureForm');
 btnValidModal2.addEventListener('click', function (e) {
     e.preventDefault();       
     SendWork(pictureForm);
-    //closeModal2();   
+    closeModal2();   
     //displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil              
 });
 
