@@ -188,7 +188,7 @@ const closeModal = function () {
 function modalWorks (values) {
     
     let photosModal = document.querySelector('.photosModal');
-    //photosModal.innerHTML ='';
+    photosModal.innerHTML ="";
     
     values.forEach ((value) =>  {
         
@@ -211,20 +211,17 @@ function modalWorks (values) {
         if (value.id === 1){
             const moveLogo = document.createElement('i');
             moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-            figure.appendChild(moveLogo);            
+            figure.appendChild(moveLogo);          
         }             
         
         figure.append(deleteProject, img, figcaption);               
-        photosModal.append(figure);
-
-        //console.log('dataId %o', dataTable)
+        photosModal.append(figure);        
 
 //Fonction qui supprime le travail en cliquant sur le logo delete
         deleteProject.addEventListener("click", function (e) {
             deleteWork(value.id);
             //figure.remove();
-            //retirerElement(dataTable);
-            
+            //retirerElement(dataTable);            
             e.preventDefault();
             return false;            
         });
@@ -246,7 +243,7 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
         if (response.ok) {
           alert("La suppression de l'élément a fonctionner");
           deleteElement(id);          
-          //modalWorks(dataTable); //itération des travaux de la fénêtre modale
+          modalWorks(dataTable); //itération des travaux de la fénêtre modale
           //displayWorks(dataTable); //itération des travaux de la page d'accueil
         } else {
           console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
@@ -255,14 +252,16 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
     };
 
 //Function qui retire l'élémént id
-function deleteElement(id, event) {
+function deleteElement(e, id) {    
     for (let i = 0; i < dataTable.length; i++){
-        console.log ('dataTableId',dataTable[i].id)
+        //console.log ('dataTableId',dataTable[i].id)
         if (dataTable[i].id === id){
             dataTable.splice(i, 1);
         }
-    }event.preventDefault();
-}       
+    }
+    e.preventDefault();
+        
+};       
 
 //Création de la Modale 2 ajout de photo
 
@@ -280,15 +279,15 @@ const openModal2 = function () {
 }; 
 
 const closeModal2 = function (e) {
-    if (modal2 === null) return
-    e.preventDefault()
+    e.preventDefault();
+    if (modal2 === null) return;    
     modal2.style.display = 'none';
     modal2.setAttribute('aria-hidden', 'true')
-    modal2.removeAttribute('aria-modal')    
-    modal2.removeEventListener('click', closeModal2)
-    modal2.querySelector('.js-modal-close2').removeEventListener('click', closeModal2)
-    modal2.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation2)
-    modal2 = null
+    modal2.removeAttribute('aria-modal');    
+    modal2.removeEventListener('click', closeModal2);
+    modal2.querySelector('.js-modal-close2').removeEventListener('click', closeModal2);
+    modal2.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation2);
+    modal2 = null;
 }
 
 //Function qui empêche de fermer la modale losque l'on click à l'inrérieur du contenu
@@ -326,52 +325,76 @@ inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
     profilePicture.style.height = '169px';             
-    labelFile.innerHTML = "";    
-    imgSize.innerHTML = "";
+    labelFile.remove();    
+    imgSize.remove();
 }
+
+
+const title = document.getElementById('photoTitle');
+const btnValidModal2 = document.getElementById('btnValider');
+
+//Fonction qui vérifie que les champs ajout de photo et titre du formulaire soient bien rempli 
+function CheckForm (el, el2, valid){
+    if ( el.value !== "" || el2.files.length === 0) {
+        valid.disabled = false;
+    } else {
+        valid.disabled = true;
+    }
+};
+
+//Fonction qui vérifie si l'utilisateur entre des données dans le champs titre du fomulaire
+title.addEventListener("input", () => {
+    CheckForm(title, inputFile, btnValidModal2)
+});
+
+//Fonction qui vérifie si l'utilisateur entre des données dans le champs ajout d'image du fomulaire
+inputFile.addEventListener("input", () => {
+    CheckForm(title, inputFile, btnValidModal2)
+}); 
 
 const pictureForm = document.getElementById('pictureForm');
  
 //function au click du submit du formulaire qui appelle la function sendWork
-pictureForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    //console.log('e.target', e.target);    
-    SendWork(e.target);//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API 
-    //fonction qui vérifie si le formulaire d'ajout d'image est bien rempli
+btnValidModal2.addEventListener('click', function (e) {
+    e.preventDefault();       
+    SendWork(pictureForm);
+    //closeModal2();   
     //displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil              
-});  
-/*
-el : c'est un élément du DOM, sendWork prend en paramêtre el un élément du DOM
-*/
+});
 
 
+
+//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
 const SendWork = (el) => {
-    const formData = new FormData(el);
-    //const dataObj = Object.fromEntries(formData);
+    const formData = new FormData(el);    
 
-    console.log('formdata %o', formData );   
+    const category = document.getElementById('categoryList');
+
+    if (!title.value || !inputFile.files || !category.value) {
+        alert("Veuillez remplir toutles les champs du fomrulaire.");
+        return;
+    }      
     
-    token = sessionStorage.getItem("token");
-    //console.log('token', token);
+    token = sessionStorage.getItem("token");    
 
     fetch('http://localhost:5678/api/works', {
         method: "POST",
         headers: {
-            'Authorization': 'Bearer' + token
+            'Authorization': 'Bearer ' + token,
         },           
-        body: formData            
+        body: formData,            
     })    
         .then(function (response){
             if (response.ok){
                 //closeModal2();
-                alert('ça fonctionne');
+                alert('Travail correctement envoyé');
                 return response.json();
             } else {
                 throw new Error ('Réponse négative du serveur');
             }
         })
-        .then(function () {
-            //dataTable.push(data);
+        .then(function (data) {
+            dataTable.push(data);
             //displayWorks(dataTable);
             //modalWorks(dataTable);
         })

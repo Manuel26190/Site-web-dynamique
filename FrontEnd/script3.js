@@ -1,6 +1,5 @@
 const imageUrl = document.getElementById('input-file');
-const title = document.getElementById('photoTitle'); 
-
+const title = document.getElementById('photoTitle');
 const btnValidModal2 = document.getElementById('btnValider');
 
 //Fonction qui vérifie que les champs ajout de photo et titre du formulaire soient bien rempli 
