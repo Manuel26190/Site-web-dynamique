@@ -1,109 +1,39 @@
-
-const pictureForm = document.getElementById('pictureForm');
-
-function addData(el) {
-
-    const imageUrl = document.getElementById('input-file').files[0];
-    const title = document.getElementById('photoTitle').value;    
-    const select = document.getElementById('categoryList').value;
+//Fonction qui affiche tous les travaux dans la fenêtre modale
+function modalWorks (values) {
     
-    /*const options = select.options;
-    const categoryIds = {
-        "1": 1,
-        "2": 2,
-        "3": 3
-    }*/
-
-    //const categoryId = categoryIds[options[select.selectedIndex].value];
-
-    if (!title || !imageUrl || !select) {
-     alert('Veuillez remplir tout les champs du formulaire');
-     return;
-     } else {
-        alert('rempli');
-     }
-
+    let photosModal = document.querySelector('.photosModal');
+    photosModal.innerHTML = "";
     
+    values.forEach ((value) =>  {
+        
+        let figure = document.createElement('figure');
 
-    let formData = new FormData(el);
+        let img = document.createElement('img');    
+        img.setAttribute("src", value.imageUrl );
+        img.classList.add('img-modal');
+        
+        let categoryId = document.createElement('p');
+        categoryId.setAttribute('src', value.categoryId);
 
-    //formData.append('image', imageUrl);
-    //formData.append('title', title);    
-    //formData.append('category', select);
+        let figcaption = document.createElement('figcaption');
+        figcaption.innerHTML = 'éditer';
 
-    //let objData = Object.fromEntries(formData);
-    //let finalObj = JSON.stringify(objData);
+        const deleteProject = document.createElement('i');
+        deleteProject.classList.add("fa-solid", "fa-trash-can");
+            
+//J'intègre à ma première photo le logo déplaçer 
+        if (value.id === 1){
+            const moveLogo = document.createElement('i');
+            moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
+            figure.appendChild(moveLogo);          
+        }             
+        
+        figure.append(deleteProject, img, figcaption);               
+        photosModal.append(figure);        
 
-    /*for (var pair of formData.entries()) {
-        console.log("clés %o valeur %o", pair[0], pair[1] )    
-    }*/
-
-    for (let entry of formData) {
-        console.log(entry);
-    }
-
-    let token = sessionStorage.getItem("token");
-
-    fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {            
-            "Authorization": "Bearer" + token            
-        },
-        body: formData
-    })
-    .then(function (response) {
-        if (response.ok) {
-            //closeModal2();
-            alert("L'ajout du nouveau projet a fonctionné");
-            return response.json();        
-        } else {
-            throw new Error("Réponse négative du serveur");
-        }
-    })
-    .then(function () {
-        //dataTable.push(data);
-        //displayWorks(dataTable);
-        //modalWorks(dataTable);
-    })
-    .catch(function (error) {
-     console.error("Error adding data", error);
-        alert("Une erreur est survenue lors de l'ajout des éléments. Veuillez réessayer ou joindre l'équipe si le problème perciste." )
-    });
-};
-
-const btnValidModal2 = document.getElementById('btnValider');
-
-function verifForm (){
-    if (document.getElementById("input-file").files.length === 0 || document.getElementById("photoTitle").value === "") {
-        btnValidModal2.disabled = true;
-    } else {
-        btnValidModal2.disabled = false;
-    }
+//Fonction qui supprime le travail en cliquant sur le logo delete
+        deleteProject.addEventListener("click", function () {
+            deleteWork(value.id);                        
+        });        
+    });   
 }
-verifForm();
-
-    btnValidModal2.addEventListener('click', function (e) {                
-        addData(pictureForm);
-        e.preventDefault();                
-    });
-
-
-//Je cible les différents champs du fomulaire ajout d'image 
-
-const profilePicture = document.getElementById('profilePicture');
-const inputFile = document.getElementById('input-file');
-const labelFile = document.getElementById('labelFile');
-const imgSize = document.getElementById('imgSize');
-
-//function qui upload l'image et la fait apparaître dans la modale
-inputFile.onchange = function (){
-    profilePicture.src = URL.createObjectURL(inputFile.files[0])
-    profilePicture.style.width = '129px'; 
-    profilePicture.style.height = '169px';
-    //profilePicture.style.marginTop ='28px'; 
-    inputFile.innerHTML = "";          
-    labelFile.innerHTML = "";    
-    imgSize.innerHTML = "";
-};
-
-

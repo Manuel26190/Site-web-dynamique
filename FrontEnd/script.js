@@ -1,11 +1,13 @@
-// je stock dans une variable l'url de l'API
 const urlApi = 'http://localhost:5678/api/works';
 
-const gallery = document.querySelector('.gallery');
-
 //function pour itérer et afficher les travaux stockés dans l'API
-function displayWorks (toto) {
-    toto.forEach( value => {
+function displayWorks (el) {
+
+    const gallery = document.querySelector('.gallery');
+
+    gallery.innerHTML = "";
+
+    el.forEach((value) => {
         
         let figure = document.createElement("figure");
         let img = document.createElement("img");
@@ -16,29 +18,11 @@ function displayWorks (toto) {
         img.setAttribute("crossorigin", "anonymous");
     
         figcaption.innerHTML = value.title;
-    
-        figure.append(img, figcaption);
-        //let figure = cElement(value)
+
+        figure.append(img, figcaption);        
         gallery.append(figure);    
-    }
-    );    
-}; 
-
-/*
-const cElement = function (el){
-    let figure = document.createElement("figure");
-    let img = document.createElement("img");
-    let figcaption = document.createElement("figcaption");
-
-    img.setAttribute("src", el.imageUrl);
-    figcaption.setAttribute("alt", el.title);
-    img.setAttribute("crossorigin", "anonymous");
-
-    figcaption.innerHTML = el.title;    
-    figure.append(img, figcaption);
-    return figure;
-}
-*/
+    });    
+} 
 
 let dataTable = [];//Je crée une constante qui contient un tableau vide
 
@@ -138,11 +122,9 @@ let token = sessionStorage.getItem("token");
 })
  
 //Ouverture de la fenêtre modale
+let modal = null;//Variable qui sert à fermer la boite modale
 
-//Variable qui sert à fermer la boite modale
-let modal = null;
-
-//Foinction qui cible mes lien href et annule le display block pour faire apparaître la fenêtre modale
+//Fonction qui cible mes lien href et annule le display block pour faire apparaître la fenêtre modale
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'));
@@ -151,9 +133,9 @@ const openModal = function (e) {
     modal.setAttribute ('aria-modal', 'true')
     modal.addEventListener ('click', closeModal)
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)  
-    
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)    
 };
+
  //Fonction qui ferme la modale
 const closeModal = function () {    
     if (modal === null) return        
@@ -272,7 +254,7 @@ const openModal2 = function () {
 }; 
 
 const closeModal2 = function (e) {
-    e.preventDefault();
+    //e.preventDefault();
     if (modal2 === null) return;    
     modal2.style.display = 'none';
     modal2.setAttribute('aria-hidden', 'true')
@@ -350,12 +332,10 @@ const pictureForm = document.getElementById('pictureForm');
 //function au click du submit du formulaire qui appelle la function sendWork
 btnValidModal2.addEventListener('click', function (e) {
     e.preventDefault();       
-    SendWork(pictureForm);
-    closeModal2();   
+    SendWork(pictureForm);//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
+    closeModal2();//Fonction qui ferme la modale 2 ajout d'image   
     //displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil              
 });
-
-
 
 //fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
 const SendWork = (el) => {
@@ -388,7 +368,7 @@ const SendWork = (el) => {
         })
         .then(function (data) {
             dataTable.push(data);
-            //displayWorks(dataTable);
+            displayWorks(dataTable);
             //modalWorks(dataTable);
         })
         .catch(function (error){
@@ -397,40 +377,4 @@ const SendWork = (el) => {
         })
 }; 
 
-//"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4"
-    
-//Je cible les éléménts du formulaire ajout d'image, messages d'erreur et bouton submit
-/*
-const btnValider = document.getElementById ('btnValider');
-const photoTitle = document.getElementById('photoTitle');
-const categoryList = document.getElementById('categoryList');
-const uploadPhotoError = document.getElementById('erreur1');
-const titleError = document.getElementById('erreur2');
-const categoryListError = document.getElementById('erreur3');
 
-//Vérification que les champs du formulaire soient bien rempli
-function verif_form(file, title, cat){        
-    if (file.value ==""){
-        uploadPhotoError.innerText ="Veuillez ajouter une photo";        
-    } else if (file.value != ""){
-        uploadPhotoError.innerText = "";
-    }     
-    if (title.value ==""){
-        titleError.innerText = "Veuillez entrer un titre";        
-    } else if (title.values != ""){
-        titleError.innerText = "";
-    } 
-    if (cat.value ==""){
-        categoryListError.innerText = "Veuillez indiquer une catégorie";
-    } else if (cat.value != ""){
-        categoryListError.innerText = "";
-    }  
-}
-*/
-
-/*    for (var pair of formData.entries()) {
-        console.log("clés %o valeur %o", pair[0], pair[1] )    }
-
-    formData.append('image', inputFile.files[0] );
-    formData.append('title', photoTitle.value);
-    formData.append('category', categoryList.value); */ 
