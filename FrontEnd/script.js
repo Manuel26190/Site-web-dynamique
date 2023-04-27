@@ -239,7 +239,7 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
           alert("La suppression de l'élément a fonctionner");
           deleteElement(id);          
           modalWorks(dataTable); //itération des travaux de la fénêtre modale
-          //displayWorks(dataTable); //itération des travaux de la page d'accueil
+          displayWorks(dataTable); //itération des travaux de la page d'accueil
         } else {
           console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
         }
