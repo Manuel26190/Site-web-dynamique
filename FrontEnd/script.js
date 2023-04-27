@@ -369,7 +369,7 @@ const SendWork = (el) => {
         .then(function (data) {
             dataTable.push(data);
             displayWorks(dataTable);
-            //modalWorks(dataTable);
+            modalWorks(dataTable);
         })
         .catch(function (error){
             console.error('error', error);
