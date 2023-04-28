@@ -238,8 +238,7 @@ const openModal2 = function () {
     modal2.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation2)
 }; 
 //Fonction qui ferme la modale 2
-const closeModal2 = function (e) {
-    //e.preventDefault();
+const closeModal2 = function () {    
     if (modal2 === null) return;    
     modal2.style.display = 'none';
     modal2.setAttribute('aria-hidden', 'true')
