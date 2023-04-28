@@ -248,7 +248,7 @@ const closeModal2 = function (e) {
     modal2.querySelector('.js-modal-close2').removeEventListener('click', closeModal2);
     modal2.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation2);
     modal2 = null;
-}
+};
 
 //Function qui empêche de fermer la modale losque l'on click à l'inrérieur du contenu
 const stopPropagation2 = function (e){
