@@ -314,18 +314,18 @@ const pictureForm = document.getElementById('pictureForm');
 //function au click du submit du formulaire qui appelle la function sendWork et closeMoadal2
 btnValidModal2.addEventListener('click', function (e) {
     e.preventDefault();       
-    SendWork(pictureForm);//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
+    SendWork(pictureForm);//Fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
     closeModal2();//Fonction qui ferme la modale 2 ajout d'image                  
 });
 
 //fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
 const SendWork = (el) => {
-    const formData = new FormData(el);    
+    const formData = new FormData(el); //Création de l'objet formData qui récupère les valeurs du formulaire    
 
     const category = document.getElementById('categoryList');
-
-    if (!title.value || !inputFile.files || !category.value) {
-        alert("Veuillez remplir toutles les champs du fomrulaire.");
+//Vérification que tous les champs du formulaire soient remplis
+    if (!title.value || !inputFile.files || !category.value) { 
+        alert("Veuillez remplir tous les les champs du fomrulaire.");
         return;
     }        
 
