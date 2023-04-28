@@ -1,9 +1,9 @@
 const urlApi = 'http://localhost:5678/api/works';
 
-//function pour itérer et afficher les travaux stockés dans l'API
-function displayWorks (el) {
+const gallery = document.querySelector('.gallery');
 
-    const gallery = document.querySelector('.gallery');
+//Function pour itérer et afficher sur la page d'accueil les travaux stockés dans l'API
+function displayWorks (el) {    
 
     gallery.innerHTML = "";
 
@@ -24,7 +24,7 @@ function displayWorks (el) {
     });    
 } 
 
-let dataTable = [];//Je crée une constante qui contient un tableau vide
+let dataTable = [];//Je crée une varaiable qui contient un tableau vide dans laquelle je vais stocker les données récupérées de l'API grâce à ma request fetch
 
 //Appel fetch qui copie les données de l'APÏ dans mon tableau dataTable
 fetch(urlApi)
@@ -35,16 +35,11 @@ fetch(urlApi)
     })
     .then(function (values) {
         values.forEach(function (element) {
-            dataTable.push(element); //je veux stocker dans un tableau la data retournée             
-            //cElement(element)//j'appelle une fonction qui crée des éléments dans le DOM 
-            //console.log ('element %o',element.id)            
+            dataTable.push(element); //je stocke dans le tableau la data retournée                       
         });
-
         displayWorks(dataTable);
-        
-//console.log('values %o', values[0].title)
 
-// Création d'une fonction pour filtrer les objets en fonction du bouton de catégorie cliquer sur le site
+// Création d'une fonction pour filtrer les objets en fonction du bouton de catégorie qui est cliqué sur le site
     function filterObjets(values, categoryId) {
 
         let filteredValues;
@@ -55,11 +50,9 @@ fetch(urlApi)
             filteredValues = values;
 
         }else{ //Sinon, on filtrera les objets pour afficher seulement ceux dont la catégorie est mentionner au click boutton
-            filteredValues = values.filter(value => categoryId.includes(value.categoryId));
-            //console.log ('filter value', filteredValues);
+            filteredValues = values.filter(value => categoryId.includes(value.categoryId));            
         }
-
-// On vide les éléments HTML présent dans Gallery
+// Je vide les éléments HTML présent dans Gallery
         gallery.innerHTML = "";
 
 // Itération sur les objets filtrés pour créer les éléments HTML ci-joints
@@ -77,7 +70,6 @@ fetch(urlApi)
 
         figure.append(img, figcaption);
         gallery.append(figure);
-
         });
     }
 // Création d'événements "au click" sur différent bouton pour filtrer les éléments selon leur catégorie (bouton) séléctionné
@@ -103,20 +95,16 @@ fetch(urlApi)
 
 //Apparition du mode edition
 let token = sessionStorage.getItem("token");
-//console.log(token);
 
     if (token) {  
-        const modalLinks = document.querySelectorAll(".js-modal");
-        //console.log('modal links %o', modalLinks);
+        const modalLinks = document.querySelectorAll(".js-modal");       
         
         modalLinks.forEach((link)=> {
             link.style.display ='flex';
         });    
     };
-
     modalWorks(dataTable);
-
-})//fermeture du Fetch
+})
 .catch(error => {
     console.log('error', error);
 })
@@ -159,8 +147,7 @@ const closeModal = function () {
     });
 
 //Fermeture de la modale avec l'utilisation de "échap"
-    window.addEventListener('keydown', function (e){
-    //console.log(e.key);
+    window.addEventListener('keydown', function (e){    
         if (e.key === "Escape" || e.key === "Esc"){
             closeModal(e)
         }
@@ -206,7 +193,6 @@ function modalWorks (values) {
     });   
 }
 
-
 //Function pour supprimer le travail de l'API 
 const deleteWork = (id, token = sessionStorage.getItem("token")) => {
 
@@ -219,7 +205,7 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
       .then((response) => {
         if (response.ok) {
           alert("La suppression de l'élément a fonctionner");
-          deleteElement(id);          
+          deleteElement(id); //Function qui retire l'élémént id         
           modalWorks(dataTable); //itération des travaux de la fénêtre modale
           displayWorks(dataTable); //itération des travaux de la page d'accueil
         } else {
@@ -239,9 +225,8 @@ function deleteElement(id) {
 }       
 
 //Création de la Modale 2 ajout de photo
-
 let modal2 = null;
-
+//Fonction qui ouvre la modale 2
 const openModal2 = function () {    
     const target2 = document.querySelector('.modal2');
     target2.style.display = null;
@@ -252,7 +237,7 @@ const openModal2 = function () {
     modal2.querySelector('.js-modal-close2').addEventListener('click', closeModal2)
     modal2.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation2)
 }; 
-
+//Fonction qui ferme la modale 2
 const closeModal2 = function (e) {
     //e.preventDefault();
     if (modal2 === null) return;    
@@ -273,8 +258,7 @@ const stopPropagation2 = function (e){
 const btnAjouter = document.querySelector('.btnAjouter');
 
 //function qui ouvre la modale 2 et ferme la modale 1 au click sur le bouton ajouter une photo
-btnAjouter.addEventListener('click', function (){
-    //console.log(e)
+btnAjouter.addEventListener('click', function (){    
     closeModal();
     openModal2();    
 });
@@ -287,15 +271,14 @@ window.addEventListener('keydown', function (e){
     }
 });
 
-//ajout photo vers l'API
+//Ajout du fichier photo vers l'API
 //Je cible les différents champs du fomulaire ajout d'image 
-
 const profilePicture = document.getElementById('profilePicture');
 const inputFile = document.getElementById('input-file');
 const labelFile = document.getElementById('labelFile');
 const imgSize = document.getElementById('imgSize');
 
-//function qui upload l'image et la fait apparaître dans la modale
+//function qui upload le fichier image du formulaire et la fait apparaître dans la modale remplaçant le logo image
 inputFile.onchange = function (){
     profilePicture.src = URL.createObjectURL(inputFile.files[0])
     profilePicture.style.width = '129px'; 
@@ -304,11 +287,10 @@ inputFile.onchange = function (){
     imgSize.remove();
 }
 
-
 const title = document.getElementById('photoTitle');
 const btnValidModal2 = document.getElementById('btnValider');
 
-//Fonction qui vérifie que les champs ajout de photo et titre du formulaire soient bien rempli 
+//Fonction qui vérifie que les champs ajout de photo et titre du formulaire soient bien rempli et active le bouton submit 
 function CheckForm (el, el2, valid){
     if ( el.value !== "" || el2.files.length === 0) {
         valid.disabled = false;
@@ -317,24 +299,23 @@ function CheckForm (el, el2, valid){
     }
 };
 
-//Fonction qui vérifie si l'utilisateur entre des données dans le champs titre du fomulaire
+//Fonction qui vérifie si l'utilisateur entre des données dans le champs "titre" du formulaire
 title.addEventListener("input", () => {
     CheckForm(title, inputFile, btnValidModal2)
 });
 
-//Fonction qui vérifie si l'utilisateur entre des données dans le champs ajout d'image du fomulaire
+//Fonction qui vérifie si l'utilisateur entre des données dans le champs "ajout d'image" du formulaire
 inputFile.addEventListener("input", () => {
     CheckForm(title, inputFile, btnValidModal2)
 }); 
 
 const pictureForm = document.getElementById('pictureForm');
  
-//function au click du submit du formulaire qui appelle la function sendWork
+//function au click du submit du formulaire qui appelle la function sendWork et closeMoadal2
 btnValidModal2.addEventListener('click', function (e) {
     e.preventDefault();       
     SendWork(pictureForm);//fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
-    closeModal2();//Fonction qui ferme la modale 2 ajout d'image   
-    //displayWorks(dataTable);//fonction qui itére les travaux sur la page d'acceuil              
+    closeModal2();//Fonction qui ferme la modale 2 ajout d'image                  
 });
 
 //fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
@@ -346,30 +327,27 @@ const SendWork = (el) => {
     if (!title.value || !inputFile.files || !category.value) {
         alert("Veuillez remplir toutles les champs du fomrulaire.");
         return;
-    }      
-    
-    token = sessionStorage.getItem("token");    
+    }        
 
     fetch('http://localhost:5678/api/works', {
         method: "POST",
         headers: {
-            'Authorization': 'Bearer ' + token,
+            'Authorization': 'Bearer ' + sessionStorage.getItem("token"),
         },           
         body: formData,            
     })    
         .then(function (response){
-            if (response.ok){
-                //closeModal2();
-                alert('Travail correctement envoyé');
+            if (response.ok){                
+                alert('Projet envoyé');
                 return response.json();
             } else {
                 throw new Error ('Réponse négative du serveur');
             }
         })
         .then(function (data) {
-            dataTable.push(data);
-            displayWorks(dataTable);
-            modalWorks(dataTable);
+            dataTable.push(data); //Ajout du projet à mon tableau dataTable
+            displayWorks(dataTable); //Function qui itère les travaux sur la page d'accueil
+            modalWorks(dataTable); //Fonction qui itère les travaux sur la modale
         })
         .catch(function (error){
             console.error('error', error);
