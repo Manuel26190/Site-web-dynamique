@@ -4,7 +4,7 @@ const gallery = document.querySelector('.gallery');
 
 //Function pour itérer et afficher sur la page d'accueil les travaux stockés dans l'API
 function displayWorks (el) {    
-
+   
     gallery.innerHTML = "";
 
     el.forEach((value) => {
@@ -154,13 +154,13 @@ const closeModal = function () {
     }); 
 
 //Fonction qui affiche tous les travaux dans la fenêtre modale
-function modalWorks (values) {
+function modalWorks (values) {    
     
     let photosModal = document.querySelector('.photosModal');
     photosModal.innerHTML = "";
     
     values.forEach ((value) =>  {
-        
+
         let figure = document.createElement('figure');
 
         let img = document.createElement('img');    
@@ -187,7 +187,8 @@ function modalWorks (values) {
         photosModal.append(figure);        
 
 //Fonction qui supprime le travail en cliquant sur le logo delete
-        deleteProject.addEventListener("click", function () {
+        deleteProject.addEventListener("click", function (e) {
+            e.preventDefault();
             deleteWork(value.id);                        
         });        
     });   
@@ -207,7 +208,7 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
           alert("La suppression de l'élément a fonctionner");
           deleteElement(id); //Function qui retire l'élémént id         
           modalWorks(dataTable); //itération des travaux de la fénêtre modale
-          displayWorks(dataTable); //itération des travaux de la page d'accueil
+          //displayWorks(dataTable); //itération des travaux de la page d'accueil
         } else {
           console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
         }
