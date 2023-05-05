@@ -3,8 +3,6 @@
 // Je cible le formulaire dans la page HTML
 const form = document.querySelector('#myForm');
 
-//console.log("mon form %o", form);
-
 // Évènement au "submit" du formulaire de connexion
 form.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -30,7 +28,6 @@ form.addEventListener('submit', async function (event) {
 
         // Enregistrement du Token dans le local storage afin de pouvoir s'en servir pour la suite du Projet
         sessionStorage.setItem('token', data.token);        
-        
 
         // Rediriger l'utilisateur sur la page d'accueil
         window.location.href = 'index.html'
@@ -41,8 +38,7 @@ form.addEventListener('submit', async function (event) {
         erreur.innerHTML = "Erreur dans l’identifiant ou le mot de passe";
         erreur.appendChild('myForm');
     } 
-    event.stopPropagation();  
-        
+    event.stopPropagation();        
 });
 
 
