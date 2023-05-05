@@ -2,7 +2,7 @@ const urlApi = 'http://localhost:5678/api/works';
 
 const gallery = document.querySelector('.gallery');
 
-//Function pour itérer et afficher sur la page d'accueil les travaux stockés dans l'API
+//Function pour itérer et afficher sur la page d'accueil les travaux stockés par l'API
 function displayWorks (el) {    
    
     gallery.innerHTML = "";
@@ -26,7 +26,7 @@ function displayWorks (el) {
 
 let dataTable = [];//Je crée une varaiable qui contient un tableau vide dans laquelle je vais stocker les données récupérées de l'API grâce à ma request fetch
 
-//Appel fetch qui copie les données de l'APÏ dans mon tableau dataTable
+//Appel fetch qui copie les données de l'API dans mon tableau dataTable
 fetch(urlApi)
     .then(function (response) {
         if (response.ok) {
@@ -37,100 +37,39 @@ fetch(urlApi)
         values.forEach(function (element) {
             dataTable.push(element); //je stocke dans le tableau la data retournée                       
         });
+        displayWorks(values);//J'appelle ma fonction displayWork qui itère les travaux sur la page d'accueil        
 
-        displayWorks(values);        
-/*
+        //Je filtres mes travaux selon leur categoryId en utilisasant la method filter()
         values.forEach(value => {
             const btnTous = document.getElementById('btnTous');           
-            btnTous.addEventListener('click', function (){
+            btnTous.addEventListener('click', function (){//Function qui au click sur le bouton "Tous" filtre les travaux selon leur categoryId
                 const filtreTous = values.filter(function (value) {
                     return value.categoryId == 1,2,3;                   
                 });                
-                displayWorks(filtreTous);               
+                displayWorks(filtreTous);//Fonction qui itère tous les travaux(car categoryId 1,2 et 3) sur la page d'accueil                
             });
             const btnObjets = document.getElementById('btnObjets');           
-            btnObjets.addEventListener('click', function (){
+            btnObjets.addEventListener('click', function (){//Function qui au click sur le bouton "Objets" filtre les travaux selon leur categoryId
                 const filtreObjets = values.filter(function (value) {
                     return value.categoryId == 1;                   
                 });                
-                displayWorks(filtreObjets);               
+                displayWorks(filtreObjets);//Fonction qui itère seulement les travaux "Objets" ayant la categoryId = 1               
             });
             const btnAppartement = document.getElementById('btnAppartements');           
-            btnAppartement.addEventListener('click', function (){
+            btnAppartement.addEventListener('click', function (){//Function qui au click sur le bouton "Appartement" filtre les travaux selon leur categoryId
                 const filtreAppartements = values.filter(function (value) {
                     return value.categoryId == 2;                   
                 });                
-                displayWorks(filtreAppartements);               
+                displayWorks(filtreAppartements);//Fonction qui itère seulement les travaux "Appartements" ayant la categoryId = 2               
             });
             const btnHotels = document.getElementById('btnHotels');           
-            btnHotels.addEventListener('click', function (){
+            btnHotels.addEventListener('click', function (){//Function qui au click sur le bouton "Hôtels & restaurants" filtre les travaux selon leur categoryId
                 const filtreHotels = values.filter(function (value) {
                     return value.categoryId == 3;                   
                 });                
-                displayWorks(filtreHotels);               
+                displayWorks(filtreHotels);//Fonction qui itère seulement les travaux "Hôtels & restaurants" ayant la categoryId = 3               
             });
         })
-*/
-
-/*
-
-// Création d'une fonction pour filtrer les objets en fonction du bouton de catégorie qui est cliqué sur le site
-    function filterObjets(values, categoryId) {
-
-        let filteredValues;
-
-// Création de l'option "par défaut" pour dire que SI aucune catégorie n'est choisi (en cliquant sur le bouton 'tous'
-// alors tout les éléments apparraitront à l'écran)
-        if (categoryId.length === 0) {
-            filteredValues = values;
-
-        }else{ //Sinon, on filtrera les objets pour afficher seulement ceux dont la catégorie est mentionner au click boutton
-            filteredValues = values.filter(value => categoryId.includes(value.categoryId));            
-        }
-// Je vide les éléments HTML présent dans Gallery
-        gallery.innerHTML = "";
-
-// Itération sur les objets filtrés pour créer les éléments HTML ci-joints
-        filteredValues.forEach( value => {
-
-        let figure = document.createElement("figure");
-        let img = document.createElement("img");
-        let figcaption = document.createElement("figcaption");
-
-        img.setAttribute("src", value.imageUrl);
-        figcaption.setAttribute("alt", value.title);
-        img.setAttribute("crossorigin", "anonymous");
-
-        figcaption.innerHTML = value.title;
-
-        figure.append(img, figcaption);
-        gallery.append(figure);
-        });
-    }
-// Création d'événements "au click" sur différent bouton pour filtrer les éléments selon leur catégorie (bouton) séléctionné
-    const noFilter = document.querySelector("#btnTous");
-    noFilter.addEventListener("click", function() {
-    filterObjets(values, []);    
-    });
-
-    const boutonObjets1 = document.querySelector("#btnObjets");
-    boutonObjets1.addEventListener("click", function() {
-    filterObjets(values, [1]);
-    });
-
-    const boutonObjets2 = document.querySelector("#btnAppartements");
-    boutonObjets2.addEventListener("click", function() {
-    filterObjets(values, [2]);
-    });
-
-    const boutonObjets3 = document.querySelector("#btnHotels");
-    boutonObjets3.addEventListener("click", function() {
-    filterObjets(values, [3]);
-    });    
-
-
-*/
-
 
 //Apparition du mode edition
 let token = sessionStorage.getItem("token");
@@ -247,7 +186,7 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
           alert("La suppression de l'élément a fonctionner");
           deleteElement(id); //Function qui retire l'élémént id         
           modalWorks(dataTable); //itération des travaux de la fénêtre modale
-          //displayWorks(dataTable); //itération des travaux de la page d'accueil
+          
         } else {
           console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
         }
@@ -368,7 +307,7 @@ const SendWork = (el) => {
         return;
     }        
 
-    fetch('http://localhost:5678/api/works', {
+    fetch(urlApi, {
         method: "POST",
         headers: {
             'Authorization': 'Bearer ' + sessionStorage.getItem("token"),
