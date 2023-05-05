@@ -4,7 +4,7 @@ const gallery = document.querySelector('.gallery');
 
 //Function pour itérer et afficher sur la page d'accueil les travaux stockés par l'API
 function displayWorks (el) {    
-   
+    
     gallery.innerHTML = "";
 
     el.forEach((value) => {
@@ -71,17 +71,17 @@ fetch(urlApi)
             });
         })
 
-//Apparition du mode edition
+//Apparition du mode edition pour ouvrir la fenêtre modale
 let token = sessionStorage.getItem("token");
 
-    if (token) {  
+    if (token) {//Condition, si le token est récupéré, les lien cachés "Modifier" seront visibles sur la page d'accueil  
         const modalLinks = document.querySelectorAll(".js-modal");       
         
         modalLinks.forEach((link)=> {
             link.style.display ='flex';
         });    
     };
-    modalWorks(dataTable);
+    modalWorks(values);//Function qui itère les travaux sur la page modale
 })
 .catch(error => {
     console.log('error', error);
@@ -90,7 +90,7 @@ let token = sessionStorage.getItem("token");
 //Ouverture de la fenêtre modale
 let modal = null;//Variable qui sert à fermer la boite modale
 
-//Fonction qui cible mes lien href et annule le display block pour faire apparaître la fenêtre modale
+//Fonction qui cible mes lien href et annule le display none pour faire apparaître la fenêtre modale
 const openModal = function (e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'));
@@ -99,7 +99,8 @@ const openModal = function (e) {
     modal.setAttribute ('aria-modal', 'true')
     modal.addEventListener ('click', closeModal)
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)    
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation) 
+       
 };
 
  //Fonction qui ferme la modale
@@ -167,7 +168,9 @@ function modalWorks (values) {
 //Fonction qui supprime le travail en cliquant sur le logo delete
         deleteProject.addEventListener("click", function (e) {
             e.preventDefault();
-            deleteWork(value.id);                        
+            deleteWork(value.id);
+            
+
         });        
     });   
 }
@@ -186,6 +189,7 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
           alert("La suppression de l'élément a fonctionner");
           deleteElement(id); //Function qui retire l'élémént id         
           modalWorks(dataTable); //itération des travaux de la fénêtre modale
+          displayWorks(dataTable);//itération des travaux de la page d'accueil
           
         } else {
           console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
