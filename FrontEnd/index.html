@@ -32,7 +32,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-		<!--Liens "Modifier" en dessous de l'image-->	
+		<!--Liens "Modifier 2" en dessous de l'image-->	
 			<a href="#modal1" class="js-modal" id="modifier2" style="display: none"><i id="logoModifier2" class="fa-solid fa-pen-to-square"></i>Modifier</a>
 		</figure>
 		<article>
@@ -77,11 +77,13 @@
 					
 					<!--Liste de categorie Objets, appartements, Hôtels-->
 					<label  for="type" id="categoryForm2">Catégorie</label>					
-					<select name="category" id="categoryList" class="form2">						
+					<select name="category" id="categoryList" class="form2">
+						<option value=""></option>						
 						<option class="listClass" value="1">Objets</option>
 						<option class="listClass" value="2">Appartements</option>
 						<option class="listClass" value="3">Hôtel & restaurants</option>							
 					</select>
+					<p style="color: red;" id="erreur3"></p>
 					<!--Bouton Valider du formulaire-->										
 					<button type="submit" id="btnValider" disabled >Valider</button>				           
 				</form>			
@@ -89,7 +91,7 @@
 		</aside>
 		<div id="divMesProjets">
 			<h2>Mes Projets</h2>
-			<!--Lien "Modifier" de Mes Projets-->			
+			<!--Lien "Modifier 3" de Mes Projets-->			
 			<a href="#modal1" class="js-modal" id="modifier3" style="display: none"><i id="logoModifier3" class="fa-solid fa-pen-to-square"></i>Modifier</a>
 		</div>				
 		<div id="divFiltres">

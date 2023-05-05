@@ -29,18 +29,19 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-/*--Bandeau qui apparait après le login--*/
+/*--Bandeau noir qui apparait à la suite le login--*/
 #bandeau{
 	height: 59px;
 	background-color: rgb(0, 0, 0);
 	display: flex;
 	justify-content: center;	
 }
+/*--Logo Modifier--*/
 #logoModifier{
 	color: #FFFFFF;
-	margin-right: 6px;
-	
+	margin-right: 6px;	
 }
+/*--Mode Edition--*/
 #modeEdition{
 	color: #ffffff;
 	font-family: 'Work Sans';
@@ -50,8 +51,8 @@ footer, header, hgroup, menu, nav, section {
 	line-height: 19px;	
 	text-decoration: none;
 	margin: 20px 20px;
-
 }
+/*--Barre Publier les changements--*/
 #publier{
 	color: #000000;
 	height: 27px;
@@ -68,7 +69,6 @@ footer, header, hgroup, menu, nav, section {
 	margin-top: 10px;
 	padding-top: 11px;
 	text-decoration: none;
-
 }
 
 body {
@@ -103,7 +103,6 @@ header {
 }
 
 /*--Section du Login--*/
-
 #bodyLogin{
 	height: 1024px;
 	width: 1440px;
@@ -149,21 +148,18 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-
 }
 
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154;
-	
+	color: #1D6154;	
 }
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
@@ -172,9 +168,7 @@ nav li {
 	font-size: 16px;
 	line-height: 19px;
 	text-align: center;
-	color: black;
-	
-	
+	color: black;	
 }
 
 li:hover {
@@ -203,7 +197,7 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
- /*--Modifier + logo --*/
+ /*--Modifier 2 en dessous de l'image + logo --*/
  #logoModifier2{
 	margin: 0 6px 0 57px ;
 	font-style: normal;
@@ -231,7 +225,7 @@ li:hover {
 	margin-bottom: 1em;
 }
 
-/*--Modifier + logo--*/
+/*--Modifier 3 de mes Projets + logo--*/
 #modifier3{
 	height: 15px;
 	width: 15px;
@@ -249,7 +243,6 @@ li:hover {
 	width: 15px;
 	margin: 0 6px 0 31px;
 	color: #000000;
-
 }
 
 .gallery {
@@ -394,6 +387,7 @@ h3 {
 	margin-top: 162px;
 	margin-bottom: 37px;}
 
+/*Texte Email et mot de passe du formulaire login*/
 .form{
 	width: 379px;
 	height: 51px;
@@ -405,7 +399,7 @@ h3 {
 	flex-direction: column;
 	width: 379px;	
 	background: #FFFFFF;
-}
+} 
 .textForm{
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -414,6 +408,7 @@ h3 {
 	line-height: 16px;
 	color: #3D3D3D;	
 }
+/*Bouton Valider du formulaire Login*/
 #btnConnect{
 	width: 179px;
 	height: 36px;
@@ -428,17 +423,18 @@ h3 {
 	text-align: center;
 	color: #FFFFFF;
 	border: none;
-	margin-left: 100px;
-	
+	margin-left: 100px;	
 }
 #divLogin{
 	display: flex;
 	justify-content: center;
 }
+/*Div mot de passe oublié du Login*/
 #mdpOublie{
 	text-align: center;
 	margin-top: 28px;
-	}
+}
+/*Lien du mot de passe oublié*/
 #lienMdp{
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -447,14 +443,16 @@ h3 {
 	line-height: 16px;	
 	color: #3D3D3D;	
 }
+/*Barre de navigation mentions légales*/
 #navMl{
 	margin-top: 350px;
 }
+/*Message d'erreur formulaire du login*/
 #erreur{
 	text-align: center;
 }
 
-/*--Fenêtre modale--*/
+/*--Fenêtre modale 1 Galerie Photo --*/
 /*--Aside--*/
 .modal{	
 	width: 100%;
@@ -475,6 +473,7 @@ h3 {
 	border-radius: 10px;
 		
 }
+/*Bouton Ajouter modale 1*/
 .btnAjouter{
 	width: 237px;
 	height: 36px;
@@ -494,6 +493,7 @@ h3 {
 	justify-content: center;
 	align-items: center;
 }
+/*Bouton Supprimer modale 1*/ 
 .btnSupprimer{
 	font-family: 'Syne';
 	font-style: normal;
@@ -507,17 +507,19 @@ h3 {
 	margin-top: 23px;
 }
 
-/*--Icone croix fermeture de la modale--*/
+/*--Div Contenant la modale 1--*/
 .js-modal-stop{
 	display: flex;
 	flex-direction: column;	
 	align-items: center;
 }
+/*--Icone croix fermeture de la modale 1--*/
 .js-modal-close {	
 	border: none;
 	background-color: #ffffff;
 	margin: 30px 0 0 545px;
 }
+
 .fa-xmark{
 	font-size: 20px;	
 }
@@ -545,23 +547,25 @@ h3 {
 	align-items: center;
 	margin-bottom: 30px;	
 }
+/*Logo croix fermeture modale 2*/
 .js-modal-close2 {	
 	border: none;	
 	margin: 30px 0 0 545px;
 	background-color: #ffffff;
 }
+/*Logo flèche arrière "retour"*/
 .fa-arrow-right{
 	font-size: 20px;
 	width: 21px;
-	margin-left: 25px;
-	
-}
+	margin-left: 25px;	
+} 
 #logoReturn{
 	border: none;
 	width: 21px;
 	height: 14px;
 	background-color: #FFFFFF;	
 }
+/*Logo image*/
 .fa-image{	
 	font-size: 58px;
 	background: #E8F1F7;
@@ -577,22 +581,6 @@ h3 {
 	color: #444444;
 	margin-top: 7px;
 }
-#erreur1{
-	text-align: center;	
-	width: 420px;	
-}
-#erreur2{
-	text-align: center;	
-	width: 420px;
-	margin: -5px 0 10px 0;	
-}
-#erreur3{
-	text-align: center;	
-	width: 420px;
-	border-bottom: 1px solid #B3B3B3;
-	padding-bottom: 10px;
-	
-}
 
 /*--Formulaire ajout photo--*/
 .modal-wrapper2{
@@ -601,6 +589,8 @@ h3 {
 	height: 670px;
 	border-radius: 10px;	
 }
+
+/*Class du titre et select"categorie" du formulaire ajout photo*/
 .form2{
 	width: 420px;
 	height: 51px;
@@ -617,6 +607,7 @@ h3 {
 	line-height: 16px;
 	color: #444444;
 }
+/*champ titre du formulaire*/
 #titreForm2{
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -626,6 +617,8 @@ h3 {
 	color: #3D3D3D;
 	margin-left: -395px;	
 }
+
+/*Champ categorie du formulaire*/
 #categoryForm2{
 	font-family: 'Work Sans';
 	font-style: normal;
@@ -645,17 +638,17 @@ h3{
 	color: #000000;	
 	margin-top: 16px;
 }
+
+/*--Div contenant les travaux de la modale 2--*/
 .photosModal{
 	width: 420px;
 	height: 410px;	
 	border-bottom: 1px solid #B3B3B3 ;	
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 6px;
-	
-		
-	
+	grid-column-gap: 6px;	
 }
+/*bouton Valider du formulaire*/
 #btnValider{
 	width: 237px;
 	height: 36px;
@@ -716,6 +709,7 @@ h3{
 	justify-content: center;
 	align-items: center;	
 }
+/*champ ajout de fichier image*/
 #input-file{
 	display: none;
 }
@@ -752,9 +746,11 @@ h3{
 	margin: 6px 0 0 34px;
 }
 
+/*Element figure du DOM dans la modale 1 galerie photo*/
 .figureModal {
 	position: relative;
 }
+/*images figure galerie photo*/
 .img-modal{
 	height: 104px;
     width: 78px;

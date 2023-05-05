@@ -163,8 +163,6 @@ function modalWorks (values) {
         photosModal.append(figure);        
 
 //Fonction qui supprime le travail en cliquant sur le logo delete
-
-
         deleteProject.addEventListener("click", function (e) {
             e.preventDefault();
             deleteWork(value.id);
@@ -174,8 +172,7 @@ function modalWorks (values) {
 }
 
 //Function pour supprimer le travail de l'API 
-const deleteWork = (id, token = sessionStorage.getItem("token")) => {  
-    
+const deleteWork = (id, token = sessionStorage.getItem("token")) => {     
 
     fetch(urlApi + "/" + id, {
       method: "DELETE",
@@ -288,17 +285,16 @@ const pictureForm = document.getElementById('pictureForm');
 //Fonction au click du submit du formulaire qui appelle les function sendWork et closeMoadal2
 pictureForm.addEventListener('submit', function (e) {
     e.preventDefault();       
-    SendWork(pictureForm);//Fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
-    closeModal2();//Fonction qui ferme la modale 2 ajout d'image                  
+    SendWork(pictureForm);//Fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API                     
 });
 
 //Fonction qui récupère les données du formulaire ajout d'image et les envoie vers l'API
-const SendWork = (el) => {
-    const formData = new FormData(el); //Création de l'objet formData qui récupère les données du formulaire    
+const SendWork = () => {
+    const formData = new FormData(pictureForm); //Création de l'objet formData qui récupère les données du formulaire    
 
-    const category = document.getElementById('categoryList');
+    const category = document.getElementById('categoryList');        
 //Vérification que tous les champs du formulaire sont remplis
-    if (!title.value || !inputFile.files || !category.value) { 
+    if (!title.value || !inputFile.files || !category.value) {         
         alert("Veuillez remplir tous les les champs du fomrulaire.");
         return;
     }        
@@ -314,19 +310,14 @@ const SendWork = (el) => {
             if (response.ok){                
                 alert('Projet envoyé');
                 return response.json();
-            } else {
-                throw new Error ('Réponse négative du serveur');
-            }
-        })
-        .then(function (data) {
+            }                   
+        }).then(function (data) {
             dataTable.push(data); //Ajout du projet à mon tableau dataTable
             displayWorks(dataTable); //Function qui itère les travaux sur la page d'accueil
             modalWorks(dataTable); //Fonction qui itère les travaux sur la modale
+            closeModal2();//Fonction qui ferme la modale 2 ajout d'image 
         })
-        .catch(function (error){
-            console.error('error', error);
-            alert("Erreur lors de l'ajout de l'élément");
-        })
+        
 }; 
 
 
