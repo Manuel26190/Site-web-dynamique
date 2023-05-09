@@ -13,14 +13,14 @@ function displayWorks (el) {
         let img = document.createElement("img");
         let figcaption = document.createElement("figcaption");
     
-        img.setAttribute("src", value.imageUrl);
-        figcaption.setAttribute("alt", value.title);
+        img.setAttribute("src", value.imageUrl);        
         img.setAttribute("crossorigin", "anonymous");
-    
+
+        figcaption.setAttribute("alt", value.title);
         figcaption.innerHTML = value.title;
 
         figure.append(img, figcaption);        
-        gallery.append(figure);    
+        gallery.append(figure);        
     });    
 } 
 
@@ -43,11 +43,9 @@ fetch(urlApi)
         values.forEach(value => {
             const btnTous = document.getElementById('btnTous');           
             btnTous.addEventListener('click', function (){//Function qui au click sur le bouton "Tous" filtre les travaux selon leur categoryId
-                const filtreTous = values.filter(function (value) {
-                    return value.categoryId == 1,2,3;                   
-                });                
-                displayWorks(filtreTous);//Fonction qui itère tous les travaux(car categoryId 1,2 et 3) sur la page d'accueil                
-            });
+                displayWorks(values);//Fonction qui itère tous les travaux(car categoryId 1,2 et 3) sur la page d'accueil                  
+                });    
+                   
             const btnObjets = document.getElementById('btnObjets');           
             btnObjets.addEventListener('click', function (){//Function qui au click sur le bouton "Objets" filtre les travaux selon leur categoryId
                 const filtreObjets = values.filter(function (value) {
@@ -133,11 +131,11 @@ document.querySelectorAll('.js-modal').forEach(a => {
 function modalWorks (values) {    
     
     let photosModal = document.querySelector('.photosModal');
-    photosModal.innerHTML = "";
+    //photosModal.innerHTML = "";
     
     values.forEach ((value) =>  {
 
-        let figure = document.createElement('figure');
+        let article = document.createElement('article');
 
         let img = document.createElement('img');    
         img.setAttribute("src", value.imageUrl );
@@ -156,18 +154,19 @@ function modalWorks (values) {
         if (value.id === 1){
             const moveLogo = document.createElement('i');
             moveLogo.classList.add("fa-solid", "fa-arrows-up-down-left-right");
-            figure.appendChild(moveLogo);          
+            article.appendChild(moveLogo);          
         }             
         
-        figure.append(deleteProject, img, figcaption);               
-        photosModal.append(figure);        
+        article.append(deleteProject, img, figcaption);               
+        photosModal.append(article);        
 
 //Fonction qui supprime le travail en cliquant sur le logo delete
         deleteProject.addEventListener("click", function (e) {
             e.preventDefault();
             deleteWork(value.id);
-            figure.remove(value)
-        });        
+            article.remove();
+                                                           
+        });                
     });   
 }
 
@@ -183,8 +182,9 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
       .then((response) => {
         if (response.ok) {
           alert("La suppression de l'élément a fonctionner");
-          deleteElement(id); //Function qui retire du tableau dataTable l'élémént en fonction de son id         
-          displayWorks(dataTable);//itération des travaux de la page d'accueil          
+          deleteElement(id); //Function qui retire du tableau dataTable l'élémént en fonction de son id 
+          displayWorks(dataTable);//itération des travaux de la page d'accueil        
+                    
         } else {
           console.error("La suppression de l'élément pose un problème, veuillez contacter l'équipe de maintenance du site.", response);
         }
@@ -193,12 +193,12 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
 
 //Function qui retire du tableau dataTable l'élémént en fonction de son id 
 function deleteElement(id) {    
-    for (let i = 0; i < dataTable.length; i++){        
+    for (let i = 0; i < dataTable.length; i++){                     
         if (dataTable[i].id === id){
-            dataTable.splice(i, 1);
+            dataTable.splice(i, 1);//je pars de 0 et je retire un élément
         }
     }        
-}       
+}
 
 //Création de la Modale 2 ajout de photo
 let modal2 = null;
@@ -295,7 +295,7 @@ const SendWork = () => {
     const category = document.getElementById('categoryList');        
 //Vérification que tous les champs du formulaire sont remplis
     if (!title.value || !inputFile.files || !category.value) {         
-        alert("Veuillez remplir tous les les champs du fomrulaire.");
+        alert("Veuillez remplir tous les les champs du formulaire.");
         return;
     }        
 //Request Fetch pour envoyer des données à l'API avec la method Post
