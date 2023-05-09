@@ -131,7 +131,7 @@ document.querySelectorAll('.js-modal').forEach(a => {
 function modalWorks (values) {    
     
     let photosModal = document.querySelector('.photosModal');
-    //photosModal.innerHTML = "";
+    photosModal.innerHTML = "";
     
     values.forEach ((value) =>  {
 
@@ -316,8 +316,7 @@ const SendWork = () => {
             displayWorks(dataTable); //Function qui itère les travaux sur la page d'accueil
             modalWorks(dataTable); //Fonction qui itère les travaux sur la modale
             closeModal2();//Fonction qui ferme la modale 2 ajout d'image 
-        })
-        
+        })        
 }; 
 
 
