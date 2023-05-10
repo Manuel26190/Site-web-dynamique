@@ -77,14 +77,37 @@ fetch(urlApi)
 //Apparition du mode edition pour ouvrir la fenêtre modale
 let token = sessionStorage.getItem("token");
 
-    if (token) {//Condition, si le token est récupéré, les lien cachés "Modifier" seront visibles sur la page d'accueil  
-        const modalLinks = document.querySelectorAll(".js-modal");       
+    //Condition, si le token est récupéré, les lien cachés "Modifier" seront visibles sur la page d'accueil
+    //Le bouton Login est supprimé pour faire place a un bouton Logout
+    
+    const modalLinks = document.querySelectorAll(".js-modal");
+    const aLogin = document.getElementById('aLogin');
+    const aLogout = document.getElementById('aLogout');
+    
+    if (token) {       
+        
+        aLogin.innerHTML = "";
         
         modalLinks.forEach((link)=> {
             link.style.display ='flex';
         });    
-    };    
- 
+    } else if (!token) {
+        modalLinks.forEach((link)=> {
+            link.style.display ='none';
+            aLogout.innerHTML = "";
+        });         
+    }        
+    
+//Fonction qui au click sur le Logout le mode édition disparait et le Token est retiré du local storage
+            
+    aLogout.addEventListener('click', function (){
+        alert('Vous êtes déconnecté');
+        sessionStorage.removeItem('token');
+        window.location.href = 'index.html';     
+    })
+
+    //sessionStorage.setItem('token', data.token);
+            
 //Ouverture de la fenêtre modale
 let modal = null;//Variable qui cible et sert à fermer la boite modale ouverte
 
@@ -195,7 +218,7 @@ const deleteWork = (id, token = sessionStorage.getItem("token")) => {
 function deleteElement(id) {    
     for (let i = 0; i < dataTable.length; i++){                     
         if (dataTable[i].id === id){
-            dataTable.splice(i, 1);//je pars de 0 et je retire un élément
+            dataTable.splice(i, 1);
         }
     }        
 }

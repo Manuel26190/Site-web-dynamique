@@ -123,6 +123,15 @@ header {
 #aLogin:hover {
 	color: #B1663C;
 }
+/*Boutton Logout*/
+#aLogout{
+	text-decoration: none;
+	color: black;
+	margin-right: 34px;
+}
+#aLogout:hover {
+	color: #B1663C;
+}
 .liNav{
 	margin-right: 44px;
 }
