@@ -86,7 +86,7 @@ let token = sessionStorage.getItem("token");
     
     if (token) {       
         
-        aLogin.innerHTML = "";
+        aLogin.remove();
         
         modalLinks.forEach((link)=> {
             link.style.display ='flex';
@@ -94,19 +94,16 @@ let token = sessionStorage.getItem("token");
     } else if (!token) {
         modalLinks.forEach((link)=> {
             link.style.display ='none';
-            aLogout.innerHTML = "";
+            aLogout.remove();
         });         
     }        
     
-//Fonction qui au click sur le Logout le mode édition disparait et le Token est retiré du local storage
-            
+//Fonction qui au click sur le Logout le mode édition disparait et le Token est retiré du local storage            
     aLogout.addEventListener('click', function (){
         alert('Vous êtes déconnecté');
         sessionStorage.removeItem('token');
         window.location.href = 'index.html';     
-    })
-
-    //sessionStorage.setItem('token', data.token);
+    })    
             
 //Ouverture de la fenêtre modale
 let modal = null;//Variable qui cible et sert à fermer la boite modale ouverte
