@@ -79,12 +79,13 @@ let token = sessionStorage.getItem("token");
 
     //Condition, si le token est récupéré, les lien cachés "Modifier" seront visibles sur la page d'accueil
     //Le bouton Login est supprimé pour faire place a un bouton Logout
+    //et à l'inverse si le token est retiré du session storage, le bouton Logout est retiré pour laisser place au bouton Login 
     
     const modalLinks = document.querySelectorAll(".js-modal");
     const aLogin = document.getElementById('aLogin');
     const aLogout = document.getElementById('aLogout');
     
-    if (token) {       
+    if (token) {      
         
         aLogin.remove();
         
@@ -98,7 +99,7 @@ let token = sessionStorage.getItem("token");
         });         
     }        
     
-//Fonction qui au click sur le Logout le mode édition disparait et le Token est retiré du local storage            
+//Fonction qui au click sur le lien Logout fait disparaître le mode édition et retire le Token de la session storage            
     aLogout.addEventListener('click', function (){
         alert('Vous êtes déconnecté');
         sessionStorage.removeItem('token');

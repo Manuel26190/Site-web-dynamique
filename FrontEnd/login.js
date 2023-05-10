@@ -30,12 +30,8 @@ form.addEventListener('submit', async function (event) {
         sessionStorage.setItem('token', data.token);        
 
         // Rediriger l'utilisateur sur la page d'accueil
-        window.location.href = 'index.html'
+        window.location.href = 'index.html'   
         
-        
-
-
-
     } else { // Si requête négatif (statut autre que 200), envoyer un message d'alerte sur l'écran
         //alert("Erreur dans l’identifiant ou le mot de passe");
         const erreur = document.querySelector('#erreur');        
