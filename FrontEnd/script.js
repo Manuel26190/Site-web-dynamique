@@ -13,7 +13,8 @@ function displayWorks (el) {
         let img = document.createElement("img");
         let figcaption = document.createElement("figcaption");
     
-        img.setAttribute("src", value.imageUrl);        
+        img.setAttribute("src", value.imageUrl); 
+        img.setAttribute ='FrontEnd/assets/images/abajour-tahina.png';       
         img.setAttribute("crossorigin", "anonymous");
 
         figcaption.setAttribute("alt", value.title);
@@ -36,7 +37,7 @@ fetch(urlApi)
     .then(function (values) {
         values.forEach(function (element) {
             dataTable.push(element); //je stocke dans le tableau la data retournée                       
-        });
+         });
         displayWorks(values);//J'appelle ma fonction displayWork qui itère les travaux sur la page d'accueil        
 
         //Je filtres mes travaux selon leur categoryId en utilisasant la method filter()
