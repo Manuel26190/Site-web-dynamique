@@ -13,12 +13,12 @@ function displayWorks (el) {
         let img = document.createElement("img");
         let figcaption = document.createElement("figcaption");
     
-        img.setAttribute("src", value.imageUrl); 
-        img.setAttribute ='FrontEnd/assets/images/abajour-tahina.png';       
-        img.setAttribute("crossorigin", "anonymous");
+        img.setAttribute("src", value.picture); 
+        //img.setAttribute ='FrontEnd/assets/images/abajour-tahina.png';       
+        //img.setAttribute("crossorigin", "anonymous");
 
-        figcaption.setAttribute("alt", value.title);
-        figcaption.innerHTML = value.title;
+        figcaption.setAttribute("alt", value.figcaption);
+        figcaption.innerHTML = value.figcaption;
 
         figure.append(img, figcaption);        
         gallery.append(figure);        
@@ -26,18 +26,19 @@ function displayWorks (el) {
 } 
 
 let dataTable = [];//Je crée une varaiable qui contient un tableau vide dans laquelle je vais stocker les données récupérées de l'API grâce à ma request fetch
-
+//console.log(dataTable)
 //Appel fetch qui copie les données de l'API dans mon tableau dataTable
-fetch(urlApi)
+fetch('./data.json')
     .then(function (response) {
-        if (response.ok) {
+        if (response.ok) {            
             return response.json();
         }
     })
     .then(function (values) {
         values.forEach(function (element) {
             dataTable.push(element); //je stocke dans le tableau la data retournée                       
-         });
+            console.log(element.picture)
+        });
         displayWorks(values);//J'appelle ma fonction displayWork qui itère les travaux sur la page d'accueil        
 
         //Je filtres mes travaux selon leur categoryId en utilisasant la method filter()
@@ -50,21 +51,21 @@ fetch(urlApi)
             const btnObjets = document.getElementById('btnObjets');           
             btnObjets.addEventListener('click', function (){//Function qui au click sur le bouton "Objets" filtre les travaux selon leur categoryId
                 const filtreObjets = values.filter(function (value) {
-                    return value.categoryId == 1;                   
+                    return value.category === "objet";                   
                 });                
                 displayWorks(filtreObjets);//Fonction qui itère seulement les travaux "Objets" ayant la categoryId = 1               
             });
             const btnAppartement = document.getElementById('btnAppartements');           
             btnAppartement.addEventListener('click', function (){//Function qui au click sur le bouton "Appartement" filtre les travaux selon leur categoryId
                 const filtreAppartements = values.filter(function (value) {
-                    return value.categoryId == 2;                   
+                    return value.category === "appartement";                   
                 });                
                 displayWorks(filtreAppartements);//Fonction qui itère seulement les travaux "Appartements" ayant la categoryId = 2               
             });
             const btnHotels = document.getElementById('btnHotels');           
             btnHotels.addEventListener('click', function (){//Function qui au click sur le bouton "Hôtels & restaurants" filtre les travaux selon leur categoryId
                 const filtreHotels = values.filter(function (value) {
-                    return value.categoryId == 3;                   
+                    return value.category === "hotelRestaurant";                   
                 });                
                 displayWorks(filtreHotels);//Fonction qui itère seulement les travaux "Hôtels & restaurants" ayant la categoryId = 3               
             });

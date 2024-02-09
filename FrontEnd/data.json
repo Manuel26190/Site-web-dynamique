@@ -1,0 +1,70 @@
+[
+    {
+        "id": 1,
+        "category": "objet",
+        "picture":"https://cdn11.bigcommerce.com/s-ftyp0waks/products/202/images/480/CL-MD05__89371.1578392918.1280.1280.jpg?c=2",
+        "figcaption": "Abajour tahina"
+    },
+    {
+        "id": 2,
+        "category": "appartement",
+        "picture": "https://www.vie-veranda.com/media/cache/resolve/moka_image/deco-salon.jpg",       
+        "figcaption": "Appartement Paris V"
+
+    },
+    {
+        "id": 3,
+        "category": "appartement",
+        "picture": "https://www.oggiluce.fr/web/image/370733-1b9f50fb/OGGI_LED.jpg",
+        "figcaption": "Appartement Paris X"
+    },    
+    {
+        "id": 4,
+        "category": "appartement",
+        "picture": "https://www.produitinterieurbrut.com/temp-pictures/le-terracotta-dans-la-chambre_900.jpg",
+        "figcaption": "Appartement Paris XVIII"
+    },   
+    {
+        "id": 5,
+        "category": "hotelRestaurant",
+        "picture": "https://www.clubentreprise.fr/wp-content/uploads/2023/04/determiner-le-style-du-bar.jpg",
+        "figcaption": "Bar Lullaby Paris"
+    },    
+    {
+        "id": 6,
+        "category": "hotelRestaurant",
+        "picture": "https://images.unsplash.com/photo-1606787947151-1c54964042e5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fFJlc3RhdXJhbnQlMjBkZSUyMGwlRTIlODAlOTloJUMzJUI0dGVsfGVufDB8fDB8fHww",
+        "figcaption": "Hôtel first arte New Delhi"
+    },    
+    {
+        "id": 7,
+        "category": "hotelRestaurant",
+        "picture": "https://www.camilleclaire.fr/wp-content/uploads/2022/06/recrutement.jpg",
+        "figcaption": "La Balisière"
+    },    
+    {
+        "id": 8,
+        "category": "hotelRestaurant",
+        "picture": "https://www.maison-mag.fr/wp-content/uploads/2023/04/spacejoy-TKFskJy8PQ8-unsplash.jpg.webp",
+        "figcaption": "Le Coteau Cassis"
+    },    
+    {
+        "id": 9,
+        "category": "hotelRestaurant",
+        "picture": "https://tisseettoile.fr/wp-content/uploads/2021/10/restau-chic.jpg",
+        "figcaption": "Restaurant Sushishen Londres"
+    },    
+    {
+        "id": 10,
+        "category": "objet",
+        "picture": "https://static.wixstatic.com/media/677f77_ee91466d8d894783bc0f770329f4072c~mv2.jpg/v1/crop/x_0,y_338,w_3284,h_4864/fill/w_266,h_395,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/lea-l-4N6qT784t3A-unsplash.jpg",
+        "figcaption": "Structure thermopolis"
+    },    
+    {
+        "id": 11,
+        "category": "appartement",
+        "picture": "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "figcaption": "Villa Firenze"
+    }    
+     
+]
