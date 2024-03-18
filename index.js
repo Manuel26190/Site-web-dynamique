@@ -1,4 +1,4 @@
-const urlApi = 'http://localhost:5678/api/works';
+//const urlApi = 'http://localhost:5678/api/works';
 
 const gallery = document.querySelector('.gallery');
 
@@ -28,8 +28,9 @@ function displayWorks (el) {
 let dataTable = [];//Je crée une varaiable qui contient un tableau vide dans laquelle je vais stocker les données récupérées de l'API grâce à ma request fetch
 //console.log(dataTable)
 //Appel fetch qui copie les données de l'API dans mon tableau dataTable
-fetch('./data.json')
+fetch('./FrontEnd/data.json')
     .then(function (response) {
+        console.log(response)
         if (response.ok) {            
             return response.json();
         }
@@ -37,7 +38,7 @@ fetch('./data.json')
     .then(function (values) {
         values.forEach(function (element) {
             dataTable.push(element); //je stocke dans le tableau la data retournée                       
-            console.log(element.picture)
+            console.log('element.picture',element.picture)
         });
         displayWorks(values);//J'appelle ma fonction displayWork qui itère les travaux sur la page d'accueil        
 

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@500&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@500&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/8ad4ebeb56.js" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./FrontEnd/style.css">
 </head>
 <body>
 	<!--Bandeau noir pour passer en mode édition-->
@@ -23,16 +24,16 @@
 		<ul>
 			<li class="liNav">projets</li>
 			<li class="liNav">contact</li>
-			<li><a id="aLogin" href="login.html">Login</a></li>
+			<li><a id="aLogin" href="./FrontEnd/login.html">Login</a></li>
 			<li><a id="aLogout" href="#">Logout</a></li>
-			<li><img id="logoInsta" src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<li><img id="logoInsta" src="./FrontEnd/assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
 </header>
 <main>
 	<section id="introduction">
 		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
+			<img src="./FrontEnd/assets/images/sophie-bluel.png" alt="">
 		<!--Liens "Modifier 2" en dessous de l'image-->	
 			<a href="#modal1" class="js-modal" id="modifier2" style="display: none"><i id="logoModifier2" class="fa-solid fa-pen-to-square"></i>Modifier</a>
 		</figure>
@@ -43,7 +44,7 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
-	<section id="portfolio">
+	<section id="portfolio">		
 		<!--Aside contenant la fenêtre modale1 galerie photo-->
 		<aside id="modal1" class="modal" aria-hidden="true" aria-labelledby="titlemodal" role="dialog" aria-modal="false" style="display: none;">
 			<div class="modal-wrapper js-modal-stop">
@@ -66,7 +67,7 @@
 				<form id="pictureForm" name="formulaire" enctype="multipart/form-data">
 					<!--Upload du fichier image-->
 					<div id="divModal2">
-						<img src="assets/images/picture_logo.svg" id="profilePicture" >
+						<img src="./FrontEnd/assets/images/picture_logo.svg" id="profilePicture" >
 						<label for="input-file" id="labelFile" name="upload" >+ ajouter une photo</label>
 						<input type="file" name="image" id="input-file" accept="image/jpeg, image/png, image/jpg">
 						<p id="imgSize">jpg. png: 4mo max</p>						
@@ -101,7 +102,18 @@
 			<button id="btnAppartements">Appartements</button>
 			<button id="btnHotels">Hôtels & restaurants</button>
 		</div>
-		<div class="gallery">					
+		<div class="gallery">
+			<!-- <img src="/FrontEnd/assets/images/abajour-tahina.png" alt="">					
+			<img src="/FrontEnd/assets/images/appartement-paris-v.png" alt="">					
+			<img src="/FrontEnd/assets/images/appartement-paris-x.png" alt="">					
+			<img src="/FrontEnd/assets/images/appartement-paris-xviii.png" alt="">					
+			<img src="/FrontEnd/assets/images/bar-lullaby-paris.png" alt="">					
+			<img src="/FrontEnd/assets/images/hotel-first-arte-new-delhi.png" alt="">					
+			<img src="/FrontEnd/assets/images/la-balisiere.png" alt="">					
+			<img src="/FrontEnd/assets/images/le-coteau-cassis.png" alt="">							
+			<img src="/FrontEnd/assets/images/restaurant-sushisen-londres.png" alt="">					
+			<img src="/FrontEnd/assets/images/structures-thermopolis.png" alt="">					
+			<img src="/FrontEnd/assets/images/villa-ferneze.png" alt="">					 -->
 		</div>		
 	</section>
 	<section id="contact">
@@ -118,7 +130,6 @@
 		</form>
 	</section>
 </main>
-
 <footer>
 	<nav>
 		<ul>
@@ -126,6 +137,6 @@
 		</ul>
 	</nav>
 </footer>
-<script src="script.js"></script>
+<script src="index.js"></script>
 </body>
 </html>
